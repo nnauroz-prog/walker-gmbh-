@@ -1563,6 +1563,43 @@ p { margin: 0 0 1em 0; }
 .contact-card .row svg { width: 20px; height: 20px; color: var(--c-accent); flex: 0 0 auto; margin-top: 3px; }
 .contact-card .row a { color: var(--c-navy); font-weight: 600; }
 
+/* Hours table */
+.hours { width: 100%; border-collapse: collapse; }
+.hours th, .hours td {
+  text-align: left;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--c-border);
+  font-size: 0.96rem;
+  font-weight: 500;
+}
+.hours tr:last-child th, .hours tr:last-child td { border-bottom: 0; }
+.hours th { color: var(--c-text); font-weight: 500; }
+.hours td { color: var(--c-navy); font-weight: 600; text-align: right; font-variant-numeric: tabular-nums; }
+.hours tr.closed td { color: var(--c-text-soft); font-weight: 500; }
+
+/* Google rating badge */
+.gbadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px 8px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--c-white);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.gbadge:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.22); }
+.gbadge__star { color: #fbbc04; font-size: 1rem; line-height: 1; }
+.gbadge__val { font-weight: 700; color: var(--c-white); letter-spacing: -0.005em; }
+.gbadge__sep { opacity: 0.4; }
+.gbadge__count { color: var(--c-silver); }
+
 /* Route picker — Google / Apple Maps */
 .route-picker { position: relative; display: inline-block; }
 .route-picker > summary {

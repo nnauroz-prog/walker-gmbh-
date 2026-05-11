@@ -13,7 +13,7 @@
 <meta property="og:url" content="https://walker-kfz.de/" />
 <meta property="og:image" content="https://walker-kfz.de/logo.png" />
 <meta name="theme-color" content="#061327" />
-<meta name="build" content="v9-route-picker" />
+<meta name="build" content="v10-hours" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
@@ -38,7 +38,17 @@
   },
   "areaServed": "Hamburg",
   "priceRange": "€€",
-  "knowsAbout": ["Mercedes-Benz", "Kfz-Diagnose", "Inspektion", "Wartung", "Reparatur", "Klimaservice", "Elektronik"]
+  "knowsAbout": ["Mercedes-Benz", "Kfz-Diagnose", "Inspektion", "Wartung", "Reparatur", "Klimaservice", "Elektronik"],
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"], "opens": "07:30", "closes": "18:30" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "07:00", "closes": "12:00" }
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.3",
+    "reviewCount": "142",
+    "bestRating": "5"
+  }
 }
 </script>
 </head>
@@ -107,7 +117,10 @@
   <div class="drawer__contact">
     Walker GmbH<br/>
     Ifflandstraße 71, 22087 Hamburg<br/>
-    Telefon: <a href="tel:+4940225536">+49 40 225536</a>
+    Telefon: <a href="tel:+4940225536">+49 40 225536</a><br/><br/>
+    Mo–Do 07:30–18:30<br/>
+    Fr 07:00–12:00<br/>
+    Sa, So geschlossen
   </div>
 </aside>
 
@@ -130,6 +143,14 @@
         <div class="hero__phone">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           Persönlich vorbeikommen: <a href="kontakt.html" style="color:#fff;text-decoration:underline;text-underline-offset:3px;">Ifflandstraße 71, 22087 Hamburg</a>
+        </div>
+        <div style="margin-top:20px;">
+          <a class="gbadge" href="https://www.google.com/maps/search/?api=1&amp;query=Walker+GmbH+Kfz-Reparaturen+Ifflandstra%C3%9Fe+71+Hamburg" target="_blank" rel="noopener noreferrer" aria-label="Walker GmbH bei Google Maps – aktuelle Bewertungen ansehen">
+            <span class="gbadge__star" aria-hidden="true">★</span>
+            <span class="gbadge__val">4,3</span>
+            <span class="gbadge__sep">·</span>
+            <span class="gbadge__count">142 Bewertungen auf Google</span>
+          </a>
         </div>
       </div>
 
@@ -424,7 +445,8 @@
           <li>Ifflandstraße 71</li>
           <li>22087 Hamburg</li>
           <li><a href="tel:+4940225536">+49 40 225536</a></li>
-          <li>Termine nach Vereinbarung</li>
+          <li>Mo–Do 07:30–18:30</li>
+          <li>Fr 07:00–12:00</li>
         </ul>
       </div>
       <div>
