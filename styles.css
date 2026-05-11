@@ -1563,6 +1563,67 @@ p { margin: 0 0 1em 0; }
 .contact-card .row svg { width: 20px; height: 20px; color: var(--c-accent); flex: 0 0 auto; margin-top: 3px; }
 .contact-card .row a { color: var(--c-navy); font-weight: 600; }
 
+/* Route picker — Google / Apple Maps */
+.route-picker { position: relative; display: inline-block; }
+.route-picker > summary {
+  list-style: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 24px;
+  min-height: 48px;
+  border-radius: 12px;
+  background: var(--c-navy);
+  color: var(--c-white);
+  font-weight: 600;
+  font-size: 0.98rem;
+  letter-spacing: -0.005em;
+}
+.route-picker > summary::-webkit-details-marker, .route-picker > summary::marker { display: none; }
+.route-picker > summary:hover { background: var(--c-deep); }
+.route-picker > summary svg { width: 16px; height: 16px; }
+.route-picker > summary .chev { transition: transform 0.2s ease; }
+.route-picker[open] > summary .chev { transform: rotate(180deg); }
+.route-picker__panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  min-width: 280px;
+  background: var(--c-white);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: 8px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.route-picker__option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--c-text);
+  transition: background 0.15s ease;
+}
+.route-picker__option:hover { background: var(--c-ice); }
+.route-picker__option .icon {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  background: var(--c-light-blue);
+  color: var(--c-accent);
+  display: inline-flex; align-items: center; justify-content: center;
+  flex: 0 0 auto;
+}
+.route-picker__option .icon svg { width: 20px; height: 20px; }
+.route-picker__option strong { display: block; color: var(--c-navy); font-weight: 600; font-size: 0.95rem; line-height: 1.2; }
+.route-picker__option small { display: block; color: var(--c-text-muted); font-size: 0.82rem; margin-top: 2px; }
+.route-picker__option.is-apple .icon { background: #f1f1f3; color: var(--c-navy); }
+
 .map-placeholder {
   position: relative;
   aspect-ratio: 16/10;

@@ -96,7 +96,23 @@
           <span class="direct-card__label">Persönlich</span>
           <span class="direct-card__big">Ifflandstraße 71</span>
           <p>22087 Hamburg-Hohenfelde · für die Fahrzeugübergabe bitte vorher kurz anrufen, damit wir Zeit für Sie haben.</p>
-          <a class="btn btn--dark" href="https://www.google.com/maps/search/?api=1&query=Ifflandstra%C3%9Fe+71%2C+22087+Hamburg" target="_blank" rel="noopener noreferrer">Route planen</a>
+          <details class="route-picker">
+            <summary>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l18-8-8 18-2-8-8-2z"/></svg>
+              Route planen
+              <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="route-picker__panel">
+              <a class="route-picker__option" href="https://www.google.com/maps/dir/?api=1&amp;destination=Ifflandstra%C3%9Fe+71%2C+22087+Hamburg" target="_blank" rel="noopener noreferrer">
+                <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+                <span><strong>Google Maps</strong><small>Android, Web, App</small></span>
+              </a>
+              <a class="route-picker__option is-apple" href="https://maps.apple.com/?daddr=Ifflandstra%C3%9Fe+71%2C+22087+Hamburg&amp;dirflg=d" target="_blank" rel="noopener noreferrer">
+                <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+                <span><strong>Apple Maps</strong><small>iPhone, iPad, Mac</small></span>
+              </a>
+            </div>
+          </details>
         </div>
       </div>
 
@@ -109,20 +125,29 @@
   </section>
 
   <section class="section section--soft">
-    <div class="container">
+    <div class="container container--narrow">
       <div class="section__head section__head--left">
         <span class="section-num"><em>01</em>Anfahrt</span>
         <h2 style="margin-top:14px;">So finden Sie uns.</h2>
-        <p class="lead" style="max-width:60ch;">Walker GmbH liegt in der Ifflandstraße 71 in Hamburg-Hohenfelde – gut erreichbar mit dem Auto und dem ÖPNV.</p>
+        <p class="lead" style="max-width:60ch;">Walker GmbH liegt in der Ifflandstraße 71 in Hamburg-Hohenfelde – gut erreichbar mit dem Auto und dem ÖPNV. Klicken Sie auf „Route planen" und wählen Sie Ihre Navi-App.</p>
+        <details class="route-picker" style="margin-top:14px;">
+          <summary>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l18-8-8 18-2-8-8-2z"/></svg>
+            Route planen
+            <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </summary>
+          <div class="route-picker__panel">
+            <a class="route-picker__option" href="https://www.google.com/maps/dir/?api=1&amp;destination=Ifflandstra%C3%9Fe+71%2C+22087+Hamburg" target="_blank" rel="noopener noreferrer">
+              <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+              <span><strong>Google Maps</strong><small>Android, Web, App</small></span>
+            </a>
+            <a class="route-picker__option is-apple" href="https://maps.apple.com/?daddr=Ifflandstra%C3%9Fe+71%2C+22087+Hamburg&amp;dirflg=d" target="_blank" rel="noopener noreferrer">
+              <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+              <span><strong>Apple Maps</strong><small>iPhone, iPad, Mac</small></span>
+            </a>
+          </div>
+        </details>
       </div>
-
-      <div class="map-placeholder" data-map data-map-src="https://www.openstreetmap.org/export/embed.html?bbox=10.034%2C53.560%2C10.044%2C53.566&amp;layer=mapnik&amp;marker=53.5630%2C10.0390">
-        <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:#1E73BE;margin-bottom:14px;"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        <strong style="color:#fff;font-size:1.1rem;">Karte laden</strong>
-        <p>Beim Laden der Karte werden Daten an den Kartenanbieter übertragen.</p>
-        <button class="btn btn--light" type="button" data-map-load>Karte laden</button>
-      </div>
-      <p style="font-size: 0.85rem; color: var(--c-text-muted); margin-top: 12px;">Mit dem Laden der Karte willigen Sie in die Datenübertragung an den Kartenanbieter ein. Diese Auswahl können Sie jederzeit über &bdquo;Cookies anpassen&ldquo; im Footer ändern.</p>
     </div>
   </section>
 
