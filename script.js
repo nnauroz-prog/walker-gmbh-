@@ -2,37 +2,80 @@
 (function () {
   'use strict';
 
-  // ---------- Mobile drawer ----------
-  const burger = document.querySelector('[data-burger]');
+  // ---------- Mobile drawer (robust) ----------
   const drawer = document.querySelector('[data-drawer]');
-  const drawerClose = document.querySelector('[data-drawer-close]');
+  const burger = document.querySelector('[data-burger]');
   let lastFocus = null;
+  let isOpen = false;
 
   function openDrawer() {
-    if (!drawer) return;
+    if (!drawer || isOpen) return;
+    isOpen = true;
     lastFocus = document.activeElement;
     drawer.setAttribute('aria-hidden', 'false');
+    document.documentElement.classList.add('no-scroll');
     document.body.classList.add('no-scroll');
-    burger && burger.setAttribute('aria-expanded', 'true');
-    const firstLink = drawer.querySelector('a, button');
-    firstLink && firstLink.focus();
+    if (burger) burger.setAttribute('aria-expanded', 'true');
+    requestAnimationFrame(() => {
+      const closeBtn = drawer.querySelector('[data-drawer-close]');
+      if (closeBtn) {
+        try { closeBtn.focus({ preventScroll: true }); } catch (_) { closeBtn.focus(); }
+      }
+    });
   }
+
   function closeDrawer() {
-    if (!drawer) return;
+    if (!drawer || !isOpen) return;
+    isOpen = false;
     drawer.setAttribute('aria-hidden', 'true');
+    document.documentElement.classList.remove('no-scroll');
     document.body.classList.remove('no-scroll');
-    burger && burger.setAttribute('aria-expanded', 'false');
-    lastFocus && lastFocus.focus && lastFocus.focus();
+    if (burger) burger.setAttribute('aria-expanded', 'false');
+    if (lastFocus && typeof lastFocus.focus === 'function') {
+      try { lastFocus.focus({ preventScroll: true }); } catch (_) { try { lastFocus.focus(); } catch (__) {} }
+    }
   }
-  burger && burger.addEventListener('click', openDrawer);
-  drawerClose && drawerClose.addEventListener('click', closeDrawer);
-  drawer && drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && drawer && drawer.getAttribute('aria-hidden') === 'false') closeDrawer();
+
+  if (burger) {
+    burger.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (isOpen) closeDrawer();
+      else openDrawer();
+    });
+  }
+
+  if (drawer) {
+    // Close button
+    drawer.querySelectorAll('[data-drawer-close]').forEach(function (el) {
+      el.addEventListener('click', function (e) {
+        e.preventDefault();
+        closeDrawer();
+      });
+    });
+    // Any nav link inside drawer closes it
+    drawer.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        closeDrawer();
+      });
+    });
+  }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && isOpen) closeDrawer();
   });
 
-  // ---------- FAQ accordion (uses <details>, no JS needed except optional single-open) ----------
-  // Native <details> handles open/close. No additional script needed.
+  // Close drawer if window resized to desktop width
+  let resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      if (window.innerWidth > 920 && isOpen) closeDrawer();
+    }, 120);
+  });
+
+  // ---------- FAQ accordion ----------
+  // Native <details> handles open/close — no extra JS required.
 
   // ---------- Termin / Multi-step form ----------
   const form = document.querySelector('[data-termin-form]');
@@ -43,18 +86,19 @@
     let current = 0;
 
     function showStep(idx) {
-      steps.forEach((s, i) => s.setAttribute('data-active', i === idx ? 'true' : 'false'));
-      stepperItems.forEach((it, i) => {
+      steps.forEach(function (s, i) {
+        s.setAttribute('data-active', i === idx ? 'true' : 'false');
+      });
+      stepperItems.forEach(function (it, i) {
         it.classList.remove('stepper__item--active', 'stepper__item--done');
         if (i === idx) it.classList.add('stepper__item--active');
         else if (i < idx) it.classList.add('stepper__item--done');
       });
       current = idx;
-      // scroll the form card into view (gentle)
       const card = form.closest('.form-card');
       if (card) {
         const top = card.getBoundingClientRect().top + window.scrollY - 90;
-        window.scrollTo({ top, behavior: 'smooth' });
+        window.scrollTo({ top: top, behavior: 'smooth' });
       }
     }
 
@@ -62,10 +106,9 @@
       const step = steps[idx];
       const required = step.querySelectorAll('[required]');
       let ok = true;
-      required.forEach(el => {
+      required.forEach(function (el) {
         if (el.type === 'radio') {
-          const name = el.name;
-          const checked = step.querySelector(`input[name="${name}"]:checked`);
+          const checked = step.querySelector('input[name="' + el.name + '"]:checked');
           if (!checked) ok = false;
         } else if (el.type === 'checkbox') {
           if (!el.checked) { ok = false; el.focus(); }
@@ -75,44 +118,43 @@
         }
       });
       if (!ok) {
-        // Mark fields visually
-        required.forEach(el => {
+        required.forEach(function (el) {
           if (el.type !== 'radio' && el.type !== 'checkbox' && !el.value.trim()) {
-            el.style.borderColor = 'var(--c-red)';
+            el.style.borderColor = '#DC2626';
           }
         });
       }
       return ok;
     }
 
-    form.addEventListener('input', e => {
+    form.addEventListener('input', function (e) {
       if (e.target.style && e.target.style.borderColor) e.target.style.borderColor = '';
     });
 
-    form.querySelectorAll('[data-next]').forEach(btn => {
-      btn.addEventListener('click', () => {
+    form.querySelectorAll('[data-next]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
         if (!validateStep(current)) return;
         if (current < steps.length - 1) showStep(current + 1);
       });
     });
-    form.querySelectorAll('[data-prev]').forEach(btn => {
-      btn.addEventListener('click', () => {
+    form.querySelectorAll('[data-prev]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
         if (current > 0) showStep(current - 1);
       });
     });
 
-    form.addEventListener('submit', e => {
+    form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!validateStep(current)) return;
 
       const data = new FormData(form);
       const lines = [];
-      lines.push('Terminanfrage Walker GmbH Kfz-Reparaturen');
+      lines.push('Terminanfrage Walker GmbH – Mercedes-Benz Spezialist');
       lines.push('');
       lines.push('Anliegen: ' + (data.get('anliegen') || '-'));
       lines.push('');
       lines.push('Fahrzeug:');
-      lines.push('  Marke: ' + (data.get('marke') || '-'));
+      lines.push('  Modellreihe / Marke: ' + (data.get('marke') || '-'));
       lines.push('  Modell: ' + (data.get('modell') || '-'));
       lines.push('  Baujahr: ' + (data.get('baujahr') || '-'));
       lines.push('  Kennzeichen: ' + (data.get('kennzeichen') || '-'));
@@ -159,8 +201,8 @@
     applyConsent(value);
     hideBanner();
   }
-  function showBanner() { banner && banner.setAttribute('aria-hidden', 'false'); }
-  function hideBanner() { banner && banner.setAttribute('aria-hidden', 'true'); }
+  function showBanner() { if (banner) banner.setAttribute('aria-hidden', 'false'); }
+  function hideBanner() { if (banner) banner.setAttribute('aria-hidden', 'true'); }
 
   function applyConsent(value) {
     if (!mapBox) return;
@@ -174,7 +216,7 @@
     const iframe = document.createElement('iframe');
     iframe.src = src;
     iframe.loading = 'lazy';
-    iframe.title = 'Standort Walker GmbH Kfz-Reparaturen';
+    iframe.title = 'Standort Walker GmbH';
     iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
     iframe.setAttribute('allowfullscreen', '');
     mapBox.innerHTML = '';
@@ -186,8 +228,8 @@
   if (consent) applyConsent(consent);
   else if (banner) showBanner();
 
-  document.querySelectorAll('[data-consent]').forEach(btn => {
-    btn.addEventListener('click', () => {
+  document.querySelectorAll('[data-consent]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
       const action = btn.getAttribute('data-consent');
       if (action === 'all') setConsent({ necessary: true, maps: true });
       else if (action === 'necessary') setConsent({ necessary: true, maps: false });
@@ -195,13 +237,12 @@
     });
   });
 
-  // Manual map load button (on consent)
-  document.querySelectorAll('[data-map-load]').forEach(btn => {
-    btn.addEventListener('click', () => setConsent({ necessary: true, maps: true }));
+  document.querySelectorAll('[data-map-load]').forEach(function (btn) {
+    btn.addEventListener('click', function () { setConsent({ necessary: true, maps: true }); });
   });
 
   // ---------- Year ----------
-  document.querySelectorAll('[data-year]').forEach(el => {
+  document.querySelectorAll('[data-year]').forEach(function (el) {
     el.textContent = String(new Date().getFullYear());
   });
 })();
