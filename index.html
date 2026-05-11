@@ -11,11 +11,14 @@
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="de_DE" />
 <meta property="og:url" content="https://walker-kfz.de/" />
+<meta property="og:image" content="https://walker-kfz.de/logo.png" />
 <meta name="theme-color" content="#061327" />
-<meta name="build" content="v3-premium" />
+<meta name="build" content="v4-logo" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/png" href="favicon.png" />
+<link rel="apple-touch-icon" href="favicon.png" />
 <link rel="stylesheet" href="styles.css" />
 <script type="application/ld+json">
 {
@@ -23,7 +26,7 @@
   "@type": "AutoRepair",
   "name": "Walker GmbH",
   "description": "Auf Mercedes-Benz spezialisierte Kfz-Werkstatt und offizieller Mercedes-Benz Teilepartner in Hamburg-Hohenfelde.",
-  "image": "https://walker-kfz.de/og.jpg",
+  "image": "https://walker-kfz.de/logo.png",
   "url": "https://walker-kfz.de/",
   "telephone": "+49 40 225536",
   "address": {
@@ -61,10 +64,7 @@
 <header class="header">
   <div class="container header__row">
     <a class="brand" href="/" aria-label="Walker GmbH – Startseite">
-      <span class="brand__mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6 7 18l3-7 2 7 3-7 4 12"/></svg>
-      </span>
-      <span class="brand__text">Walker GmbH<small>Mercedes-Benz Spezialist</small></span>
+      <img class="brand__logo" src="logo.png" alt="Walker GmbH – Mercedes-Benz Spezialist & Teile Partner" width="180" height="80" />
     </a>
 
     <nav class="nav" aria-label="Hauptnavigation">
@@ -89,10 +89,7 @@
 <aside class="drawer" id="drawer" aria-hidden="true" data-drawer aria-label="Menü">
   <div class="drawer__head">
     <span class="brand" style="color:#fff;">
-      <span class="brand__mark drawer__brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6 7 18l3-7 2 7 3-7 4 12"/></svg>
-      </span>
-      <span class="brand__text">Walker GmbH<small style="color:#C9D2DC">Mercedes-Benz Spezialist</small></span>
+      <img class="brand__logo" src="logo.png" alt="Walker GmbH" width="180" height="80" style="filter:brightness(0) invert(1);" />
     </span>
     <button class="drawer__close" type="button" aria-label="Menü schließen" data-drawer-close>
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
@@ -118,157 +115,49 @@
 
 <main id="main">
 
-  <!-- ================== HERO ================== -->
+  <!-- ================== HERO – dark, editorial ================== -->
   <section class="hero">
-    <div class="container hero__grid">
-      <div>
-        <div class="hero__badges">
-          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Mercedes-Benz Spezialist</span>
-          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-12V5l-8-3-8 3v5c0 8 8 12 8 12Z"/></svg>Offizieller Teilepartner</span>
-          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 2"/></svg>Moderne Diagnose</span>
-        </div>
-        <h1 class="hero__title">Schnelle Diagnose.<br/>Saubere Reparatur.<br/><span class="accent">Mercedes-Benz Kompetenz.</span></h1>
-        <p class="hero__lead">Walker GmbH ist Ihre auf Mercedes-Benz spezialisierte Werkstatt in Hamburg-Hohenfelde – mit moderner Diagnose, transparenter Beratung und zuverlässiger Ersatzteilversorgung als offizieller Mercedes-Benz Teilepartner.</p>
+    <div class="container">
+      <div class="hero__inner">
+        <span class="hero__eyebrow">Mercedes-Benz Spezialist · Hamburg-Hohenfelde</span>
+        <h1 class="hero__title">Mercedes-Benz Service<br/>auf <span class="accent">Spezialisten-Niveau.</span></h1>
+        <p class="hero__lead">Walker GmbH ist Ihre auf Mercedes-Benz spezialisierte Werkstatt in Hamburg-Hohenfelde – mit moderner Diagnose, fachgerechter Reparatur und zuverlässiger Ersatzteilversorgung als offizieller Mercedes-Benz Teilepartner.</p>
         <div class="hero__cta">
           <a class="btn btn--primary" href="termin.html">
             Termin anfragen
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </a>
-          <a class="btn btn--ghost" href="leistungen.html">Leistungen ansehen</a>
+          <a class="btn btn--light" href="leistungen.html">Leistungen ansehen</a>
         </div>
-        <p class="hero__phone">
+        <div class="hero__phone">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7a2 2 0 0 1 1.72 2z"/></svg>
           Direkt anrufen: <a href="tel:+4940225536">+49 40 225536</a>
-        </p>
-      </div>
-
-      <!-- Hero visual: chrome wheel composition -->
-      <div class="hero__visual" aria-hidden="true">
-        <svg class="wheel" viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="hubGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0" stop-color="#1E73BE" stop-opacity="0.5"/>
-              <stop offset="1" stop-color="#1E73BE" stop-opacity="0"/>
-            </radialGradient>
-            <radialGradient id="rimChrome" cx="50%" cy="40%" r="60%">
-              <stop offset="0" stop-color="#EEF1F4"/>
-              <stop offset="0.5" stop-color="#B8C0CC"/>
-              <stop offset="1" stop-color="#3A4452"/>
-            </radialGradient>
-            <radialGradient id="diskShine" cx="50%" cy="50%" r="50%">
-              <stop offset="0" stop-color="#5B6677"/>
-              <stop offset="1" stop-color="#0A1623"/>
-            </radialGradient>
-            <linearGradient id="spokeChrome" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0" stop-color="#EEF1F4"/>
-              <stop offset="0.5" stop-color="#B8C0CC"/>
-              <stop offset="1" stop-color="#5B6677"/>
-            </linearGradient>
-            <linearGradient id="spokeShadow" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0" stop-color="#1A2638"/>
-              <stop offset="1" stop-color="#0A1623"/>
-            </linearGradient>
-            <radialGradient id="centerHub" cx="50%" cy="40%" r="55%">
-              <stop offset="0" stop-color="#EEF1F4"/>
-              <stop offset="1" stop-color="#5B6677"/>
-            </radialGradient>
-          </defs>
-
-          <!-- Glow halo -->
-          <circle cx="240" cy="240" r="220" fill="url(#hubGlow)" opacity="0.7"/>
-
-          <!-- Tire -->
-          <circle cx="240" cy="240" r="218" fill="#0a1623"/>
-          <circle cx="240" cy="240" r="218" fill="none" stroke="#1a2638" stroke-width="14"/>
-
-          <!-- Outer rim chrome -->
-          <circle cx="240" cy="240" r="200" fill="url(#rimChrome)"/>
-          <circle cx="240" cy="240" r="200" fill="none" stroke="#EEF1F4" stroke-width="1" opacity="0.4"/>
-
-          <!-- Brake disc backdrop -->
-          <circle cx="240" cy="240" r="180" fill="url(#diskShine)"/>
-          <!-- Cross-drilled holes (subtle) -->
-          <g fill="#0a1623" opacity="0.85">
-            <circle cx="240" cy="80" r="3"/><circle cx="320" cy="100" r="3"/><circle cx="380" cy="160" r="3"/><circle cx="400" cy="240" r="3"/><circle cx="380" cy="320" r="3"/><circle cx="320" cy="380" r="3"/><circle cx="240" cy="400" r="3"/><circle cx="160" cy="380" r="3"/><circle cx="100" cy="320" r="3"/><circle cx="80" cy="240" r="3"/><circle cx="100" cy="160" r="3"/><circle cx="160" cy="100" r="3"/>
-          </g>
-
-          <!-- Inner rim cap -->
-          <circle cx="240" cy="240" r="148" fill="url(#rimChrome)"/>
-          <circle cx="240" cy="240" r="148" fill="none" stroke="#5B6677" stroke-width="1.5" opacity="0.6"/>
-
-          <!-- 5 spokes -->
-          <g>
-            <g transform="translate(240 240) rotate(0)">
-              <path d="M0,-138 L18,-30 L-18,-30 Z" fill="url(#spokeChrome)"/>
-              <path d="M0,-138 L0,-30 L-18,-30 Z" fill="url(#spokeShadow)" opacity="0.5"/>
-            </g>
-            <g transform="translate(240 240) rotate(72)">
-              <path d="M0,-138 L18,-30 L-18,-30 Z" fill="url(#spokeChrome)"/>
-              <path d="M0,-138 L0,-30 L-18,-30 Z" fill="url(#spokeShadow)" opacity="0.5"/>
-            </g>
-            <g transform="translate(240 240) rotate(144)">
-              <path d="M0,-138 L18,-30 L-18,-30 Z" fill="url(#spokeChrome)"/>
-              <path d="M0,-138 L0,-30 L-18,-30 Z" fill="url(#spokeShadow)" opacity="0.5"/>
-            </g>
-            <g transform="translate(240 240) rotate(216)">
-              <path d="M0,-138 L18,-30 L-18,-30 Z" fill="url(#spokeChrome)"/>
-              <path d="M0,-138 L0,-30 L-18,-30 Z" fill="url(#spokeShadow)" opacity="0.5"/>
-            </g>
-            <g transform="translate(240 240) rotate(288)">
-              <path d="M0,-138 L18,-30 L-18,-30 Z" fill="url(#spokeChrome)"/>
-              <path d="M0,-138 L0,-30 L-18,-30 Z" fill="url(#spokeShadow)" opacity="0.5"/>
-            </g>
-          </g>
-
-          <!-- Center hub -->
-          <circle cx="240" cy="240" r="42" fill="url(#centerHub)"/>
-          <circle cx="240" cy="240" r="38" fill="#0A1623"/>
-          <!-- Abstract 3-ray emblem (geometric, not MB star) -->
-          <g stroke="url(#spokeChrome)" stroke-width="3" stroke-linecap="round" fill="none" transform="translate(240 240)">
-            <line x1="0" y1="0" x2="0" y2="-20"/>
-            <line x1="0" y1="0" x2="17" y2="11"/>
-            <line x1="0" y1="0" x2="-17" y2="11"/>
-          </g>
-          <circle cx="240" cy="240" r="3" fill="#EEF1F4"/>
-
-          <!-- Highlight -->
-          <ellipse cx="180" cy="160" rx="120" ry="20" fill="white" opacity="0.05"/>
-        </svg>
-
-        <div class="hero__visual-meta">
-          <span class="live"><span class="dot"></span>Werkstatt aktiv</span>
-          <span class="loc">Hamburg-Hohenfelde</span>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ================== STATS STRIP ================== -->
-  <section class="section section--tight" aria-label="Eckdaten">
-    <div class="container">
-      <div class="stats">
-        <div class="stat">
-          <div class="stat__big"><em>1</em>Marke</div>
-          <div class="stat__label">Spezialisierung auf Mercedes-Benz – kein Bauchladen.</div>
+      <div class="hero__meta">
+        <div class="hero__meta-item">
+          <span class="hero__meta-label">Spezialisierung</span>
+          <span class="hero__meta-value">Mercedes-Benz</span>
         </div>
-        <div class="stat">
-          <div class="stat__big">Offiziell</div>
-          <div class="stat__label">Mercedes-Benz Teilepartner mit zuverlässiger Versorgung.</div>
+        <div class="hero__meta-item">
+          <span class="hero__meta-label">Status</span>
+          <span class="hero__meta-value">Offizieller Teilepartner</span>
         </div>
-        <div class="stat">
-          <div class="stat__big">Modern</div>
-          <div class="stat__label">Diagnose-Technik für aktuelle Mercedes-Benz Modelle.</div>
+        <div class="hero__meta-item">
+          <span class="hero__meta-label">Standort</span>
+          <span class="hero__meta-value">Ifflandstraße 71, Hamburg</span>
         </div>
-        <div class="stat">
-          <div class="stat__big">Hamburg</div>
-          <div class="stat__label">Lokal erreichbar in Hohenfelde, Ifflandstraße 71.</div>
+        <div class="hero__meta-item">
+          <span class="hero__meta-label">Termine</span>
+          <span class="hero__meta-value">Nach Vereinbarung</span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ================== TRUST STRIP ================== -->
-  <section class="section section--tight section--soft" aria-label="Schwerpunkte">
+  <section class="section section--tight" aria-label="Schwerpunkte">
     <div class="container">
       <div class="trust">
         <div class="trust__card">
@@ -300,10 +189,6 @@
             <span class="section-num"><em>01</em>Spezialisierung</span>
             <h2 id="mb-h" style="margin-top:14px;">Markenkompetenz, die man im Service spürt.</h2>
             <p class="lead">Als auf Mercedes-Benz spezialisierte Werkstatt und offizieller Mercedes-Benz Teilepartner verbinden wir markenspezifisches Know-how mit zuverlässiger Ersatzteilversorgung.</p>
-            <div class="mb-section__chips">
-              <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Markenspezialisierung</span>
-              <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-12V5l-8-3-8 3v5c0 8 8 12 8 12Z"/></svg>Offizieller Teilepartner</span>
-            </div>
             <ul class="mb-section__list">
               <li>Diagnose und Technikverständnis für Mercedes-Benz Modelle</li>
               <li>Zuverlässige Versorgung mit Mercedes-Benz Ersatzteilen</li>
@@ -318,57 +203,8 @@
           </div>
 
           <div class="mb-section__visual" aria-hidden="true">
-            <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
-              <defs>
-                <radialGradient id="ringg2" cx="50%" cy="50%" r="50%">
-                  <stop offset="0" stop-color="#EAF4FF" stop-opacity="0"/>
-                  <stop offset="1" stop-color="#1E73BE" stop-opacity="0.6"/>
-                </radialGradient>
-                <linearGradient id="chrome2" x1="0" x2="1" y1="0" y2="1">
-                  <stop offset="0" stop-color="#ffffff"/>
-                  <stop offset="0.5" stop-color="#cfd8e3"/>
-                  <stop offset="1" stop-color="#7a8895"/>
-                </linearGradient>
-              </defs>
-              <circle cx="100" cy="100" r="84" stroke="url(#chrome2)" stroke-width="2.5" fill="url(#ringg2)" opacity="0.95"/>
-              <circle cx="100" cy="100" r="62" stroke="rgba(255,255,255,0.18)" stroke-width="1" fill="none"/>
-              <circle cx="100" cy="100" r="40" stroke="rgba(255,255,255,0.12)" stroke-width="1" fill="none"/>
-              <g stroke="url(#chrome2)" stroke-width="3.5" stroke-linecap="round">
-                <line x1="100" y1="100" x2="100" y2="32"/>
-                <line x1="100" y1="100" x2="159" y2="134"/>
-                <line x1="100" y1="100" x2="41" y2="134"/>
-              </g>
-              <circle cx="100" cy="100" r="6" fill="#EEF1F4"/>
-              <circle cx="100" cy="100" r="3" fill="#1E73BE"/>
-            </svg>
+            <img src="logo.png" alt="" style="width:100%;height:auto;max-width:340px;filter:brightness(0) invert(1);opacity:0.95;" />
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================== MODELLREIHEN ================== -->
-  <section class="section section--tight" aria-labelledby="modelle-h">
-    <div class="container">
-      <div class="models-band">
-        <div>
-          <span class="section-num"><em>02</em>Modellreihen</span>
-          <h2 id="modelle-h" style="margin-top:14px;font-size:clamp(1.5rem,2vw + 0.5rem,2rem);">Service für die gängigen Mercedes-Benz Klassen.</h2>
-          <p>Von kompakter Limousine bis SUV – wir betreuen die typischen Pkw-Modelle der Marke. Bitte teilen Sie uns Modell und Baujahr vorab kurz mit.</p>
-        </div>
-        <div class="models-grid">
-          <a href="termin.html" class="model-chip">A-Klasse</a>
-          <a href="termin.html" class="model-chip">B-Klasse</a>
-          <a href="termin.html" class="model-chip">C-Klasse</a>
-          <a href="termin.html" class="model-chip">E-Klasse</a>
-          <a href="termin.html" class="model-chip">S-Klasse</a>
-          <a href="termin.html" class="model-chip">CLA</a>
-          <a href="termin.html" class="model-chip">GLA</a>
-          <a href="termin.html" class="model-chip">GLC</a>
-          <a href="termin.html" class="model-chip">GLE</a>
-          <a href="termin.html" class="model-chip">V-Klasse</a>
-          <a href="termin.html" class="model-chip">AMG</a>
-          <a href="termin.html" class="model-chip">EQ-Reihe</a>
         </div>
       </div>
     </div>
@@ -378,7 +214,7 @@
   <section class="section" aria-labelledby="leistungen-h">
     <div class="container">
       <div class="section__head">
-        <span class="section-num"><em>03</em>Leistungen</span>
+        <span class="section-num"><em>02</em>Leistungen</span>
         <h2 id="leistungen-h" style="margin-top:14px;">Werkstatt-Leistungen für Ihren Mercedes-Benz</h2>
         <p class="lead" style="margin-inline:auto;">Von der Inspektion bis zur Reparatur: wir prüfen sorgfältig und sprechen notwendige Arbeiten transparent mit Ihnen ab.</p>
       </div>
@@ -444,7 +280,7 @@
   <section class="section section--soft" aria-labelledby="ablauf-h">
     <div class="container">
       <div class="section__head">
-        <span class="section-num"><em>04</em>Ablauf</span>
+        <span class="section-num"><em>03</em>Ablauf</span>
         <h2 id="ablauf-h" style="margin-top:14px;">So läuft Ihr Werkstatttermin ab</h2>
         <p class="lead" style="margin-inline:auto;">Klar, nachvollziehbar und ohne Überraschungen – vom ersten Kontakt bis zur Abholung.</p>
       </div>
@@ -463,7 +299,7 @@
 
   <!-- ================== EDITORIAL QUOTE ================== -->
   <section class="section section--tight">
-    <div class="container">
+    <div class="container container--narrow">
       <div class="quote">
         <div class="quote__mark" aria-hidden="true">“</div>
         <p class="quote__text">Eine Werkstatt ist Vertrauenssache. Deshalb sagen wir, was nötig ist – und was warten kann.</p>
@@ -477,7 +313,7 @@
     <div class="container">
       <div class="why">
         <div>
-          <span class="section-num"><em>05</em>Warum Walker</span>
+          <span class="section-num"><em>04</em>Warum Walker</span>
           <h2 id="why-h" style="margin-top:14px;">Spezialisierung statt Massenabfertigung.</h2>
           <p class="lead">Mercedes-Benz Reparaturen sind anspruchsvoll. Deshalb setzen wir auf markenspezifische Diagnose, qualitätsorientierte Arbeit und klare Kommunikation – damit Sie wissen, was an Ihrem Fahrzeug gemacht wird und warum.</p>
           <a class="btn btn--dark" href="ueber-uns.html">Mehr über uns</a>
@@ -525,7 +361,7 @@
   <section class="section section--soft" aria-labelledby="faq-h">
     <div class="container">
       <div class="section__head">
-        <span class="section-num"><em>06</em>FAQ</span>
+        <span class="section-num"><em>05</em>FAQ</span>
         <h2 id="faq-h" style="margin-top:14px;">Häufige Fragen</h2>
       </div>
       <div class="faq">
@@ -564,14 +400,8 @@
   <div class="container">
     <div class="footer__grid">
       <div>
-        <span class="footer__brand">
-          <span class="brand__mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6 7 18l3-7 2 7 3-7 4 12"/></svg>
-          </span>
-          Walker GmbH
-        </span>
-        <span class="footer__tag">Mercedes-Benz Spezialist</span>
-        <p style="margin-top:14px;">Auf Mercedes-Benz spezialisierte Kfz-Werkstatt und offizieller Mercedes-Benz Teilepartner in Hamburg-Hohenfelde.</p>
+        <img class="footer__logo" src="logo.png" alt="Walker GmbH – Mercedes-Benz Spezialist" width="280" height="96" />
+        <p style="margin-top:0;">Auf Mercedes-Benz spezialisierte Kfz-Werkstatt und offizieller Mercedes-Benz Teilepartner in Hamburg-Hohenfelde.</p>
       </div>
       <div>
         <h4>Leistungen</h4>

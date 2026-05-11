@@ -11,6 +11,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/png" href="favicon.png" />
+<link rel="apple-touch-icon" href="favicon.png" />
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -26,7 +28,7 @@
 
 <header class="header">
   <div class="container header__row">
-    <a class="brand" href="index.html"><span class="brand__mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6 7 18l3-7 2 7 3-7 4 12"/></svg></span><span class="brand__text">Walker GmbH<small>Mercedes-Benz Spezialist</small></span></a>
+    <a class="brand" href="index.html"><img class="brand__logo" src="logo.png" alt="Walker GmbH – Mercedes-Benz Spezialist" width="180" height="80" /></a>
     <nav class="nav" aria-label="Hauptnavigation">
       <a class="nav__link" href="index.html">Start</a>
       <a class="nav__link" href="leistungen.html">Leistungen</a>
@@ -44,7 +46,7 @@
 
 <aside class="drawer" id="drawer" aria-hidden="true" data-drawer aria-label="Menü">
   <div class="drawer__head">
-    <span class="brand" style="color:#fff;"><span class="brand__mark drawer__brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6 7 18l3-7 2 7 3-7 4 12"/></svg></span><span class="brand__text">Walker GmbH<small style="color:#C9D2DC">Mercedes-Benz Spezialist</small></span></span>
+    <span class="brand" style="color:#fff;"><img class="brand__logo" src="logo.png" alt="Walker GmbH – Mercedes-Benz Spezialist" width="180" height="80" style="filter:brightness(0) invert(1);" /></span>
     <button class="drawer__close" type="button" aria-label="Menü schließen" data-drawer-close><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
   </div>
   <ul class="drawer__nav" role="list">
@@ -145,9 +147,8 @@
   <div class="container">
     <div class="footer__grid">
       <div>
-        <span class="footer__brand"><span class="brand__mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6 7 18l3-7 2 7 3-7 4 12"/></svg></span>Walker GmbH</span>
-        <span class="footer__tag">Mercedes-Benz Spezialist</span>
-        <p style="margin-top:14px;">Auf Mercedes-Benz spezialisierte Kfz-Werkstatt und offizieller Mercedes-Benz Teilepartner in Hamburg-Hohenfelde.</p>
+        <img class="footer__logo" src="logo.png" alt="Walker GmbH – Mercedes-Benz Spezialist" width="280" height="96" />
+        <p>Auf Mercedes-Benz spezialisierte Kfz-Werkstatt und offizieller Mercedes-Benz Teilepartner in Hamburg-Hohenfelde.</p>
       </div>
       <div>
         <h4>Leistungen</h4>
