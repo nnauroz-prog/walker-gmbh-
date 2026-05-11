@@ -13,7 +13,7 @@
 <meta property="og:url" content="https://walker-kfz.de/" />
 <meta property="og:image" content="https://walker-kfz.de/logo.png" />
 <meta name="theme-color" content="#061327" />
-<meta name="build" content="v13-tone" />
+<meta name="build" content="v14-photos" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
@@ -126,9 +126,10 @@
 
 <main id="main">
 
-  <!-- ================== HERO – dark, editorial ================== -->
+  <!-- ================== HERO – dark, editorial, mit Foto ================== -->
   <section class="hero">
     <div class="container">
+      <div class="hero__grid">
       <div class="hero__inner">
         <span class="hero__eyebrow">Walker GmbH · Ifflandstraße 71, Hamburg-Hohenfelde</span>
         <h1 class="hero__title">Ihre Mercedes-Werkstatt<br/>in Hohenfelde.</h1>
@@ -152,6 +153,11 @@
             <span class="gbadge__count">Bewertungen auf Google</span>
           </a>
         </div>
+      </div>
+
+      <div class="hero__visual" aria-hidden="true">
+        <img src="foto-diagnose.jpg" alt="Diagnosegerät mit blauer LED, angeschlossen an einen Mercedes-Benz" width="1200" height="1500" loading="eager" />
+      </div>
       </div>
 
       <div class="hero__meta">
@@ -235,8 +241,8 @@
             <p class="mb-section__legal">Walker GmbH ist eine eigenständige Fachwerkstatt und keine offizielle Mercedes-Benz Niederlassung.</p>
           </div>
 
-          <div class="mb-section__visual" aria-hidden="true">
-            <img src="logo.png" alt="" style="width:100%;height:auto;max-width:340px;filter:brightness(0) invert(1);opacity:0.95;" />
+          <div class="mb-section__visual" aria-hidden="true" style="padding:0;overflow:hidden;">
+            <img src="foto-bremsen.jpg" alt="Bremsscheibe und Bremssattel an einem Mercedes-Benz" style="width:100%;height:100%;object-fit:cover;" />
           </div>
         </div>
       </div>

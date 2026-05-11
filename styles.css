@@ -548,10 +548,36 @@ p { margin: 0 0 1em 0; }
   background: linear-gradient(90deg, transparent, var(--c-chrome) 30%, var(--c-accent) 50%, var(--c-chrome) 70%, transparent);
   opacity: 0.5;
 }
+.hero__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: clamp(32px, 5vw, 80px);
+  align-items: center;
+}
 .hero__inner {
   position: relative;
   max-width: 920px;
   z-index: 2;
+}
+.hero__visual {
+  position: relative;
+  z-index: 2;
+  aspect-ratio: 4/5;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-deep);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.hero__visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+@media (max-width: 980px) {
+  .hero__grid { grid-template-columns: 1fr; }
+  .hero__visual { aspect-ratio: 16/10; max-width: 100%; }
 }
 .hero__title {
   font-size: clamp(2.6rem, 5.5vw + 0.6rem, 5rem);
@@ -900,14 +926,12 @@ p { margin: 0 0 1em 0; }
   position: relative;
   aspect-ratio: 1/1;
   border-radius: var(--radius-lg);
-  background:
-    radial-gradient(closest-side at 50% 50%, rgba(30,115,190,0.25), transparent 60%),
-    linear-gradient(160deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+  background: rgba(255,255,255,0.02);
   border: 1px solid rgba(255,255,255,0.08);
   overflow: hidden;
   display: flex; align-items: center; justify-content: center;
-  padding: 14%;
 }
+.mb-section__visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .mb-section__legal {
   margin-top: 12px;
   font-size: 0.78rem;
@@ -1719,22 +1743,12 @@ p { margin: 0 0 1em 0; }
   position: relative;
   aspect-ratio: 4/5;
   border-radius: var(--radius-xl);
-  background:
-    radial-gradient(closest-side at 20% 0%, rgba(30, 115, 190, 0.24), transparent 70%),
-    linear-gradient(160deg, var(--c-deep) 0%, #030a15 100%);
   overflow: hidden;
-  color: var(--c-white);
   box-shadow: var(--shadow-lg);
 }
-.about-visual::before {
-  content: "";
-  position: absolute; inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size: 28px 28px;
+.about-visual img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
 }
-.about-visual svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 
 /* Legal pages */
 .legal {
