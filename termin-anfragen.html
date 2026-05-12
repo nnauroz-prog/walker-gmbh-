@@ -129,11 +129,315 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
 
   <section class="section">
     <div class="container">
-      <p class="lead">Diese Seite wird in Etappe&nbsp;2 mit Inhalt befüllt (Walker GmbH – Aufbau-Skelett).</p>
+      <div class="termin-wrap">
+
+        <div>
+          <!-- Form -->
+          <form class="termin-form" data-termin-form novalidate aria-labelledby="termin-h">
+            <h2 id="termin-h" style="margin-top:0;font-family:var(--font-body);font-size:1.2rem;">Ihre Anfrage</h2>
+            <p class="termin-form__hint">Pflichtfelder sind mit einem Sternchen markiert. Wir antworten in der Regel innerhalb eines Werktages – am schnellsten geht es telefonisch unter <a href="tel:+4940225536" style="color:var(--navy);font-weight:600;">+49 40 225536</a>.</p>
+
+            <fieldset>
+              <legend>Anliegen</legend>
+              <div class="field">
+                <label for="f-service">Service-Art <span class="req">*</span></label>
+                <select id="f-service" name="service_type" required>
+                  <option value="">Bitte wählen …</option>
+                  <option>Diagnose / Fehleranalyse</option>
+                  <option>Inspektion / Wartung</option>
+                  <option>Ölservice / Filterwechsel</option>
+                  <option>Bremsen / Fahrwerk</option>
+                  <option>Elektronik / Steuergeräte</option>
+                  <option>Klimaservice</option>
+                  <option>Reparatur</option>
+                  <option>Sonstiges</option>
+                </select>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Fahrzeug</legend>
+              <div class="field">
+                <label for="f-vehicle">Fahrzeugmodell <span class="req">*</span></label>
+                <input id="f-vehicle" name="vehicle" type="text" required autocomplete="off" placeholder="z. B. Mercedes-Benz C 220 d (W205)">
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="f-plate">Kennzeichen <small class="field-hint">(optional)</small></label>
+                  <input id="f-plate" name="license_plate" type="text" autocomplete="off" placeholder="HH-XX 1234">
+                </div>
+                <div class="field">
+                  <label for="f-mileage">Kilometerstand <small class="field-hint">(optional)</small></label>
+                  <input id="f-mileage" name="mileage" type="text" inputmode="numeric" autocomplete="off" placeholder="z. B. 95.000">
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Kontakt</legend>
+              <div class="field">
+                <label for="f-name">Name <span class="req">*</span></label>
+                <input id="f-name" name="name" type="text" required autocomplete="name">
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="f-phone">Telefon <span class="req">*</span></label>
+                  <input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="+49 …">
+                </div>
+                <div class="field">
+                  <label for="f-email">E-Mail</label>
+                  <input id="f-email" name="email" type="email" autocomplete="email">
+                </div>
+              </div>
+              <p class="field-hint">Bitte Telefon <em>oder</em> E-Mail angeben – wir nehmen den von Ihnen bevorzugten Weg.</p>
+            </fieldset>
+
+            <fieldset>
+              <legend>Wunschtermin &amp; Nachricht</legend>
+              <div class="field-row">
+                <div class="field">
+                  <label for="f-date">Wunschdatum <small class="field-hint">(optional)</small></label>
+                  <input id="f-date" name="preferred_date" type="date">
+                </div>
+                <div class="field">
+                  <label for="f-time">Wunschzeit <small class="field-hint">(optional)</small></label>
+                  <input id="f-time" name="preferred_time" type="text" autocomplete="off" placeholder="z. B. vormittags">
+                </div>
+              </div>
+              <div class="field">
+                <label for="f-message">Nachricht / Symptome</label>
+                <textarea id="f-message" name="message" rows="5" placeholder="z. B. Motorkontrollleuchte seit gestern, beim Kaltstart ein leises Klacken im Motorraum …"></textarea>
+              </div>
+            </fieldset>
+
+            <label class="checkbox-row">
+              <input type="checkbox" name="privacy" required>
+              <span>Ich habe die <a href="datenschutz.html">Datenschutzhinweise</a> gelesen und stimme der elektronischen Speicherung meiner Angaben zur Bearbeitung der Anfrage zu. <span class="req">*</span></span>
+            </label>
+
+            <div data-form-status></div>
+
+            <button type="submit" class="btn btn--blue">
+              Anfrage senden
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
+          </form>
+
+          <!-- Success card (hidden initially) -->
+          <div class="termin-success" data-termin-success hidden>
+            <span class="termin-success__icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </span>
+            <h2>Danke. Ihre Anfrage wurde übermittelt.</h2>
+            <p class="lead" style="margin:0 auto 18px;">Wir melden uns schnellstmöglich zurück.</p>
+            <p style="color:var(--muted);font-size:0.94rem;">In dringenden Fällen erreichen Sie uns direkt unter <a href="tel:+4940225536" style="color:var(--blue);font-weight:600;">+49 40 225536</a>.</p>
+            <div style="margin-top:22px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+              <a class="btn btn--primary" href="index.html">Zur Startseite</a>
+              <button class="btn btn--ghost" type="button" data-reset-form>Weitere Anfrage stellen</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Side -->
+        <aside class="termin-side" aria-label="Direkter Kontakt">
+          <div class="contact-card contact-card--dark">
+            <span class="contact-card__label">Lieber direkt anrufen?</span>
+            <a class="contact-card__big" href="tel:+4940225536">+49 40 225536</a>
+            <p>Mo–Do 07:30–18:30 · Fr 07:00–12:00</p>
+            <span class="live-status" data-live-status style="color:var(--blue-soft);"><span class="dot"></span><span data-live-label>—</span></span>
+          </div>
+
+          <div class="contact-card">
+            <span class="contact-card__label">Persönlich vorbeikommen</span>
+            <span class="contact-card__big">Ifflandstraße 71</span>
+            <p>22087 Hamburg-Hohenfelde · Für die Übergabe vorher kurz anrufen.</p>
+            <a class="btn btn--ghost btn--sm" href="kontakt.html">Anfahrt &amp; Karte</a>
+          </div>
+
+          <div class="contact-card" style="background:var(--silver);border-color:var(--line);">
+            <span class="contact-card__label">Was wir am Telefon brauchen</span>
+            <ul style="padding-left:1.1em;margin:6px 0 0;color:var(--anthracite);font-size:0.94rem;line-height:1.7;">
+              <li>Modell und Baujahr</li>
+              <li>Kurze Symptom-Beschreibung</li>
+              <li>Ihren Wunschtermin</li>
+            </ul>
+          </div>
+        </aside>
+
+      </div>
+
+      <!-- Hidden hours for Live-Status -->
+      <table data-hours hidden aria-hidden="true">
+        <tr data-day="1-4" data-from="07:30" data-to="18:30"></tr>
+        <tr data-day="5" data-from="07:00" data-to="12:00"></tr>
+        <tr data-day="6" data-closed></tr>
+        <tr data-day="0" data-closed></tr>
+      </table>
     </div>
   </section>
 
 </main>
+
+<script>
+/* ===== Termin-Anfragen Form-Handler ===== */
+(function(){
+  'use strict';
+
+  document.addEventListener('DOMContentLoaded', function(){
+    var form = document.querySelector('[data-termin-form]');
+    var success = document.querySelector('[data-termin-success]');
+    var status = document.querySelector('[data-form-status]');
+    if (!form) return;
+
+    function setStatus(type, msg){
+      if (!status) return;
+      status.innerHTML = '';
+      if (!msg) return;
+      var box = document.createElement('div');
+      box.className = 'alert alert--' + type;
+      box.innerHTML = msg;
+      status.appendChild(box);
+    }
+
+    function buildMailtoFallback(payload){
+      var lines = [
+        'Terminanfrage Walker GmbH',
+        '',
+        'Service: ' + (payload.service_type || '-'),
+        '',
+        'Fahrzeug: ' + (payload.vehicle || '-'),
+        'Kennzeichen: ' + (payload.license_plate || '-'),
+        'KM-Stand: ' + (payload.mileage || '-'),
+        '',
+        'Name: ' + (payload.name || '-'),
+        'Telefon: ' + (payload.phone || '-'),
+        'E-Mail: ' + (payload.email || '-'),
+        '',
+        'Wunschdatum: ' + (payload.preferred_date || '-'),
+        'Wunschzeit: ' + (payload.preferred_time || '-'),
+        '',
+        'Nachricht:',
+        payload.message || '-'
+      ];
+      var cfg = window.walkerConfig || {};
+      var to = (cfg.COMPANY && cfg.COMPANY.email) ? cfg.COMPANY.email : '';
+      var subject = 'Terminanfrage – ' + (payload.name || 'Kunde');
+      return 'mailto:' + encodeURIComponent(to) + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
+    }
+
+    function validate(payload){
+      var errors = [];
+      if (!payload.service_type) errors.push('Bitte wählen Sie ein Anliegen aus.');
+      if (!payload.vehicle || !payload.vehicle.trim()) errors.push('Bitte geben Sie das Fahrzeugmodell an.');
+      if (!payload.name || !payload.name.trim()) errors.push('Bitte geben Sie Ihren Namen an.');
+      var hasPhone = payload.phone && payload.phone.trim();
+      var hasEmail = payload.email && payload.email.trim();
+      if (!hasPhone && !hasEmail) errors.push('Bitte hinterlassen Sie Telefon oder E-Mail.');
+      if (!payload.privacy) errors.push('Bitte stimmen Sie der Datenschutzerklärung zu.');
+      return errors;
+    }
+
+    form.addEventListener('input', function(e){
+      if (e.target && e.target.style && e.target.style.borderColor) e.target.style.borderColor = '';
+    });
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+
+      var data = new FormData(form);
+      var payload = {
+        service_type:    String(data.get('service_type') || ''),
+        vehicle:         String(data.get('vehicle') || ''),
+        license_plate:   String(data.get('license_plate') || ''),
+        mileage:         String(data.get('mileage') || ''),
+        name:            String(data.get('name') || ''),
+        phone:           String(data.get('phone') || ''),
+        email:           String(data.get('email') || ''),
+        preferred_date:  String(data.get('preferred_date') || '') || null,
+        preferred_time:  String(data.get('preferred_time') || ''),
+        message:         String(data.get('message') || ''),
+        privacy:         !!data.get('privacy')
+      };
+
+      var errors = validate(payload);
+      if (errors.length) {
+        setStatus('error', '<strong>Bitte prüfen:</strong><br>' + errors.join('<br>'));
+        // mark missing required visually
+        ['service_type','vehicle','name'].forEach(function(n){
+          var el = form.querySelector('[name="'+n+'"]');
+          if (el && !el.value.trim()) el.style.borderColor = '#DC2626';
+        });
+        if (!(payload.phone && payload.phone.trim()) && !(payload.email && payload.email.trim())) {
+          var phone = form.querySelector('[name="phone"]');
+          var email = form.querySelector('[name="email"]');
+          if (phone) phone.style.borderColor = '#DC2626';
+          if (email) email.style.borderColor = '#DC2626';
+        }
+        return;
+      }
+
+      var submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+      setStatus('info', 'Anfrage wird übermittelt …');
+
+      // Remove privacy flag before saving (not needed in DB)
+      var dbPayload = Object.assign({}, payload);
+      delete dbPayload.privacy;
+
+      if (!window.walkerDb) {
+        // walkerDb noch nicht geladen — Fallback auf mailto
+        window.location.href = buildMailtoFallback(payload);
+        if (submitBtn) submitBtn.disabled = false;
+        return;
+      }
+
+      window.walkerDb.addServiceRequest(dbPayload).then(function(res){
+        if (res && res.ok) {
+          form.hidden = true;
+          if (success) {
+            success.hidden = false;
+            success.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        } else if (res && res.local) {
+          // Konnte nicht zu Supabase, aber lokal gesichert
+          form.hidden = true;
+          if (success) {
+            var note = document.createElement('p');
+            note.className = 'alert alert--info';
+            note.style.marginTop = '14px';
+            note.innerHTML = '<strong>Hinweis:</strong> Die Anfrage wurde zwischengespeichert. Falls sich keiner meldet, rufen Sie uns bitte unter +49 40 225536 an.';
+            success.appendChild(note);
+            success.hidden = false;
+            success.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        } else {
+          var msg = '<strong>Anfrage konnte nicht übermittelt werden.</strong><br>Bitte rufen Sie uns direkt an oder nutzen Sie den E-Mail-Fallback.';
+          if (res && res.error && res.error.message) msg += '<br><small>' + res.error.message + '</small>';
+          msg += '<br><br><a class="btn btn--blue btn--sm" href="' + buildMailtoFallback(payload) + '">Per E-Mail senden</a> <a class="btn btn--light btn--sm" href="tel:+4940225536" style="margin-left:8px;">+49 40 225536</a>';
+          setStatus('error', msg);
+        }
+      }).catch(function(err){
+        var msg = '<strong>Anfrage konnte nicht übermittelt werden.</strong><br>' + (err && err.message ? err.message : '') + '<br><br><a class="btn btn--blue btn--sm" href="' + buildMailtoFallback(payload) + '">Per E-Mail senden</a> <a class="btn btn--light btn--sm" href="tel:+4940225536" style="margin-left:8px;">+49 40 225536</a>';
+        setStatus('error', msg);
+      }).finally(function(){
+        if (submitBtn) submitBtn.disabled = false;
+      });
+    });
+
+    // Reset-Button im Success-State
+    var resetBtn = document.querySelector('[data-reset-form]');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', function(){
+        form.reset();
+        form.hidden = false;
+        if (success) success.hidden = true;
+        setStatus('', '');
+        form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+  });
+})();
+</script>
 
 <footer class="footer">
   <div class="container">
