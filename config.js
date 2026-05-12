@@ -41,14 +41,7 @@ window.walkerConfig = {
     ],
     googleReviewsUrl: 'https://www.google.com/search?q=Walker+GmbH+Kfz-Reparaturen+Hamburg+Bewertungen',
     ratingValue: '4.3',
-    ratingCount: '142',
-
-    // WhatsApp Business — TODO: Inhaber sollte für die Werkstatt
-    // ggf. eine separate WhatsApp-Business-Nummer einrichten und
-    // diese hier eintragen (im internationalen Format ohne + und 0).
-    // Solange leer, wird die normale Telefonnummer (phoneRaw) verwendet.
-    whatsappNumber: '',
-    whatsappPrefill: 'Moin, ich fahre einen Mercedes [Modell], Bj. [Jahr], Kennzeichen [HH-…]. Anliegen: '
+    ratingCount: '142'
   },
 
   // Cache-Buster-Version (muss mit Microscript im <head> übereinstimmen)

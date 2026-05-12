@@ -5,19 +5,20 @@
 ## Stand
 
 Die Webseite ist im Kern fertig: Inhalte aller öffentlichen Seiten,
-WhatsApp-Erstkontakt statt Kontaktformular und ein **Auftragsstatus-
-Tracker** für Kunden („Mein Fahrzeug"), den Walker in 10 Sekunden
-pro Auto pflegen kann.
+Telefon + persönliche Vorbeifahrt als Kontaktwege und ein
+**Auftragsstatus-Tracker** für Kunden („Mein Fahrzeug"), den Walker
+in 10 Sekunden pro Auto pflegen kann.
 
 ## Werkstatt-Konzept (Entlastung statt Mehrarbeit)
 
 Statt eines Kontaktformulars, das E-Mails erzeugt, die niemand
 abarbeiten kann, läuft alles über zwei werkstatt-taugliche Kanäle:
 
-1. **WhatsApp-Anfrage** als primärer Kontakt (One-Tap-Link mit
-   vorgefülltem Text — Modell, Baujahr, Kennzeichen, Anliegen).
-   Inhaber liest zwischen den Arbeiten, antwortet wenn er Zeit hat.
-2. **Telefon** als sekundärer Kanal.
+1. **Telefon** als primärer Kontakt (+49 40 225536, einfacher
+   `tel:`-Link in der Header-Leiste). Direkter Draht zur Werkstatt,
+   kein Callcenter, keine Warteschleife.
+2. **Persönlich vorbeikommen** in der Ifflandstraße 71. Adresse +
+   Routen-Knopf (Google / Apple Maps) auf der Kontaktseite.
 3. **„Mein Fahrzeug"-Status** für die häufigste Frage („Ist mein
    Auto fertig?") — Kunde gibt sein Kennzeichen ein, sieht selbst
    den Status, ruft nicht an.
@@ -166,24 +167,6 @@ Beim nächsten Seitenaufruf wird der `localStorage`-Cache geleert.
 
 ---
 
-## WhatsApp-Setup (5 Minuten)
-
-Der WhatsApp-Button auf der Webseite öffnet `wa.me/4940225536`. Für eine
-saubere Trennung empfehlen wir:
-
-1. **WhatsApp Business** (kostenlos) installieren — auf einem Werkstatt-
-   Smartphone oder im Browser-Tab.
-2. Nummer aktivieren (entweder Festnetz +49 40 225536 mit SMS-Verifizierung,
-   oder eine separate Werkstatt-Mobilnummer).
-3. **Begrüßungstext** einrichten:
-   > Moin, danke für Ihre Nachricht. Wir antworten meist innerhalb des
-   > Werktages. Bitte Kennzeichen, Modell (z. B. W213) und Anliegen kurz
-   > beschreiben. — Walker GmbH
-4. **Abwesenheits-Nachricht** für nach Feierabend / Wochenende:
-   > Wir haben gerade Feierabend. Wir melden uns am nächsten Werktag.
-5. Falls Mobilnummer abweichend: in `config.js` → `COMPANY.phoneRaw` und
-   den Link-Aufbau in den HTML-Dateien (`wa.me/<NUMMER>`) anpassen.
-
 ## „Mein Fahrzeug"-Workflow (Status-Tracker)
 
 Der Tracker entlastet das Telefon. Workflow:
@@ -199,12 +182,6 @@ Der Tracker entlastet das Telefon. Workflow:
 
 Tipp: Auf der Übersicht zeigt das **Badge auf der Admin-Karte** an, wie
 viele Fahrzeuge gerade „Abholbereit" sind.
-
-### Optionaler PIN-Schutz
-
-Wer mehr Kontrolle möchte, vergibt beim Annahme-Gespräch eine 4-stellige
-Auftragsnummer und trägt sie zusätzlich im Eintrag ein. Der Kunde muss
-dann Kennzeichen **+** PIN angeben, um den Status zu sehen.
 
 ## Offene Geschäfts-/Rechtsdaten (TODO)
 

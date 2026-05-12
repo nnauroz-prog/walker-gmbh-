@@ -678,14 +678,6 @@ p { margin: 0 0 1em; }
   cursor: pointer;
 }
 
-/* ---------- WhatsApp Button ---------- */
-.btn--wa {
-  background: #25D366;
-  color: var(--white);
-  border-color: #25D366;
-}
-.btn--wa:hover { background: #1FBA59; border-color: #1FBA59; }
-
 /* ---------- Vehicle Status Lookup ---------- */
 .lookup {
   max-width: 540px;
@@ -777,34 +769,6 @@ p { margin: 0 0 1em; }
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-}
-
-/* ---------- Big WhatsApp Card (Kontakt) ---------- */
-.wa-card {
-  background: linear-gradient(160deg, #128C7E 0%, #075E54 100%);
-  color: var(--white);
-  border-radius: var(--radius-md);
-  padding: clamp(24px, 4vw, 40px);
-  position: relative;
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 18px;
-  align-items: center;
-}
-.wa-card h3 { color: var(--white); font-family: var(--font-body); font-size: 1.2rem; margin: 0 0 6px; }
-.wa-card p { color: rgba(255,255,255,0.88); margin: 0; }
-.wa-card .btn { background: #25D366; color: var(--white); border-color: #25D366; }
-.wa-card .btn:hover { background: #1FBA59; border-color: #1FBA59; }
-.wa-card__icon {
-  width: 72px; height: 72px; border-radius: 50%;
-  background: rgba(255,255,255,0.12);
-  display: inline-flex; align-items: center; justify-content: center;
-  flex: 0 0 auto;
-}
-@media (max-width: 560px) {
-  .wa-card { grid-template-columns: 1fr; text-align: left; }
-  .wa-card__icon { width: 56px; height: 56px; }
 }
 
 /* ---------- Admin: Vehicle Status Editor (Etappe 4) ---------- */

@@ -79,8 +79,8 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
       <a class="nav__link" data-nav href="kontakt.html">Kontakt</a>
     </nav>
     <div class="header__cta">
-      <a class="btn btn--ghost btn--sm" href="tel:+4940225536">Anrufen</a>
-      <a class="btn btn--primary btn--sm" href="https://wa.me/4940225536?text=Moin%2C%20ich%20fahre%20einen%20Mercedes%20%5BModell%5D%2C%20Bj.%20%5BJahr%5D%2C%20Kennzeichen%20%5BHH-%E2%80%A6%5D.%20Anliegen%3A%20" target="_blank" rel="noopener noreferrer">WhatsApp-Anfrage</a>
+      <a class="btn btn--ghost btn--sm" href="mein-fahrzeug.html">Mein Fahrzeug</a>
+      <a class="btn btn--primary btn--sm" href="tel:+4940225536"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7a2 2 0 0 1 1.72 2z"/></svg>+49 40 225536</a>
       <button class="burger" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="drawer" data-burger>
         <span></span><span></span><span></span>
       </button>
@@ -136,10 +136,6 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
           <label for="lp">Kennzeichen</label>
           <input class="lookup__plate" id="lp" name="plate" type="text" autocomplete="off" inputmode="latin" placeholder="HH-XY 1234" required>
         </div>
-        <div class="field">
-          <label for="pin">Auftragsnummer (4-stellig) <small class="field-hint">optional, sofern Sie eine erhalten haben</small></label>
-          <input id="pin" name="pin" type="text" inputmode="numeric" maxlength="4" autocomplete="off" pattern="[0-9]{0,4}" placeholder="z. B. 7423">
-        </div>
         <div data-lookup-status></div>
         <button class="btn btn--blue btn--block" type="submit">
           Status abfragen
@@ -150,7 +146,7 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
       <div data-lookup-result></div>
 
       <div style="max-width:540px;margin:32px auto 0;text-align:center;font-size:0.9rem;color:var(--muted);">
-        <p>Sie sehen nur den Bearbeitungs-Status — keine personenbezogenen Daten.<br>Wenn etwas nicht passt: <a href="tel:+4940225536" style="color:var(--blue);font-weight:600;">+49 40 225536</a> oder <a href="https://wa.me/4940225536" target="_blank" rel="noopener noreferrer" style="color:var(--blue);font-weight:600;">WhatsApp</a>.</p>
+        <p>Sie sehen nur den Bearbeitungs-Status — keine personenbezogenen Daten.<br>Wenn etwas nicht passt: <a href="tel:+4940225536" style="color:var(--blue);font-weight:600;">+49 40 225536</a>.</p>
       </div>
 
     </div>
@@ -327,7 +323,6 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
     form.addEventListener('submit', function(e){
       e.preventDefault();
       var plate = form.querySelector('[name="plate"]').value || '';
-      var pin = form.querySelector('[name="pin"]').value || '';
       plate = plate.trim();
       if (!plate) {
         setStatus('error', 'Bitte geben Sie ein Kennzeichen ein.');
@@ -336,14 +331,10 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
       setStatus('info', 'Wird geprüft …');
       resultEl.innerHTML = '';
 
-      window.walkerDb.lookupVehicleStatus(plate, pin).then(function(res){
+      window.walkerDb.lookupVehicleStatus(plate, '').then(function(res){
         setStatus('', '');
         if (!res || !res.ok) {
           setStatus('error', 'Abfrage konnte gerade nicht durchgeführt werden. Bitte versuchen Sie es später erneut oder rufen Sie uns kurz an.');
-          return;
-        }
-        if (res.locked) {
-          setStatus('error', 'Kennzeichen gefunden, aber die Auftragsnummer (PIN) stimmt nicht. Bitte prüfen Sie Ihren Beleg oder rufen Sie uns kurz an.');
           return;
         }
         if (!res.found) {
