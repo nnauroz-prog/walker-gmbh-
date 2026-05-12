@@ -129,7 +129,68 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
 
   <section class="section">
     <div class="container">
-      <p class="lead">Diese Seite wird in Etappe&nbsp;2 mit Inhalt befüllt (Walker GmbH – Aufbau-Skelett).</p>
+      <div class="direct-grid reveal">
+        <div class="contact-card contact-card--dark">
+          <span class="contact-card__label">Telefonisch</span>
+          <a class="contact-card__big" href="tel:+4940225536">+49 40 225536</a>
+          <p>Sie sprechen direkt mit der Werkstatt – kein Callcenter, keine Warteschleife.</p>
+          <a class="btn btn--blue" href="tel:+4940225536">Jetzt anrufen</a>
+        </div>
+        <div class="contact-card">
+          <span class="contact-card__label">Persönlich</span>
+          <span class="contact-card__big">Ifflandstraße 71</span>
+          <p>22087 Hamburg-Hohenfelde · Für die Fahrzeugübergabe bitte vorher kurz anrufen, damit wir Zeit für Sie haben.</p>
+          <details class="route-picker">
+            <summary>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l18-8-8 18-2-8-8-2z"/></svg>
+              Route planen
+              <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="route-picker__panel">
+              <a class="route-picker__option" href="https://www.google.com/maps/dir/?api=1&amp;destination=Ifflandstra%C3%9Fe+71%2C+22087+Hamburg" target="_blank" rel="noopener noreferrer">
+                <span><strong>Google Maps</strong><small>Android, Web, App</small></span>
+              </a>
+              <a class="route-picker__option" href="https://maps.apple.com/?daddr=Ifflandstra%C3%9Fe+71%2C+22087+Hamburg&amp;dirflg=d" target="_blank" rel="noopener noreferrer">
+                <span><strong>Apple Maps</strong><small>iPhone, iPad, Mac</small></span>
+              </a>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <div class="hours-card" style="margin-top:18px;" data-hours>
+        <h3 style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;">
+          <span>Öffnungszeiten</span>
+          <span class="live-status" data-live-status><span class="dot"></span><span data-live-label>—</span></span>
+        </h3>
+        <table class="hours">
+          <tbody>
+            <tr data-day="1" data-from="07:30" data-to="18:30"><th>Montag</th><td>07:30 – 18:30</td></tr>
+            <tr data-day="2" data-from="07:30" data-to="18:30"><th>Dienstag</th><td>07:30 – 18:30</td></tr>
+            <tr data-day="3" data-from="07:30" data-to="18:30"><th>Mittwoch</th><td>07:30 – 18:30</td></tr>
+            <tr data-day="4" data-from="07:30" data-to="18:30"><th>Donnerstag</th><td>07:30 – 18:30</td></tr>
+            <tr data-day="5" data-from="07:00" data-to="12:00"><th>Freitag</th><td>07:00 – 12:00</td></tr>
+            <tr class="closed" data-day="6" data-closed><th>Samstag</th><td>Geschlossen</td></tr>
+            <tr class="closed" data-day="0" data-closed><th>Sonntag</th><td>Geschlossen</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:0.85rem;color:var(--muted);margin-top:14px;margin-bottom:0;">An gesetzlichen Feiertagen können die Zeiten abweichen. Für die Fahrzeugübergabe bitte vorher kurz telefonisch abstimmen.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section__head section__head--left">
+        <p class="eyebrow">Anfahrt</p>
+        <h2>So finden Sie uns.</h2>
+        <p class="lead" style="max-width:60ch;">Walker GmbH liegt in der Ifflandstraße 71 in Hamburg-Hohenfelde – gut erreichbar mit dem Auto und dem ÖPNV.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a class="btn btn--blue" href="https://www.google.com/maps/dir/?api=1&amp;destination=Ifflandstra%C3%9Fe+71%2C+22087+Hamburg" target="_blank" rel="noopener noreferrer">Route via Google Maps</a>
+        <a class="btn btn--light" href="https://maps.apple.com/?daddr=Ifflandstra%C3%9Fe+71%2C+22087+Hamburg&amp;dirflg=d" target="_blank" rel="noopener noreferrer">Route via Apple Maps</a>
+      </div>
+      <p style="font-size:0.85rem;color:var(--muted);margin-top:14px;">Beim Aufruf einer Karte werden Daten an den jeweiligen Anbieter übertragen.</p>
     </div>
   </section>
 

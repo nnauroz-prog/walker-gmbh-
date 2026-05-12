@@ -46,6 +46,37 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
 .splash__mark{width:56px;height:56px;border-radius:14px;background:var(--navy);display:inline-flex;align-items:center;justify-content:center;color:var(--white);font-family:Georgia,serif;font-weight:700;font-size:1.6rem}
 </style>
 <link rel="stylesheet" href="styles.css?v=2026-01-01-r1">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AutoRepair",
+  "name": "Walker GmbH",
+  "description": "Auf Mercedes-Benz spezialisierte Kfz-Werkstatt und offizieller Mercedes-Benz Teilepartner in Hamburg-Hohenfelde.",
+  "image": "https://walker-kfz.de/logo.png",
+  "url": "https://walker-kfz.de/",
+  "telephone": "+49 40 225536",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Ifflandstraße 71",
+    "postalCode": "22087",
+    "addressLocality": "Hamburg",
+    "addressCountry": "DE"
+  },
+  "areaServed": "Hamburg",
+  "priceRange": "€€",
+  "knowsAbout": ["Mercedes-Benz", "Kfz-Diagnose", "Inspektion", "Wartung", "Reparatur", "Klimaservice", "Elektronik"],
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"], "opens": "07:30", "closes": "18:30" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "07:00", "closes": "12:00" }
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.3",
+    "reviewCount": "142",
+    "bestRating": "5"
+  }
+}
+</script>
 </head>
 <body>
 <div class="splash" id="splash" aria-hidden="true"><span class="splash__mark">W</span></div>
@@ -117,18 +148,245 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
 
 <main id="main">
 
-  <section class="page-hero">
-    <div class="container page-hero__grid">
-        <h1>Schnelle Diagnose. Saubere Reparatur.</h1>
-        <p class="lead">Walker GmbH ist Ihre auf Mercedes-Benz spezialisierte Kfz-Werkstatt in Hamburg-Hohenfelde – mit moderner Diagnose, klarer Beratung und zuverlässiger Teileversorgung.</p>
-      </div>
-  </section>
-
-  <section class="section">
+  <!-- ===== HERO ===== -->
+  <section class="hero">
     <div class="container">
-      <p class="lead">Diese Seite wird in Etappe&nbsp;2 mit Inhalt befüllt (Walker GmbH – Aufbau-Skelett).</p>
+      <div class="hero__grid">
+        <div>
+          <p class="eyebrow" style="color:var(--blue-soft);">Walker GmbH · Hamburg-Hohenfelde</p>
+          <h1 class="hero__title">Schnelle Diagnose.<br><span class="accent">Saubere Reparatur.</span></h1>
+          <p class="hero__lead">Walker GmbH ist Ihre auf Mercedes-Benz spezialisierte Kfz-Werkstatt in Hamburg-Hohenfelde – mit moderner Diagnose, klarer Beratung und zuverlässiger Teileversorgung als offizieller Mercedes-Benz Teilepartner.</p>
+          <div class="hero__cta">
+            <a class="btn btn--blue" href="termin-anfragen.html">
+              Termin anfragen
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+            <a class="btn btn--light" href="leistungen.html">Leistungen ansehen</a>
+          </div>
+          <div class="hero__meta">
+            <span class="hero__meta-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7a2 2 0 0 1 1.72 2z"/></svg>
+              <a href="tel:+4940225536">+49 40 225536</a>
+            </span>
+            <span class="hero__meta-item live-status" data-live-status>
+              <span class="dot"></span>
+              <span data-live-label>Öffnungszeiten prüfen</span>
+            </span>
+          </div>
+        </div>
+        <div class="hero__visual reveal">
+          <img src="foto-diagnose.jpg" alt="Werkstatt – Diagnose an einem Mercedes-Benz" loading="eager" width="800" height="1000">
+        </div>
+      </div>
     </div>
   </section>
+
+  <!-- ===== TRUST STRIP ===== -->
+  <section class="section section--tight">
+    <div class="container">
+      <div class="trust reveal">
+        <div class="trust__card">
+          <span class="trust__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-12V5l-8-3-8 3v5c0 8 8 12 8 12Z"/></svg></span>
+          <div><h3>Mercedes-Benz Spezialist</h3><p>Markenspezifisches Know-how – von der A-Klasse bis zur S-Klasse.</p></div>
+        </div>
+        <div class="trust__card">
+          <span class="trust__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg></span>
+          <div><h3>Offizieller Teilepartner</h3><p>Zuverlässige Ersatzteilversorgung passend zu Ihrem Modell.</p></div>
+        </div>
+        <div class="trust__card">
+          <span class="trust__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 2"/></svg></span>
+          <div><h3>Moderne Diagnose</h3><p>Ursachen werden eingegrenzt, bevor Teile getauscht werden.</p></div>
+        </div>
+        <div class="trust__card">
+          <span class="trust__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+          <div><h3>Persönliche Beratung</h3><p>Sie sprechen direkt mit der Werkstatt – kein Callcenter.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MERCEDES-BENZ TEASER ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="mb-section reveal">
+        <div>
+          <p class="eyebrow" style="color:var(--blue-soft);">Spezialisierung</p>
+          <h2>Eine Marke. Wirklich verstanden.</h2>
+          <p class="lead">Mercedes-Benz Fahrzeuge sind technisch anspruchsvoll. Wer eine Marke jahrelang konsequent macht, erkennt typische Symptome schneller und findet Ursachen, wo andere noch suchen.</p>
+          <ul class="mb-list">
+            <li>Erfahrung über die gängigen Modellreihen – A bis S, AMG, GLA bis GLE, V-Klasse, EQ</li>
+            <li>Offizieller Mercedes-Benz Teilepartner: zuverlässige Versorgung mit passenden Komponenten</li>
+            <li>Inspektion und Wartung nach Herstellervorgaben, sauber dokumentiert</li>
+            <li>Empfehlungen werden vorab besprochen – inklusive der Hinweise, was warten kann</li>
+          </ul>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <a class="btn btn--blue" href="mercedes-spezialist.html">Mehr zur Spezialisierung</a>
+            <a class="btn btn--light" href="teilepartner.html">Teilepartner-Vorteile</a>
+          </div>
+          <p class="mb-section__legal">Walker GmbH ist eine eigenständige Fachwerkstatt – keine offizielle Mercedes-Benz Niederlassung. „Mercedes-Benz" ist eine eingetragene Marke der Mercedes-Benz Group AG.</p>
+        </div>
+        <div class="mb-section__visual">
+          <img src="foto-bremsen.jpg" alt="Bremsscheibe und Bremssattel an einem Mercedes-Benz" loading="lazy" width="800" height="1000">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LEISTUNGEN TEASER ===== -->
+  <section class="section section--soft" aria-labelledby="leistungen-h">
+    <div class="container">
+      <div class="section__head">
+        <p class="eyebrow">Leistungen</p>
+        <h2 id="leistungen-h">Was wir für Ihren Mercedes-Benz tun.</h2>
+        <p class="lead" style="margin-inline:auto;">Diagnose, Wartung, Reparatur, Klimaservice und Mercedes-Benz Ersatzteile – aus einer Hand und ohne Umwege.</p>
+      </div>
+      <div class="services reveal">
+        <article class="service">
+          <span class="service__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 2"/></svg></span>
+          <h3>Diagnose &amp; Fehleranalyse</h3>
+          <p>Wir grenzen die Ursache ein, bevor Teile getauscht werden.</p>
+          <a class="service__more" href="leistungen.html#diagnose">Mehr <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </article>
+        <article class="service">
+          <span class="service__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0-1.4 0L4 15.6V20h4.4l9.3-9.3a1 1 0 0 0 0-1.4l-3-3z"/><path d="m13 8 3 3"/></svg></span>
+          <h3>Inspektion &amp; Wartung</h3>
+          <p>Wartung nach Herstellervorgaben, sauber dokumentiert.</p>
+          <a class="service__more" href="leistungen.html#wartung">Mehr <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </article>
+        <article class="service">
+          <span class="service__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg></span>
+          <h3>Bremsen &amp; Fahrwerk</h3>
+          <p>Prüfung und Reparatur sicherheitsrelevanter Teile.</p>
+          <a class="service__more" href="leistungen.html#bremsen">Mehr <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </article>
+        <article class="service">
+          <span class="service__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18"/><path d="M6 7v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></svg></span>
+          <h3>Ölservice &amp; Filter</h3>
+          <p>Motoröl, Innenraum-, Luft- und Pollenfilter.</p>
+          <a class="service__more" href="leistungen.html#oel">Mehr <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </article>
+        <article class="service">
+          <span class="service__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 18a3 3 0 0 0 6 0V6a3 3 0 0 1 6 0v12"/><circle cx="12" cy="12" r="2"/></svg></span>
+          <h3>Elektronik &amp; Steuergeräte</h3>
+          <p>Analyse von Sensorik und Steuergeräten.</p>
+          <a class="service__more" href="leistungen.html#elektronik">Mehr <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </article>
+        <article class="service">
+          <span class="service__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 18 0"/><path d="M12 3v9l5 3"/></svg></span>
+          <h3>Klimaservice</h3>
+          <p>Prüfung und Wartung der Fahrzeugklimaanlage.</p>
+          <a class="service__more" href="leistungen.html#klima">Mehr <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </article>
+        <article class="service">
+          <span class="service__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-12V5l-8-3-8 3v5c0 8 8 12 8 12Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+          <h3>Reparatur &amp; Instandsetzung</h3>
+          <p>Vom Verschleißteil bis zur größeren Reparatur.</p>
+          <a class="service__more" href="leistungen.html#reparatur">Mehr <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </article>
+        <article class="service">
+          <span class="service__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-12V5l-8-3-8 3v5c0 8 8 12 8 12Z"/></svg></span>
+          <h3>Mercedes-Benz Ersatzteile</h3>
+          <p>Als offizieller Teilepartner – passende Komponenten.</p>
+          <a class="service__more" href="teilepartner.html">Mehr <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </article>
+      </div>
+      <div style="text-align:center;margin-top:32px;">
+        <a class="btn btn--primary" href="leistungen.html">Alle Leistungen ansehen</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABLAUF ===== -->
+  <section class="section" aria-labelledby="ablauf-h">
+    <div class="container">
+      <div class="section__head">
+        <p class="eyebrow">Ablauf</p>
+        <h2 id="ablauf-h">So läuft Ihr Werkstatttermin.</h2>
+        <p class="lead" style="margin-inline:auto;">Von der ersten Kontaktaufnahme bis zur Abholung – ohne Umwege.</p>
+      </div>
+      <ol class="steps reveal">
+        <li class="step"><span class="step__num">01</span><h4>Anfrage senden</h4><p>Telefonisch oder über das Anfrage-Formular.</p></li>
+        <li class="step"><span class="step__num">02</span><h4>Anliegen schildern</h4><p>Modell, Symptom, Wunschtermin – kurz und klar.</p></li>
+        <li class="step"><span class="step__num">03</span><h4>Diagnose &amp; Termin</h4><p>Fehlerspeicher auslesen, Sichtprüfung, Befund.</p></li>
+        <li class="step"><span class="step__num">04</span><h4>Reparaturfreigabe</h4><p>Sie hören vorab von uns, was sinnvoll ist.</p></li>
+        <li class="step"><span class="step__num">05</span><h4>Fahrzeug abholen</h4><p>Erklärung der Arbeiten bei der Übergabe.</p></li>
+      </ol>
+      <div class="step-note">
+        Reparaturen, die über die Erstabsprache hinausgehen, werden ausnahmslos vorab freigegeben.
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QUOTE ===== -->
+  <section class="section section--tight section--soft">
+    <div class="container">
+      <div class="quote">
+        <div class="quote__mark" aria-hidden="true">"</div>
+        <p class="quote__text">Eine gute Werkstatt erkennt man daran, dass man nach dem Termin weiß, was gemacht wurde – und warum.</p>
+        <div class="quote__author">Walker GmbH · Mercedes-Benz Spezialist</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA BAND ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="mb-section">
+        <div>
+          <p class="eyebrow" style="color:var(--blue-soft);">Kontakt</p>
+          <h2>Ihr Mercedes braucht Service?</h2>
+          <p class="lead">Telefonisch unter <a href="tel:+4940225536" style="color:var(--white);font-weight:600;">+49 40 225536</a> oder über das Anfrage-Formular. Persönlich in der Ifflandstraße 71 in Hamburg-Hohenfelde.</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:18px;">
+            <a class="btn btn--blue" href="termin-anfragen.html">Termin anfragen</a>
+            <a class="btn btn--light" href="tel:+4940225536">+49 40 225536</a>
+          </div>
+        </div>
+        <div class="mb-section__visual">
+          <img src="foto-wartung.jpg" alt="Mercedes-Benz auf der Hebebühne in der Werkstatt" loading="lazy" width="800" height="1000">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="section section--soft" aria-labelledby="faq-h">
+    <div class="container">
+      <div class="section__head">
+        <p class="eyebrow">FAQ</p>
+        <h2 id="faq-h">Häufige Fragen.</h2>
+      </div>
+      <div class="faq">
+        <details class="faq__item">
+          <summary class="faq__q">Reparieren Sie ausschließlich Mercedes-Benz?<svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="faq__a">Mercedes-Benz ist unser Schwerpunkt. Andere gängige Pkw-Marken nehmen wir nach Absprache an. Bitte teilen Sie uns Marke und Modell vorab telefonisch mit.</div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q">Verwenden Sie Original-Ersatzteile?<svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="faq__a">Als offizieller Mercedes-Benz Teilepartner setzen wir auf qualitativ hochwertige Original-Ersatzteile mit zuverlässiger Verfügbarkeit. Alternative Optionen besprechen wir vorab.</div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q">Wie kurzfristig sind Termine möglich?<svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="faq__a">Termine erhalten Sie nach Verfügbarkeit. Bei akuten Anliegen prüfen wir kurzfristige Möglichkeiten – am schnellsten telefonisch.</div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q">Warnleuchte am Armaturenbrett – wie verhalten?<svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="faq__a">Bei roten Warnleuchten (Öldruck, Motorkontrolle, Batterie) Fahrzeug abstellen und Werkstatt kontaktieren. Wir lesen den Fehlerspeicher aus und besprechen das weitere Vorgehen mit Ihnen.</div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q">Wie erreichen wir Sie?<svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="faq__a">Telefonisch unter <a href="tel:+4940225536">+49 40 225536</a> oder persönlich in der Ifflandstraße 71. Mo–Do 07:30–18:30, Fr 07:00–12:00.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hidden hours table used by the Live-Status JS -->
+  <table data-hours hidden aria-hidden="true">
+    <tr data-day="1-4" data-from="07:30" data-to="18:30"></tr>
+    <tr data-day="5" data-from="07:00" data-to="12:00"></tr>
+    <tr data-day="6" data-closed></tr>
+    <tr data-day="0" data-closed></tr>
+  </table>
 
 </main>
 

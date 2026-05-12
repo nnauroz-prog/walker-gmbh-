@@ -130,7 +130,85 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
 
   <section class="section">
     <div class="container">
-      <p class="lead">Diese Seite wird in Etappe&nbsp;2 mit Inhalt befüllt (Walker GmbH – Aufbau-Skelett).</p>
+      <div class="legal">
+
+        <h2>1. Verantwortliche Stelle</h2>
+        <p>
+          Walker GmbH<br>
+          Ifflandstraße 71<br>
+          22087 Hamburg<br>
+          Telefon: <a href="tel:+4940225536">+49 40 225536</a><br>
+          E-Mail: <span class="todo">TODO: E-Mail-Adresse eintragen</span>
+        </p>
+
+        <h2>2. Hosting</h2>
+        <p>Diese Webseite wird bei einem externen Dienstleister gehostet. Die personenbezogenen Daten, die auf dieser Webseite erfasst werden, werden auf den Servern des Hosters gespeichert.</p>
+        <p>Hoster: <span class="todo">TODO: Name &amp; Anschrift des Hosting-Anbieters eintragen (z.&nbsp;B. Netlify, GitHub, eigenes Hosting)</span></p>
+        <p>Der Einsatz des Hosters erfolgt zum Zwecke der Vertragserfüllung gegenüber unseren potenziellen und bestehenden Kunden (Art. 6 Abs. 1 lit. b DSGVO) und im Interesse einer sicheren, schnellen und effizienten Bereitstellung unseres Online-Angebots (Art. 6 Abs. 1 lit. f DSGVO).</p>
+
+        <h2>3. Backend &amp; Datenbank (Supabase)</h2>
+        <p>Für die Speicherung von Anfragen, die Anmeldung des Mitgliederbereichs und die Pflege von Inhalten nutzen wir die Plattform <strong>Supabase</strong> der Supabase Inc. (970 Toa Payoh North, #07-04, Singapore 318992). Supabase bietet eine PostgreSQL-Datenbank, Authentifizierungs- und Speicher-Dienste an. Die Datenverarbeitung erfolgt in der EU (Frankfurt am Main).</p>
+        <p>Wenn Sie unser Anfrage-Formular nutzen, werden die übermittelten Daten in der Supabase-Datenbank gespeichert. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Anbahnung eines Vertragsverhältnisses) bzw. Art. 6 Abs. 1 lit. f DSGVO (Bearbeitung der Anfrage als berechtigtes Interesse).</p>
+        <p>Datenschutz von Supabase: <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer">https://supabase.com/privacy</a>.</p>
+
+        <h2>4. Server-Logfiles</h2>
+        <p>Der Provider erhebt und speichert automatisch Informationen in sogenannten Server-Logfiles, die Ihr Browser übermittelt:</p>
+        <ul>
+          <li>Browsertyp und Browserversion</li>
+          <li>Verwendetes Betriebssystem</li>
+          <li>Referrer-URL</li>
+          <li>Hostname des zugreifenden Rechners</li>
+          <li>Uhrzeit der Serveranfrage</li>
+          <li>IP-Adresse (anonymisiert oder gekürzt, sofern technisch möglich)</li>
+        </ul>
+        <p>Die Erfassung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an technisch fehlerfreier Darstellung).</p>
+
+        <h2>5. Anfrage-Formular</h2>
+        <p>Wenn Sie das Formular zur Terminanfrage nutzen, werden Ihre Angaben (Name, Telefon, E-Mail, Fahrzeugdaten, Anliegen, Wunschtermin) zur Bearbeitung Ihrer Anfrage und für eventuelle Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p>
+        <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung) oder Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an effektiver Bearbeitung).</p>
+
+        <h2>6. Cookies &amp; LocalStorage</h2>
+        <p>Unsere Webseite verwendet nur technisch notwendige Cookies und nutzt zudem den <code>localStorage</code> Ihres Browsers für:</p>
+        <ul>
+          <li>Speicherung Ihrer Cookie-Einstellung</li>
+          <li>Cache-Versionierung (damit Sie nach einem Update die aktuelle Webseite sehen)</li>
+          <li>lokaler Fallback-Speicher für Inhalte, falls die Backend-Verbindung kurzzeitig nicht erreichbar ist</li>
+        </ul>
+        <p>Diese Vorgänge sind technisch erforderlich und erfordern keine Einwilligung gemäß § 25 Abs. 2 TDDDG.</p>
+
+        <h2>7. Externe Karten (Routenplanung)</h2>
+        <p>Auf unserer Kontaktseite bieten wir Links zu Google Maps und Apple Maps für die Routenplanung. Karten werden <strong>nicht automatisch eingebunden</strong>. Erst wenn Sie auf „Route via Google Maps" oder „Route via Apple Maps" klicken, werden Sie an den jeweiligen Anbieter weitergeleitet und Daten (insbesondere Ihre IP-Adresse) dorthin übermittelt.</p>
+        <p>Datenschutzhinweise der Anbieter: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google</a> · <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer">Apple</a>.</p>
+
+        <h2>8. Mitgliederbereich (Authentifizierung)</h2>
+        <p>Der Mitgliederbereich (<code>admin.html</code>) ist über Supabase Auth abgesichert. Es werden E-Mail-Adresse und Passwort verarbeitet. Die Zugangsdaten werden ausschließlich für die Authentifizierung und für die Sicherheit des Bereichs verwendet (Art. 6 Abs. 1 lit. b und f DSGVO).</p>
+
+        <h2>9. Speicherdauer</h2>
+        <p>Wir verarbeiten und speichern Ihre personenbezogenen Daten nur so lange, wie dies zur Erfüllung des jeweiligen Verarbeitungszwecks erforderlich ist oder gesetzliche Aufbewahrungsfristen dies vorschreiben.</p>
+
+        <h2>10. Ihre Rechte</h2>
+        <p>Sie haben jederzeit das Recht auf:</p>
+        <ul>
+          <li>Auskunft (Art. 15 DSGVO)</li>
+          <li>Berichtigung (Art. 16 DSGVO)</li>
+          <li>Löschung (Art. 17 DSGVO)</li>
+          <li>Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+          <li>Datenübertragbarkeit (Art. 20 DSGVO)</li>
+          <li>Widerspruch (Art. 21 DSGVO)</li>
+        </ul>
+
+        <h2>11. Widerruf der Einwilligung</h2>
+        <p>Eine erteilte Einwilligung können Sie jederzeit widerrufen. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt vom Widerruf unberührt.</p>
+
+        <h2>12. Beschwerderecht</h2>
+        <p>Sie haben das Recht auf Beschwerde bei einer Aufsichtsbehörde. Zuständig ist insbesondere der Hamburgische Beauftragte für Datenschutz und Informationsfreiheit.</p>
+
+        <h2>13. SSL-/TLS-Verschlüsselung</h2>
+        <p>Diese Seite nutzt aus Gründen der Sicherheit und zum Schutz der Übertragung vertraulicher Inhalte eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie an „https://" in der Adresszeile Ihres Browsers.</p>
+
+        <p style="margin-top:2rem;font-size:0.85rem;color:var(--muted);">Diese Datenschutzhinweise sind ein Vorlagentext, der an die konkreten Verhältnisse vor Ort angepasst werden muss. <span class="todo">TODO: rechtliche Prüfung empfohlen.</span></p>
+
+      </div>
     </div>
   </section>
 
