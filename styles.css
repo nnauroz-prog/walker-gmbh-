@@ -678,6 +678,167 @@ p { margin: 0 0 1em; }
   cursor: pointer;
 }
 
+/* ---------- WhatsApp Button ---------- */
+.btn--wa {
+  background: #25D366;
+  color: var(--white);
+  border-color: #25D366;
+}
+.btn--wa:hover { background: #1FBA59; border-color: #1FBA59; }
+
+/* ---------- Vehicle Status Lookup ---------- */
+.lookup {
+  max-width: 540px;
+  margin: 0 auto;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: clamp(24px, 3.5vw, 36px);
+  box-shadow: var(--shadow-sm);
+}
+.lookup__plate {
+  font: inherit;
+  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.4rem, 2vw + 0.6rem, 1.8rem);
+  letter-spacing: 0.04em;
+  padding: 18px 18px;
+  text-align: center;
+  width: 100%;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--silver);
+  min-height: 64px;
+  color: var(--navy);
+}
+.lookup__plate:focus {
+  border-color: var(--blue);
+  outline: 0;
+  box-shadow: 0 0 0 4px rgba(30,115,190,0.12);
+}
+.lookup .field { margin-bottom: 14px; }
+
+/* Status Card */
+.status-result {
+  max-width: 540px;
+  margin: 18px auto 0;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: clamp(24px, 3.5vw, 36px);
+  box-shadow: var(--shadow-sm);
+}
+.status-result__plate {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+  letter-spacing: 0.04em;
+  color: var(--navy);
+  margin-bottom: 14px;
+}
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+}
+.status-badge .dot { width: 10px; height: 10px; border-radius: 50%; }
+.status-badge--received     { background: #EFF6FF; color: #1E3A8A; }
+.status-badge--received .dot{ background: #3B82F6; }
+.status-badge--in_progress  { background: #FEF3C7; color: #92400E; }
+.status-badge--in_progress .dot { background: #F59E0B; }
+.status-badge--waiting_parts{ background: #FFEDD5; color: #9A3412; }
+.status-badge--waiting_parts .dot { background: #F97316; }
+.status-badge--ready        { background: #DCFCE7; color: #065F46; }
+.status-badge--ready .dot   { background: #10B981; box-shadow: 0 0 0 4px rgba(16,185,129,0.2); }
+.status-badge--done         { background: var(--line-soft); color: var(--muted); }
+.status-badge--done .dot    { background: var(--muted); }
+
+.status-result__note {
+  margin-top: 16px;
+  padding: 14px 16px;
+  background: var(--silver);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  color: var(--anthracite);
+}
+.status-result__meta {
+  margin-top: 14px;
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+.status-result__cta {
+  margin-top: 18px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ---------- Big WhatsApp Card (Kontakt) ---------- */
+.wa-card {
+  background: linear-gradient(160deg, #128C7E 0%, #075E54 100%);
+  color: var(--white);
+  border-radius: var(--radius-md);
+  padding: clamp(24px, 4vw, 40px);
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 18px;
+  align-items: center;
+}
+.wa-card h3 { color: var(--white); font-family: var(--font-body); font-size: 1.2rem; margin: 0 0 6px; }
+.wa-card p { color: rgba(255,255,255,0.88); margin: 0; }
+.wa-card .btn { background: #25D366; color: var(--white); border-color: #25D366; }
+.wa-card .btn:hover { background: #1FBA59; border-color: #1FBA59; }
+.wa-card__icon {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  display: inline-flex; align-items: center; justify-content: center;
+  flex: 0 0 auto;
+}
+@media (max-width: 560px) {
+  .wa-card { grid-template-columns: 1fr; text-align: left; }
+  .wa-card__icon { width: 56px; height: 56px; }
+}
+
+/* ---------- Admin: Vehicle Status Editor (Etappe 4) ---------- */
+.vs-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 14px;
+}
+.vs-table th, .vs-table td {
+  padding: 12px 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.94rem;
+  vertical-align: middle;
+}
+.vs-table th {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  font-weight: 600;
+}
+.vs-add {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1.4fr auto;
+  gap: 10px;
+  align-items: end;
+  padding: 18px;
+  background: var(--silver);
+  border-radius: var(--radius-sm);
+  margin-top: 12px;
+}
+@media (max-width: 760px) { .vs-add { grid-template-columns: 1fr; } }
+
 /* ---------- Termin-Anfragen Form ---------- */
 .termin-wrap {
   display: grid;

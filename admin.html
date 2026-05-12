@@ -105,14 +105,14 @@ html,body{margin:0;background:var(--silver);color:var(--anthracite);font-family:
       </div>
 
       <div class="admin-overview__cards">
+        <button class="admin-card" data-open-panel="vehicle-status" type="button">
+          <h3>Auftragsstatus pflegen</h3>
+          <p>Kennzeichen + Status. Kunden sehen das selbst und rufen nicht an.</p>
+          <span class="admin-card__badge" data-status-badge hidden>0</span>
+        </button>
         <button class="admin-card" data-open-panel="services" type="button">
           <h3>Leistungen bearbeiten</h3>
           <p>Texte, Reihenfolge und Leistungsbereiche anpassen.</p>
-        </button>
-        <button class="admin-card" data-open-panel="requests" type="button">
-          <h3>Anfragen ansehen</h3>
-          <p>Neue Kundenanfragen prüfen und bearbeiten.</p>
-          <span class="admin-card__badge" data-requests-badge hidden>0</span>
         </button>
         <button class="admin-card" data-open-panel="notice" type="button">
           <h3>Hinweisbanner aktivieren</h3>
@@ -133,7 +133,60 @@ html,body{margin:0;background:var(--silver);color:var(--anthracite);font-family:
       </div>
     </div>
 
-    <!-- Panels (Bereich wird in Etappe 4 mit echter Logik gefüllt) -->
+    <!-- ===== AUFTRAGSSTATUS (Etappe 3) ===== -->
+    <section class="admin-overview" style="margin-top:18px;" data-panel="vehicle-status">
+      <button class="admin-panel__back" type="button" data-back-overview>← Zurück zur Übersicht</button>
+      <div class="admin-overview__head" style="margin-bottom:14px;">
+        <div>
+          <h2 class="admin-overview__title">Auftragsstatus pflegen</h2>
+          <p style="font-size:0.9rem;color:var(--muted);margin:4px 0 0;">Status ändern in 10 Sekunden: Kennzeichen suchen, Status klicken, fertig. Kunden sehen den Status selbst unter <code>mein-fahrzeug.html</code>.</p>
+        </div>
+      </div>
+
+      <!-- Quick add -->
+      <form class="vs-add" data-vs-add novalidate>
+        <div class="field" style="margin:0;">
+          <label for="vs-plate">Kennzeichen *</label>
+          <input id="vs-plate" name="plate" type="text" autocomplete="off" placeholder="HH-XY 1234" required style="text-transform:uppercase;">
+        </div>
+        <div class="field" style="margin:0;">
+          <label for="vs-status">Status *</label>
+          <select id="vs-status" name="status" required>
+            <option value="received">Angenommen</option>
+            <option value="in_progress">In Bearbeitung</option>
+            <option value="waiting_parts">Warten auf Teile</option>
+            <option value="ready">Abholbereit</option>
+            <option value="done">Abgeschlossen</option>
+          </select>
+        </div>
+        <div class="field" style="margin:0;">
+          <label for="vs-note">Hinweis (optional, kunden­sichtbar)</label>
+          <input id="vs-note" name="public_note" type="text" placeholder="z. B. Bremsen erledigt, Räder folgen">
+        </div>
+        <button type="submit" class="btn btn--blue">Speichern</button>
+      </form>
+      <p style="font-size:0.82rem;color:var(--muted);margin-top:8px;">PIN-Schutz (optional): in der Detail-Ansicht je Eintrag setzbar.</p>
+
+      <div data-vs-status></div>
+
+      <!-- Table -->
+      <div style="overflow-x:auto;margin-top:18px;">
+        <table class="vs-table" data-vs-table>
+          <thead>
+            <tr>
+              <th>Kennzeichen</th>
+              <th>Status</th>
+              <th>Hinweis</th>
+              <th>Aktualisiert</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== LEISTUNGEN ===== -->
     <section class="admin-overview" style="margin-top:18px;" data-panel="services">
       <button class="admin-panel__back" type="button" data-back-overview>← Zurück zur Übersicht</button>
       <h2 class="admin-overview__title">Leistungen bearbeiten</h2>

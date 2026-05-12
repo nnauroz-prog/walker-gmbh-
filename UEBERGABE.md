@@ -4,12 +4,28 @@
 
 ## Stand
 
-Die Repository-Struktur, das Designsystem (Navy/Blue/Chrome + Fraunces + Inter),
-die Datenzugriffs-Schicht (`db.js` / `config.js`), das Admin-Skelett und die
-Supabase-SQL-Vorlage sind angelegt. Sämtliche 11 HTML-Seiten haben ein
-einheitliches Skelett mit Header, Footer, Cache-Buster und Inline-Critical-CSS.
+Die Webseite ist im Kern fertig: Inhalte aller öffentlichen Seiten,
+WhatsApp-Erstkontakt statt Kontaktformular und ein **Auftragsstatus-
+Tracker** für Kunden („Mein Fahrzeug"), den Walker in 10 Sekunden
+pro Auto pflegen kann.
 
-Inhalte (Hero-Texte, Leistungs-Cards, FAQs etc.) folgen in **Etappe 2**.
+## Werkstatt-Konzept (Entlastung statt Mehrarbeit)
+
+Statt eines Kontaktformulars, das E-Mails erzeugt, die niemand
+abarbeiten kann, läuft alles über zwei werkstatt-taugliche Kanäle:
+
+1. **WhatsApp-Anfrage** als primärer Kontakt (One-Tap-Link mit
+   vorgefülltem Text — Modell, Baujahr, Kennzeichen, Anliegen).
+   Inhaber liest zwischen den Arbeiten, antwortet wenn er Zeit hat.
+2. **Telefon** als sekundärer Kanal.
+3. **„Mein Fahrzeug"-Status** für die häufigste Frage („Ist mein
+   Auto fertig?") — Kunde gibt sein Kennzeichen ein, sieht selbst
+   den Status, ruft nicht an.
+
+Der Status wird im Admin-Bereich gepflegt:
+Kennzeichen + Status-Dropdown (Angenommen / In Bearbeitung / Warten
+auf Teile / Abholbereit / Abgeschlossen) + optionaler Hinweis.
+Eine Statusänderung dauert ein paar Sekunden.
 
 ---
 
@@ -21,7 +37,7 @@ Inhalte (Hero-Texte, Leistungs-Cards, FAQs etc.) folgen in **Etappe 2**.
 | `leistungen.html` | Leistungs-Übersicht |
 | `mercedes-spezialist.html` | Mercedes-Benz Spezialisierungs-Seite |
 | `teilepartner.html` | Offizieller Teilepartner |
-| `termin-anfragen.html` | Anfrage-Formular (Formular folgt in Etappe 3) |
+| `mein-fahrzeug.html` | Status-Abfrage per Kennzeichen (öffentlich) |
 | `kontakt.html` | Adresse, Anfahrt, Öffnungszeiten |
 | `ueber-uns.html` | Über Walker GmbH |
 | `impressum.html` | Pflichtangaben |
@@ -149,6 +165,46 @@ ausgerollt wird:
 Beim nächsten Seitenaufruf wird der `localStorage`-Cache geleert.
 
 ---
+
+## WhatsApp-Setup (5 Minuten)
+
+Der WhatsApp-Button auf der Webseite öffnet `wa.me/4940225536`. Für eine
+saubere Trennung empfehlen wir:
+
+1. **WhatsApp Business** (kostenlos) installieren — auf einem Werkstatt-
+   Smartphone oder im Browser-Tab.
+2. Nummer aktivieren (entweder Festnetz +49 40 225536 mit SMS-Verifizierung,
+   oder eine separate Werkstatt-Mobilnummer).
+3. **Begrüßungstext** einrichten:
+   > Moin, danke für Ihre Nachricht. Wir antworten meist innerhalb des
+   > Werktages. Bitte Kennzeichen, Modell (z. B. W213) und Anliegen kurz
+   > beschreiben. — Walker GmbH
+4. **Abwesenheits-Nachricht** für nach Feierabend / Wochenende:
+   > Wir haben gerade Feierabend. Wir melden uns am nächsten Werktag.
+5. Falls Mobilnummer abweichend: in `config.js` → `COMPANY.phoneRaw` und
+   den Link-Aufbau in den HTML-Dateien (`wa.me/<NUMMER>`) anpassen.
+
+## „Mein Fahrzeug"-Workflow (Status-Tracker)
+
+Der Tracker entlastet das Telefon. Workflow:
+
+1. **Bei Annahme**: Kennzeichen im Admin (`admin.html` → „Auftragsstatus
+   pflegen") anlegen mit Status „Angenommen".
+2. **Während der Arbeit**: Status auf „In Bearbeitung" klicken — auto-save.
+3. **Bei Teile-Bestellung**: Status „Warten auf Teile", evtl. mit Hinweis
+   wie „Bremsteile bestellt, Lieferung Donnerstag".
+4. **Sobald fertig**: Status auf „Abholbereit". Mehr ist nicht nötig.
+   Kunden sehen das selbst auf `mein-fahrzeug.html`.
+5. **Nach Abholung**: Status „Abgeschlossen" oder Eintrag löschen.
+
+Tipp: Auf der Übersicht zeigt das **Badge auf der Admin-Karte** an, wie
+viele Fahrzeuge gerade „Abholbereit" sind.
+
+### Optionaler PIN-Schutz
+
+Wer mehr Kontrolle möchte, vergibt beim Annahme-Gespräch eine 4-stellige
+Auftragsnummer und trägt sie zusätzlich im Eintrag ein. Der Kunde muss
+dann Kennzeichen **+** PIN angeben, um den Status zu sehen.
 
 ## Offene Geschäfts-/Rechtsdaten (TODO)
 

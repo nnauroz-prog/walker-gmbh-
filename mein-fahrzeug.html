@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>
+(function(){
+  var V='2026-01-01-r1';
+  try{
+    if(localStorage.getItem('app-version')!==V){
+      localStorage.removeItem('app-content');
+      localStorage.setItem('app-version',V);
+    }
+  }catch(e){}
+  try{
+    if('serviceWorker' in navigator){
+      navigator.serviceWorker.getRegistrations()
+        .then(function(rs){rs.forEach(function(r){r.unregister();});}).catch(function(){});
+    }
+  }catch(e){}
+})();
+</script>
+<title>Mein Fahrzeug — Status abfragen | Walker GmbH</title>
+<meta name="description" content="Ist Ihr Fahrzeug fertig? Geben Sie Ihr Kennzeichen ein und sehen Sie den aktuellen Status. Walker GmbH Mercedes-Benz Spezialist Hamburg.">
+<link rel="canonical" href="https://walker-kfz.de/mein-fahrzeug.html">
+<meta property="og:type" content="business.business">
+<meta property="og:title" content="Mein Fahrzeug — Status abfragen | Walker GmbH">
+<meta property="og:description" content="Status Ihres Fahrzeugs nach Kennzeichen abfragen.">
+<meta property="og:url" content="https://walker-kfz.de/mein-fahrzeug.html">
+<meta property="og:image" content="https://walker-kfz.de/logo.png">
+<meta property="og:site_name" content="Walker GmbH">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#061327">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#061327;--white:#fff;--anthracite:#111827;--silver:#F3F6FA}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.splash{position:fixed;inset:0;background:var(--white);z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity .4s cubic-bezier(.22,1,.36,1)}
+.splash.hide{opacity:0;pointer-events:none}
+.splash__mark{width:56px;height:56px;border-radius:14px;background:var(--navy);display:inline-flex;align-items:center;justify-content:center;color:var(--white);font-family:Georgia,serif;font-weight:700;font-size:1.6rem}
+</style>
+<link rel="stylesheet" href="styles.css?v=2026-01-01-r1">
+</head>
+<body>
+<div class="splash" id="splash" aria-hidden="true"><span class="splash__mark">W</span></div>
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+<div class="topbar" role="region" aria-label="Kontakt und Adresse">
+  <div class="container topbar__row">
+    <a class="topbar__item" href="tel:+4940225536" aria-label="Telefonnummer anrufen">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7a2 2 0 0 1 1.72 2z"/></svg>
+      +49 40 225536
+    </a>
+    <span class="topbar__item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Ifflandstraße 71, Hamburg-Hohenfelde
+    </span>
+    <span class="topbar__item topbar__hint"><span class="dot"></span>Mercedes-Benz Spezialist · Offizieller Teilepartner</span>
+  </div>
+</div>
+
+<header class="header">
+  <div class="container header__row">
+    <a class="brand" data-nav href="index.html" aria-label="Walker GmbH – Startseite">
+      <img class="brand__logo" src="logo.png" alt="Walker GmbH – Mercedes-Benz Spezialist" width="180" height="80">
+    </a>
+    <nav class="nav" aria-label="Hauptnavigation">
+      <a class="nav__link" data-nav href="index.html">Start</a>
+      <a class="nav__link" data-nav href="leistungen.html">Leistungen</a>
+      <a class="nav__link" data-nav href="mercedes-spezialist.html">Mercedes-Benz</a>
+      <a class="nav__link" data-nav href="mein-fahrzeug.html">Mein Fahrzeug</a>
+      <a class="nav__link" data-nav href="ueber-uns.html">Über uns</a>
+      <a class="nav__link" data-nav href="kontakt.html">Kontakt</a>
+    </nav>
+    <div class="header__cta">
+      <a class="btn btn--ghost btn--sm" href="tel:+4940225536">Anrufen</a>
+      <a class="btn btn--primary btn--sm" href="https://wa.me/4940225536?text=Moin%2C%20ich%20fahre%20einen%20Mercedes%20%5BModell%5D%2C%20Bj.%20%5BJahr%5D%2C%20Kennzeichen%20%5BHH-%E2%80%A6%5D.%20Anliegen%3A%20" target="_blank" rel="noopener noreferrer">WhatsApp-Anfrage</a>
+      <button class="burger" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="drawer" data-burger>
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<aside class="drawer" id="drawer" aria-hidden="true" data-drawer aria-label="Menü">
+  <div class="drawer__head">
+    <img class="drawer__logo" src="logo.png" alt="Walker GmbH" width="180" height="80">
+    <button class="drawer__close" type="button" aria-label="Menü schließen" data-drawer-close>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+  </div>
+  <ul class="drawer__nav" role="list">
+    <li><a data-nav href="index.html">Start</a></li>
+    <li><a data-nav href="leistungen.html">Leistungen</a></li>
+    <li><a data-nav href="mercedes-spezialist.html">Mercedes-Benz Spezialist</a></li>
+    <li><a data-nav href="teilepartner.html">Teilepartner</a></li>
+    <li><a data-nav href="ueber-uns.html">Über uns</a></li>
+    <li><a data-nav href="kontakt.html">Kontakt &amp; Anfahrt</a></li>
+    <li><a data-nav href="mein-fahrzeug.html">Mein Fahrzeug — Status</a></li>
+  </ul>
+  <div class="drawer__cta">
+    <a class="btn btn--blue btn--block" href="tel:+4940225536">Jetzt anrufen · +49 40 225536</a>
+    <a class="btn btn--light btn--block" href="kontakt.html">Adresse &amp; Anfahrt</a>
+  </div>
+  <div class="drawer__contact">
+    Walker GmbH<br>Ifflandstraße 71, 22087 Hamburg<br>Telefon: <a href="tel:+4940225536">+49 40 225536</a><br><br>Mo–Do 07:30–18:30<br>Fr 07:00–12:00<br>Sa, So geschlossen
+  </div>
+</aside>
+
+<div class="notice" hidden data-notice></div>
+
+<main id="main">
+
+  <section class="page-hero">
+    <div class="container page-hero__grid">
+      <nav class="breadcrumbs" aria-label="Brotkrumennavigation">
+        <a href="index.html">Start</a> <span>›</span> <span aria-current="page">Mein Fahrzeug</span>
+      </nav>
+      <p class="eyebrow">Status-Abfrage</p>
+      <h1>Ist mein Fahrzeug fertig?</h1>
+      <p class="lead">Geben Sie Ihr Kennzeichen ein, um den aktuellen Status Ihres Fahrzeugs zu sehen. Sobald wir den Status auf „abholbereit" gesetzt haben, können Sie während der Öffnungszeiten vorbeikommen — ohne Anruf nötig.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+
+      <form class="lookup" data-lookup-form novalidate>
+        <div class="field">
+          <label for="lp">Kennzeichen</label>
+          <input class="lookup__plate" id="lp" name="plate" type="text" autocomplete="off" inputmode="latin" placeholder="HH-XY 1234" required>
+        </div>
+        <div class="field">
+          <label for="pin">Auftragsnummer (4-stellig) <small class="field-hint">optional, sofern Sie eine erhalten haben</small></label>
+          <input id="pin" name="pin" type="text" inputmode="numeric" maxlength="4" autocomplete="off" pattern="[0-9]{0,4}" placeholder="z. B. 7423">
+        </div>
+        <div data-lookup-status></div>
+        <button class="btn btn--blue btn--block" type="submit">
+          Status abfragen
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </form>
+
+      <div data-lookup-result></div>
+
+      <div style="max-width:540px;margin:32px auto 0;text-align:center;font-size:0.9rem;color:var(--muted);">
+        <p>Sie sehen nur den Bearbeitungs-Status — keine personenbezogenen Daten.<br>Wenn etwas nicht passt: <a href="tel:+4940225536" style="color:var(--blue);font-weight:600;">+49 40 225536</a> oder <a href="https://wa.me/4940225536" target="_blank" rel="noopener noreferrer" style="color:var(--blue);font-weight:600;">WhatsApp</a>.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section__head section__head--left">
+        <p class="eyebrow">So funktioniert's</p>
+        <h2>Anrufen ist nicht nötig.</h2>
+        <p class="lead" style="max-width:60ch;">Wir aktualisieren den Status während der Arbeiten. Sobald „abholbereit" steht, können Sie zur Werkstatt kommen — innerhalb der Öffnungszeiten.</p>
+      </div>
+      <div class="services">
+        <article class="service">
+          <span class="status-badge status-badge--received" style="margin-bottom:8px;"><span class="dot"></span>Angenommen</span>
+          <p>Ihr Fahrzeug ist bei uns angekommen. Wir starten zeitnah mit der Diagnose.</p>
+        </article>
+        <article class="service">
+          <span class="status-badge status-badge--in_progress" style="margin-bottom:8px;"><span class="dot"></span>In Bearbeitung</span>
+          <p>Wir arbeiten gerade an Ihrem Fahrzeug. Bei Rückfragen melden wir uns telefonisch.</p>
+        </article>
+        <article class="service">
+          <span class="status-badge status-badge--waiting_parts" style="margin-bottom:8px;"><span class="dot"></span>Warten auf Teile</span>
+          <p>Ein Teil ist bestellt. Sobald es da ist, geht es weiter. Sie hören von uns, sobald sich der Status ändert.</p>
+        </article>
+        <article class="service">
+          <span class="status-badge status-badge--ready" style="margin-bottom:8px;"><span class="dot"></span>Abholbereit</span>
+          <p>Fertig. Sie können während der Öffnungszeiten vorbeikommen — ohne Anruf.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <img class="footer__logo" src="logo.png" alt="Walker GmbH – Mercedes-Benz Spezialist" width="240" height="84">
+        <p>Auf Mercedes-Benz spezialisierte Kfz-Werkstatt und offizieller Mercedes-Benz Teilepartner in Hamburg-Hohenfelde.</p>
+      </div>
+      <div>
+        <h4>Leistungen</h4>
+        <ul>
+          <li><a href="leistungen.html">Diagnose &amp; Fehleranalyse</a></li>
+          <li><a href="leistungen.html">Inspektion &amp; Wartung</a></li>
+          <li><a href="leistungen.html">Bremsen &amp; Fahrwerk</a></li>
+          <li><a href="leistungen.html">Elektronik &amp; Steuergeräte</a></li>
+          <li><a href="leistungen.html">Klimaservice</a></li>
+          <li><a href="teilepartner.html">Mercedes-Benz Teile</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <ul>
+          <li>Walker GmbH</li>
+          <li>Ifflandstraße 71</li>
+          <li>22087 Hamburg</li>
+          <li><a href="tel:+4940225536">+49 40 225536</a></li>
+          <li>Mo–Do 07:30–18:30</li>
+          <li>Fr 07:00–12:00</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Rechtliches</h4>
+        <ul>
+          <li><a href="impressum.html">Impressum</a></li>
+          <li><a href="datenschutz.html">Datenschutz</a></li>
+          <li><a href="kontakt.html">Kontakt &amp; Anfahrt</a></li>
+          <li><a href="admin.html">Mitgliederbereich</a></li>
+          <li><button class="btn--link" type="button" data-cookie-open>Cookies anpassen</button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© <span data-year>2026</span> Walker GmbH · Mercedes-Benz Spezialist</span>
+    </div>
+    <p class="footer__legal-note">
+      Walker GmbH ist eine eigenständige Kfz-Fachwerkstatt mit Spezialisierung auf Mercedes-Benz und offizieller Mercedes-Benz Teilepartner. Keine offizielle Mercedes-Benz Niederlassung. „Mercedes-Benz" ist eine eingetragene Marke der Mercedes-Benz Group AG.
+    </p>
+  </div>
+</footer>
+
+<div class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie-Hinweis" aria-hidden="true" data-cookie-banner>
+  <div class="cookie-banner__row">
+    <div class="cookie-banner__text">
+      <strong>Wir achten auf Ihre Daten</strong>
+      Wir verwenden nur technisch notwendige Cookies und Speicher. Mit „Zustimmen" akzeptieren Sie zusätzliche Komfort-Funktionen. Details in den <a href="datenschutz.html" style="color:#fff;text-decoration:underline;">Datenschutzhinweisen</a>.
+    </div>
+    <div class="cookie-banner__actions">
+      <button class="btn btn--ghost btn--sm" type="button" data-cookie="necessary">Nur notwendig</button>
+      <button class="btn btn--blue btn--sm" type="button" data-cookie="all">Zustimmen</button>
+    </div>
+  </div>
+</div>
+
+<script src="config.js?v=2026-01-01-r1" defer></script>
+<script src="db.js?v=2026-01-01-r1" defer></script>
+<script src="script.js?v=2026-01-01-r1" defer></script>
+<script>
+/* ===== Mein-Fahrzeug Lookup ===== */
+(function(){
+  'use strict';
+
+  function relTime(ts){
+    var d = new Date(ts);
+    var diff = (Date.now() - d.getTime()) / 1000;
+    if (diff < 60) return 'gerade eben';
+    if (diff < 3600) return 'vor ' + Math.floor(diff/60) + ' Minuten';
+    if (diff < 86400) return 'vor ' + Math.floor(diff/3600) + ' Stunden';
+    var days = Math.floor(diff/86400);
+    if (days === 1) return 'gestern';
+    if (days < 7) return 'vor ' + days + ' Tagen';
+    return d.toLocaleDateString('de-DE', { day:'2-digit', month:'2-digit', year:'numeric' });
+  }
+
+  var STATUS_LABEL = {
+    received:      'Angenommen',
+    in_progress:   'In Bearbeitung',
+    waiting_parts: 'Warten auf Teile',
+    ready:         'Abholbereit',
+    done:          'Abgeschlossen'
+  };
+  var STATUS_HINT = {
+    received:      'Ihr Fahrzeug ist bei uns. Wir starten zeitnah mit der Diagnose.',
+    in_progress:   'Wir arbeiten gerade daran. Bei Rückfragen melden wir uns telefonisch.',
+    waiting_parts: 'Ein Teil ist bestellt. Sobald es da ist, geht es weiter.',
+    ready:         'Fertig. Sie können während der Öffnungszeiten vorbeikommen — ohne Anruf.',
+    done:          'Bereits abgeholt.'
+  };
+
+  document.addEventListener('DOMContentLoaded', function(){
+    var form = document.querySelector('[data-lookup-form]');
+    var statusEl = document.querySelector('[data-lookup-status]');
+    var resultEl = document.querySelector('[data-lookup-result]');
+    if (!form || !window.walkerDb) return;
+
+    function setStatus(type, msg){
+      statusEl.innerHTML = '';
+      if (!msg) return;
+      var box = document.createElement('div');
+      box.className = 'alert alert--' + type;
+      box.innerHTML = msg;
+      statusEl.appendChild(box);
+    }
+
+    function renderResult(plateDisplay, data){
+      var label = STATUS_LABEL[data.status] || data.status;
+      var hint = STATUS_HINT[data.status] || '';
+      var card = document.createElement('div');
+      card.className = 'status-result reveal in';
+      card.innerHTML = '' +
+        '<div class="status-result__plate">' + (plateDisplay || data.plate_display || data.plate) + '</div>' +
+        '<span class="status-badge status-badge--' + (data.status || 'received') + '"><span class="dot"></span>' + label + '</span>' +
+        (data.public_note ? '<div class="status-result__note">' + escapeHtml(data.public_note) + '</div>' : (hint ? '<div class="status-result__note" style="color:var(--muted);">' + hint + '</div>' : '')) +
+        '<p class="status-result__meta">Aktualisiert ' + relTime(data.updated_at) + '</p>' +
+        (data.status === 'ready'
+          ? '<div class="status-result__cta">' +
+              '<a class="btn btn--blue" href="kontakt.html">Anfahrt &amp; Adresse</a>' +
+              '<a class="btn btn--ghost" href="tel:+4940225536">+49 40 225536</a>' +
+            '</div>'
+          : '<div class="status-result__cta"><a class="btn btn--ghost" href="kontakt.html">Adresse &amp; Öffnungszeiten</a></div>');
+      resultEl.innerHTML = '';
+      resultEl.appendChild(card);
+    }
+
+    function escapeHtml(s){
+      return String(s).replace(/[&<>"']/g, function(c){
+        return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c];
+      });
+    }
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var plate = form.querySelector('[name="plate"]').value || '';
+      var pin = form.querySelector('[name="pin"]').value || '';
+      plate = plate.trim();
+      if (!plate) {
+        setStatus('error', 'Bitte geben Sie ein Kennzeichen ein.');
+        return;
+      }
+      setStatus('info', 'Wird geprüft …');
+      resultEl.innerHTML = '';
+
+      window.walkerDb.lookupVehicleStatus(plate, pin).then(function(res){
+        setStatus('', '');
+        if (!res || !res.ok) {
+          setStatus('error', 'Abfrage konnte gerade nicht durchgeführt werden. Bitte versuchen Sie es später erneut oder rufen Sie uns kurz an.');
+          return;
+        }
+        if (res.locked) {
+          setStatus('error', 'Kennzeichen gefunden, aber die Auftragsnummer (PIN) stimmt nicht. Bitte prüfen Sie Ihren Beleg oder rufen Sie uns kurz an.');
+          return;
+        }
+        if (!res.found) {
+          setStatus('info', 'Zu diesem Kennzeichen liegt aktuell kein Auftrag vor. Falls Ihr Fahrzeug heute angenommen wurde, kann es einen Moment dauern, bis der Status erscheint. Bei Fragen: <a href="tel:+4940225536" style="color:var(--navy);font-weight:600;">+49 40 225536</a>.');
+          return;
+        }
+        renderResult(plate.toUpperCase(), res.data);
+      }).catch(function(){
+        setStatus('error', 'Abfrage konnte gerade nicht durchgeführt werden. Bitte versuchen Sie es später erneut.');
+      });
+    });
+
+    // Pre-fill from URL ?plate=HH-XY1234
+    try {
+      var params = new URLSearchParams(window.location.search);
+      var pre = params.get('plate');
+      if (pre) {
+        form.querySelector('[name="plate"]').value = pre;
+        form.requestSubmit();
+      }
+    } catch(e){}
+  });
+})();
+</script>
+</body>
+</html>

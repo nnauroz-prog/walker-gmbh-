@@ -314,6 +314,119 @@
     });
   }
 
+  // ---------- Vehicle status (öffentlicher Lookup + Owner-Pflege) ----------
+  function normalizePlate(input){
+    if (!input) return '';
+    return String(input).toUpperCase().replace(/[\s\-]/g, '');
+  }
+  function prettyPlate(input){
+    // Display: keep first dash if any, else collapse to uppercase
+    var s = String(input || '').toUpperCase().trim();
+    return s.replace(/\s+/g, ' ');
+  }
+
+  function lookupVehicleStatus(plate, pin){
+    var key = normalizePlate(plate);
+    if (!key) return Promise.resolve({ ok: false, error: 'empty' });
+
+    if (!isProd) {
+      // Demo: lokal nachschauen
+      var all = lsGet('vehicle_status') || [];
+      var found = all.find(function(r){ return normalizePlate(r.plate) === key; });
+      if (!found) return Promise.resolve({ ok: true, found: false });
+      if (found.pin && String(found.pin) !== String(pin || '')) {
+        return Promise.resolve({ ok: true, found: false, locked: true });
+      }
+      return Promise.resolve({
+        ok: true, found: true,
+        data: {
+          plate: key,
+          plate_display: found.plate_display || plate || key,
+          status: found.status || 'received',
+          public_note: found.public_note || '',
+          updated_at: found.updated_at || new Date().toISOString(),
+          has_pin: !!found.pin
+        }
+      });
+    }
+    return ready().then(function(){
+      if (!supabaseClient) return { ok: true, found: false };
+      return supabaseClient.rpc('lookup_vehicle_status', { q_plate: plate, q_pin: pin || null })
+        .then(function(res){
+          if (res.error) return { ok: false, error: res.error };
+          var row = res.data && res.data[0];
+          if (!row) return { ok: true, found: false };
+          return { ok: true, found: true, data: row };
+        });
+    });
+  }
+
+  function listVehicleStatus(){
+    if (!isProd) return Promise.resolve(lsGet('vehicle_status') || []);
+    return ready().then(function(){
+      if (!supabaseClient) return lsGet('vehicle_status') || [];
+      return supabaseClient.from('vehicle_status')
+        .select('*')
+        .order('updated_at', { ascending: false })
+        .then(function(res){
+          if (res.error) return lsGet('vehicle_status') || [];
+          return res.data || [];
+        });
+    });
+  }
+
+  function upsertVehicleStatus(record){
+    if (!record || !record.plate) return Promise.reject(new Error('Kennzeichen fehlt'));
+    var entry = {
+      plate: normalizePlate(record.plate),
+      plate_display: record.plate_display || record.plate,
+      pin: record.pin ? String(record.pin).trim() : null,
+      status: record.status || 'received',
+      public_note: record.public_note || '',
+      updated_at: new Date().toISOString()
+    };
+    if (!isProd) {
+      var list = lsGet('vehicle_status') || [];
+      list = list.filter(function(r){ return normalizePlate(r.plate) !== entry.plate; });
+      list.unshift(entry);
+      lsSet('vehicle_status', list);
+      return Promise.resolve({ ok: true, local: true, data: entry });
+    }
+    return ready().then(function(){
+      if (!supabaseClient) {
+        var list = lsGet('vehicle_status') || [];
+        list = list.filter(function(r){ return normalizePlate(r.plate) !== entry.plate; });
+        list.unshift(entry);
+        lsSet('vehicle_status', list);
+        return { ok: true, local: true, data: entry };
+      }
+      return supabaseClient.from('vehicle_status')
+        .upsert(entry)
+        .select()
+        .single()
+        .then(function(res){
+          if (res.error) return { ok: false, error: res.error };
+          return { ok: true, data: res.data };
+        });
+    });
+  }
+
+  function deleteVehicleStatus(plate){
+    var key = normalizePlate(plate);
+    if (!isProd) {
+      var list = (lsGet('vehicle_status') || []).filter(function(r){ return normalizePlate(r.plate) !== key; });
+      lsSet('vehicle_status', list);
+      return Promise.resolve({ ok: true, local: true });
+    }
+    return ready().then(function(){
+      if (!supabaseClient) return { ok: false };
+      return supabaseClient.from('vehicle_status')
+        .delete()
+        .eq('plate', key)
+        .then(function(res){ return { ok: !res.error, error: res.error }; });
+    });
+  }
+
   // ---------- Export ----------
   global.walkerDb = {
     isProd: isProd,
@@ -327,6 +440,11 @@
     addServiceRequest: addServiceRequest,
     listServiceRequests: listServiceRequests,
     updateServiceRequestStatus: updateServiceRequestStatus,
-    deleteServiceRequest: deleteServiceRequest
+    deleteServiceRequest: deleteServiceRequest,
+    lookupVehicleStatus: lookupVehicleStatus,
+    listVehicleStatus: listVehicleStatus,
+    upsertVehicleStatus: upsertVehicleStatus,
+    deleteVehicleStatus: deleteVehicleStatus,
+    normalizePlate: normalizePlate
   };
 })(window);
