@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>
+(function(){
+  var V='2026-01-01-r1';
+  try{
+    if(localStorage.getItem('app-version')!==V){
+      localStorage.removeItem('app-content');
+      localStorage.setItem('app-version',V);
+    }
+  }catch(e){}
+  try{
+    if('serviceWorker' in navigator){
+      navigator.serviceWorker.getRegistrations()
+        .then(function(rs){rs.forEach(function(r){r.unregister();});}).catch(function(){});
+    }
+  }catch(e){}
+})();
+</script>
+<title>Mitgliederbereich – Walker GmbH</title>
+<meta name="description" content="Interner Mitgliederbereich von Walker GmbH.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="canonical" href="https://walker-kfz.de/admin.html">
+<meta name="theme-color" content="#061327">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#061327;--white:#fff;--anthracite:#111827;--silver:#F3F6FA}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;background:var(--silver);color:var(--anthracite);font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.splash{position:fixed;inset:0;background:var(--silver);z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity .4s cubic-bezier(.22,1,.36,1)}
+.splash.hide{opacity:0;pointer-events:none}
+.splash__mark{width:56px;height:56px;border-radius:14px;background:var(--navy);display:inline-flex;align-items:center;justify-content:center;color:var(--white);font-family:Georgia,serif;font-weight:700;font-size:1.6rem}
+</style>
+<link rel="stylesheet" href="styles.css?v=2026-01-01-r1">
+</head>
+<body>
+<div class="splash" id="splash" aria-hidden="true"><span class="splash__mark">W</span></div>
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+<header class="header">
+  <div class="container header__row">
+    <a class="brand" href="index.html" aria-label="Walker GmbH – Startseite">
+      <img class="brand__logo" src="logo.png" alt="Walker GmbH" width="180" height="80">
+    </a>
+    <div class="header__cta">
+      <a class="btn btn--ghost btn--sm" href="index.html">Zur Webseite</a>
+      <button class="btn btn--primary btn--sm" type="button" data-signout style="display:none;">Abmelden</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ===== LOGIN ===== -->
+  <section class="admin-login" data-admin-login>
+    <div class="admin-login__card">
+      <h1>Mitgliederbereich</h1>
+      <p class="lead" style="font-size:0.95rem;margin-bottom:18px;">Anmeldung für autorisierte Mitarbeiter.</p>
+
+      <div class="alert alert--info" hidden data-demo-note>
+        <strong>Hinweis Demo-Modus:</strong> Supabase ist nicht konfiguriert. Bitte trage <code>SUPABASE_URL</code> und <code>SUPABASE_ANON_KEY</code> in <code>config.js</code> ein. Details in <code>UEBERGABE.md</code>.
+      </div>
+
+      <form data-login-form novalidate>
+        <div class="field">
+          <label for="login-email">E-Mail</label>
+          <input id="login-email" name="email" type="email" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="login-password">Passwort</label>
+          <div class="password-field">
+            <input id="login-password" name="password" type="password" autocomplete="current-password" required>
+            <button type="button" class="password-field__toggle" data-pw-toggle aria-label="Passwort anzeigen">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+        <div data-login-status></div>
+        <button class="btn btn--primary btn--block" type="submit">Anmelden</button>
+        <p class="field-hint" style="margin-top:14px;">
+          Passwort vergessen? Bitte wenden Sie sich an Ihren Administrator.
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== SHELL (eingeloggt) ===== -->
+  <section class="admin-shell" data-admin-shell style="display:none;">
+
+    <div class="admin-overview" data-overview>
+      <div class="admin-overview__head">
+        <div>
+          <p class="eyebrow" style="margin-bottom:4px;">Walker GmbH · Admin</p>
+          <h2 class="admin-overview__title">Was möchten Sie ändern?</h2>
+          <p style="font-size:0.9rem;color:var(--muted);margin:6px 0 0;">Angemeldet als <span data-admin-email>—</span></p>
+        </div>
+        <span class="tag" style="background:#ECFDF5;color:#065F46;">● Online</span>
+      </div>
+
+      <div class="admin-overview__cards">
+        <button class="admin-card" data-open-panel="services" type="button">
+          <h3>Leistungen bearbeiten</h3>
+          <p>Texte, Reihenfolge und Leistungsbereiche anpassen.</p>
+        </button>
+        <button class="admin-card" data-open-panel="requests" type="button">
+          <h3>Anfragen ansehen</h3>
+          <p>Neue Kundenanfragen prüfen und bearbeiten.</p>
+          <span class="admin-card__badge" data-requests-badge hidden>0</span>
+        </button>
+        <button class="admin-card" data-open-panel="notice" type="button">
+          <h3>Hinweisbanner aktivieren</h3>
+          <p>Urlaub, geänderte Öffnungszeiten oder wichtige Hinweise anzeigen.</p>
+        </button>
+        <button class="admin-card" data-open-panel="images" type="button">
+          <h3>Bilder hochladen</h3>
+          <p>Logo, Hero-Bild, Werkstattbilder und Galerie pflegen.</p>
+        </button>
+        <button class="admin-card" data-open-panel="hours" type="button">
+          <h3>Öffnungszeiten ändern</h3>
+          <p>Reguläre Zeiten und Hinweise aktualisieren.</p>
+        </button>
+        <button class="admin-card" data-open-panel="contact" type="button">
+          <h3>Kontakt &amp; Standort</h3>
+          <p>Adresse, Telefon, E-Mail und Standortdaten bearbeiten.</p>
+        </button>
+      </div>
+    </div>
+
+    <!-- Panels (Bereich wird in Etappe 4 mit echter Logik gefüllt) -->
+    <section class="admin-overview" style="margin-top:18px;" data-panel="services">
+      <button class="admin-panel__back" type="button" data-back-overview>← Zurück zur Übersicht</button>
+      <h2 class="admin-overview__title">Leistungen bearbeiten</h2>
+      <p style="color:var(--muted);">Editor wird in Etappe 4 implementiert. Speichert in Tabelle <code>content</code> unter ID <code>services</code>.</p>
+    </section>
+
+    <section class="admin-overview" style="margin-top:18px;" data-panel="requests">
+      <button class="admin-panel__back" type="button" data-back-overview>← Zurück zur Übersicht</button>
+      <h2 class="admin-overview__title">Kundenanfragen</h2>
+      <p style="color:var(--muted);">Liste der Anfragen mit Status, Tel/Mail-Klick und Realtime-Updates – Etappe 4.</p>
+    </section>
+
+    <section class="admin-overview" style="margin-top:18px;" data-panel="notice">
+      <button class="admin-panel__back" type="button" data-back-overview>← Zurück zur Übersicht</button>
+      <h2 class="admin-overview__title">Hinweisbanner</h2>
+      <p style="color:var(--muted);">Banner-Editor – Etappe 4. Speichert in <code>content</code> unter ID <code>notice</code>.</p>
+    </section>
+
+    <section class="admin-overview" style="margin-top:18px;" data-panel="images">
+      <button class="admin-panel__back" type="button" data-back-overview>← Zurück zur Übersicht</button>
+      <h2 class="admin-overview__title">Bilder</h2>
+      <p style="color:var(--muted);">Upload-Slots (Logo, Hero, About, Galerie) in den Bucket <code>images</code> – Etappe 4.</p>
+    </section>
+
+    <section class="admin-overview" style="margin-top:18px;" data-panel="hours">
+      <button class="admin-panel__back" type="button" data-back-overview>← Zurück zur Übersicht</button>
+      <h2 class="admin-overview__title">Öffnungszeiten</h2>
+      <p style="color:var(--muted);">Editor für Wochentage / Zeiten – Etappe 4. Speichert in <code>content</code> unter ID <code>hours</code>.</p>
+    </section>
+
+    <section class="admin-overview" style="margin-top:18px;" data-panel="contact">
+      <button class="admin-panel__back" type="button" data-back-overview>← Zurück zur Übersicht</button>
+      <h2 class="admin-overview__title">Kontakt &amp; Standort</h2>
+      <p style="color:var(--muted);">Adresse, Telefon und E-Mail – Etappe 4. Speichert in <code>content</code> unter ID <code>contact</code>.</p>
+    </section>
+
+  </section>
+
+</main>
+
+<script src="config.js?v=2026-01-01-r1" defer></script>
+<script src="db.js?v=2026-01-01-r1" defer></script>
+<script src="script.js?v=2026-01-01-r1" defer></script>
+<script src="admin.js?v=2026-01-01-r1" defer></script>
+</body>
+</html>
