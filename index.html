@@ -36,7 +36,7 @@
 <link rel="apple-touch-icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Inter+Tight:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--navy:#061327;--white:#fff;--anthracite:#111827;--silver:#F3F6FA}
 *,*::before,*::after{box-sizing:border-box}
@@ -148,11 +148,14 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
 
 <main id="main">
 
-  <!-- ===== HERO ===== -->
-  <section class="hero">
+  <!-- ===== HERO — MB-Bühne (Vollbild-Photo, Headline-Overlay) ===== -->
+  <section class="hero" data-hero>
+    <div class="hero__visual">
+      <img src="foto-diagnose.jpg" alt="Werkstatt – Diagnose an einem Mercedes-Benz" loading="eager" width="2400" height="1600">
+    </div>
     <div class="hero__inner">
       <div class="hero__copy">
-        <p class="marker marker--light"><span class="marker__num">№ 01</span><span class="marker__sep">/</span>Walker GmbH<span class="marker__sep">·</span>Hamburg-Hohenfelde</p>
+        <p class="eyebrow eyebrow--light">Mercedes-Benz Spezialist · Hamburg-Hohenfelde</p>
         <h1 class="hero__title">Schnelle Diagnose.<br><span class="hero__title-accent">Saubere Reparatur.</span></h1>
         <p class="hero__lead">Auf Mercedes-Benz spezialisierte Kfz-Werkstatt. Moderne Diagnose, klare Beratung, offizieller Mercedes-Benz Teilepartner.</p>
         <div class="hero__cta">
@@ -171,52 +174,27 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
             <span data-live-label>Öffnungszeiten prüfen</span>
           </span>
           <span class="hero__meta-sep" aria-hidden="true">·</span>
-          <span class="hero__meta-item">Ifflandstraße 71</span>
+          <span class="hero__meta-item">Ifflandstraße 71, Hamburg</span>
         </div>
       </div>
-      <div class="hero__visual">
-        <img src="foto-diagnose.jpg" alt="Werkstatt – Diagnose an einem Mercedes-Benz" loading="eager" width="1200" height="1500">
-      </div>
     </div>
   </section>
 
-  <!-- ===== MARQUEE — Werkstatt-Spec endlos ===== -->
-  <section class="marquee" aria-hidden="true">
-    <div class="marquee__track">
-      <span class="marquee__item">Diagnose</span>
-      <span class="marquee__item">Inspektion</span>
-      <span class="marquee__item">Wartung</span>
-      <span class="marquee__item">Bremsen &amp; Fahrwerk</span>
-      <span class="marquee__item">Klimaservice</span>
-      <span class="marquee__item">Elektronik</span>
-      <span class="marquee__item">Mercedes-Benz Teile</span>
-      <span class="marquee__item">Reparatur</span>
-      <span class="marquee__item" aria-hidden="true">Diagnose</span>
-      <span class="marquee__item" aria-hidden="true">Inspektion</span>
-      <span class="marquee__item" aria-hidden="true">Wartung</span>
-      <span class="marquee__item" aria-hidden="true">Bremsen &amp; Fahrwerk</span>
-      <span class="marquee__item" aria-hidden="true">Klimaservice</span>
-      <span class="marquee__item" aria-hidden="true">Elektronik</span>
-      <span class="marquee__item" aria-hidden="true">Mercedes-Benz Teile</span>
-      <span class="marquee__item" aria-hidden="true">Reparatur</span>
-    </div>
-  </section>
-
-  <!-- ===== SPEC-STRIP — Signatur statt Trust-Cards ===== -->
+  <!-- ===== SPEC-STRIP (MB-dezent) ===== -->
   <section class="section--tight">
     <div class="container">
-      <div class="spec-strip" data-animate>
+      <div class="spec-strip">
         <div class="spec-strip__item">
-          <span class="spec-strip__num"><span class="spec-count" style="--to: 142;"></span></span>
+          <span class="spec-strip__num">142</span>
           <span class="spec-strip__label">Google-Bewertungen</span>
         </div>
         <div class="spec-strip__item">
           <span class="spec-strip__num">4,3 ★</span>
-          <span class="spec-strip__label">Durchschnitt</span>
+          <span class="spec-strip__label">Durchschnittsbewertung</span>
         </div>
         <div class="spec-strip__item">
-          <span class="spec-strip__num"><span class="spec-count" style="--to: 100;"></span> %</span>
-          <span class="spec-strip__label">Mercedes-Benz fokussiert</span>
+          <span class="spec-strip__num">A – S</span>
+          <span class="spec-strip__label">Mercedes-Benz Modellreihen</span>
         </div>
         <div class="spec-strip__item">
           <span class="spec-strip__num">22087</span>
@@ -226,16 +204,16 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
     </div>
   </section>
 
-  <!-- ===== BIG STATEMENT ===== -->
+  <!-- ===== STATEMENT (MB-Schnitt: ruhig, Sans, klare Botschaft) ===== -->
   <section class="statement">
     <div class="statement__inner">
       <p class="statement__text">
-        Wir reparieren nicht. <em>Wir verstehen, was Ihr Mercedes braucht — und tun&nbsp;genau&nbsp;das.</em>
+        Verstehen, was Ihr Mercedes&#8209;Benz braucht. <em>Und genau das tun.</em>
       </p>
       <div class="statement__meta">
-        <span><span class="statement__meta-num">№</span>Mercedes-Benz Spezialist</span>
-        <span><span class="statement__meta-num">№</span>Offizieller Teilepartner</span>
-        <span><span class="statement__meta-num">№</span>Hamburg-Hohenfelde seit Jahren</span>
+        <span><span class="statement__meta-num">01</span>Mercedes-Benz Spezialist</span>
+        <span><span class="statement__meta-num">02</span>Offizieller Teilepartner</span>
+        <span><span class="statement__meta-num">03</span>Hamburg-Hohenfelde</span>
       </div>
     </div>
   </section>
@@ -244,7 +222,7 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
   <section class="pinned">
     <div class="pinned__grid">
       <div class="pinned__head">
-        <p class="marker"><span class="marker__num">№ 02</span><span class="marker__sep">/</span>Spezialisierung</p>
+        <p class="eyebrow">Spezialisierung</p>
         <h2>Eine Marke.<br>Wirklich verstanden.</h2>
         <p class="lead">Wer eine Marke jahrelang konsequent macht, erkennt Symptome schneller und findet Ursachen, wo andere noch suchen.</p>
         <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:18px;">
@@ -278,12 +256,12 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
     </div>
   </section>
 
-  <!-- ===== LEISTUNGEN — 3 große statt 8 Karten ===== -->
+  <!-- ===== LEISTUNGEN — MB-Service-Cards mit Bild ===== -->
   <section aria-labelledby="leistungen-h">
-    <div class="container" style="padding-top: clamp(80px, 12vw, 168px);">
+    <div class="container" style="padding-top: clamp(72px, 9vw, 128px); padding-bottom: clamp(36px, 4vw, 56px);">
       <div class="section__head section__head--editorial">
         <div>
-          <p class="marker"><span class="marker__num">№ 03</span><span class="marker__sep">/</span>Leistungen</p>
+          <p class="eyebrow">Leistungen</p>
           <h2 id="leistungen-h">Drei Bereiche.<br>Vollständige Werkstatt.</h2>
         </div>
         <p class="lead">Diagnose, Service, Mercedes-Benz Ersatzteile — aus einer Hand. Die vollständige Liste finden Sie auf der Leistungen-Seite.</p>
@@ -291,22 +269,31 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
     </div>
     <div class="hero-services">
       <a class="hs-card" href="leistungen.html#diagnose">
-        <span class="hs-card__num">№ 01</span>
-        <h3 class="hs-card__title">Diagnose &amp;<br>Fehleranalyse</h3>
-        <p class="hs-card__body">Fehlerspeicher auslesen, eingrenzen, verstehen. Die Ursache vor der Reparatur.</p>
-        <span class="hs-card__more">Mehr lesen <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <div class="hs-card__media"><img src="foto-diagnose.jpg" alt="Diagnose an einem Mercedes-Benz" loading="lazy" width="1200" height="900"></div>
+        <div class="hs-card__body">
+          <span class="hs-card__num">01 · Diagnose</span>
+          <h3 class="hs-card__title">Diagnose &amp; Fehleranalyse</h3>
+          <p class="hs-card__text">Fehlerspeicher auslesen, eingrenzen, verstehen. Die Ursache vor der Reparatur.</p>
+          <span class="hs-card__more">Mehr erfahren <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        </div>
       </a>
       <a class="hs-card" href="leistungen.html#wartung">
-        <span class="hs-card__num">№ 02</span>
-        <h3 class="hs-card__title">Wartung &amp;<br>Reparatur</h3>
-        <p class="hs-card__body">Inspektion nach Herstellervorgaben. Bremsen, Fahrwerk, Klimaservice, Elektronik.</p>
-        <span class="hs-card__more">Mehr lesen <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <div class="hs-card__media"><img src="foto-wartung.jpg" alt="Wartung an einem Mercedes-Benz auf der Hebebühne" loading="lazy" width="1200" height="900"></div>
+        <div class="hs-card__body">
+          <span class="hs-card__num">02 · Service</span>
+          <h3 class="hs-card__title">Wartung &amp; Reparatur</h3>
+          <p class="hs-card__text">Inspektion nach Herstellervorgaben. Bremsen, Fahrwerk, Klimaservice, Elektronik.</p>
+          <span class="hs-card__more">Mehr erfahren <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        </div>
       </a>
       <a class="hs-card" href="teilepartner.html">
-        <span class="hs-card__num">№ 03</span>
-        <h3 class="hs-card__title">Mercedes-Benz<br>Ersatzteile</h3>
-        <p class="hs-card__body">Als offizieller Teilepartner: zuverlässige Versorgung mit passenden Komponenten.</p>
-        <span class="hs-card__more">Mehr lesen <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <div class="hs-card__media"><img src="foto-bremsen.jpg" alt="Bremsscheibe und -sattel eines Mercedes-Benz" loading="lazy" width="1200" height="900"></div>
+        <div class="hs-card__body">
+          <span class="hs-card__num">03 · Teile</span>
+          <h3 class="hs-card__title">Mercedes-Benz Ersatzteile</h3>
+          <p class="hs-card__text">Als offizieller Teilepartner: zuverlässige Versorgung mit passenden Komponenten.</p>
+          <span class="hs-card__more">Mehr erfahren <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        </div>
       </a>
     </div>
   </section>
@@ -316,7 +303,7 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
     <div class="container">
       <div class="section__head section__head--editorial">
         <div>
-          <p class="marker"><span class="marker__num">№ 04</span><span class="marker__sep">/</span>Ablauf</p>
+          <p class="eyebrow">Ablauf</p>
           <h2 id="ablauf-h">So läuft Ihr Werkstatttermin.</h2>
         </div>
         <p class="lead">Von der ersten Kontaktaufnahme bis zur Abholung — ohne Umwege.</p>
@@ -350,7 +337,7 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
     <div class="container">
       <div class="mb-section">
         <div>
-          <p class="marker marker--light"><span class="marker__num">№ 05</span><span class="marker__sep">/</span>Kontakt</p>
+          <p class="eyebrow eyebrow--light">Kontakt</p>
           <h2>Ihr Mercedes braucht Service?</h2>
           <p class="lead">Direkter Draht zur Werkstatt unter <a href="tel:+4940225536" style="color:var(--white);font-weight:600;">+49 40 225536</a> — oder persönlich in der Ifflandstraße 71 in Hamburg-Hohenfelde.</p>
           <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:18px;">
@@ -370,7 +357,7 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
     <div class="container">
       <div class="section__head section__head--editorial">
         <div>
-          <p class="marker"><span class="marker__num">№ 06</span><span class="marker__sep">/</span>FAQ</p>
+          <p class="eyebrow">FAQ</p>
           <h2 id="faq-h">Häufige Fragen.</h2>
         </div>
         <p class="lead">Was Kunden vor dem Termin am häufigsten wissen wollen.</p>
@@ -415,7 +402,7 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
   <div class="container">
     <div class="footer__top">
       <div>
-        <p class="marker marker--light"><span class="marker__num">№ —</span><span class="marker__sep">/</span>Walker GmbH</p>
+        <p class="eyebrow eyebrow--light">Walker GmbH</p>
         <p class="footer__lead">Auf Mercedes-Benz spezialisierte Werkstatt in Hamburg-Hohenfelde.</p>
       </div>
       <div class="footer__col">

@@ -243,6 +243,15 @@
     apply();
   });
 
+  // ---------- Hero zoom-in on load ----------
+  safeRun(function(){
+    var hero = document.querySelector('[data-hero]');
+    if (!hero) return;
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){ hero.classList.add('is-loaded'); });
+    });
+  });
+
   // ---------- Custom Cursor (Desktop only, mix-blend-mode dot) ----------
   safeRun(function(){
     if (!window.matchMedia || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
