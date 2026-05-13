@@ -228,4 +228,43 @@
     });
   });
 
+  // ---------- Header scrolled state ----------
+  safeRun(function(){
+    var header = document.querySelector('.header');
+    if (!header) return;
+    var ticking = false;
+    function apply(){
+      header.classList.toggle('is-scrolled', window.scrollY > 8);
+      ticking = false;
+    }
+    window.addEventListener('scroll', function(){
+      if (!ticking) { window.requestAnimationFrame(apply); ticking = true; }
+    }, { passive: true });
+    apply();
+  });
+
+  // ---------- Custom Cursor (Desktop only, mix-blend-mode dot) ----------
+  safeRun(function(){
+    if (!window.matchMedia || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var dot = document.createElement('div');
+    dot.className = 'cursor-dot';
+    document.body.appendChild(dot);
+    var x = 0, y = 0, tx = 0, ty = 0;
+    document.addEventListener('mousemove', function(e){ tx = e.clientX; ty = e.clientY; }, { passive: true });
+    (function loop(){
+      x += (tx - x) * 0.22;
+      y += (ty - y) * 0.22;
+      dot.style.transform = 'translate(' + x + 'px,' + y + 'px) translate(-50%,-50%)';
+      requestAnimationFrame(loop);
+    })();
+    var hoverSel = 'a, button, [role="button"], .hs-card, summary, input, textarea, select, .lookup__plate';
+    document.addEventListener('mouseover', function(e){
+      if (e.target.closest && e.target.closest(hoverSel)) dot.classList.add('is-hover');
+    });
+    document.addEventListener('mouseout', function(e){
+      if (e.target.closest && e.target.closest(hoverSel)) dot.classList.remove('is-hover');
+    });
+  });
+
 })();

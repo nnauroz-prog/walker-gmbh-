@@ -180,12 +180,34 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
     </div>
   </section>
 
+  <!-- ===== MARQUEE — Werkstatt-Spec endlos ===== -->
+  <section class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span class="marquee__item">Diagnose</span>
+      <span class="marquee__item">Inspektion</span>
+      <span class="marquee__item">Wartung</span>
+      <span class="marquee__item">Bremsen &amp; Fahrwerk</span>
+      <span class="marquee__item">Klimaservice</span>
+      <span class="marquee__item">Elektronik</span>
+      <span class="marquee__item">Mercedes-Benz Teile</span>
+      <span class="marquee__item">Reparatur</span>
+      <span class="marquee__item" aria-hidden="true">Diagnose</span>
+      <span class="marquee__item" aria-hidden="true">Inspektion</span>
+      <span class="marquee__item" aria-hidden="true">Wartung</span>
+      <span class="marquee__item" aria-hidden="true">Bremsen &amp; Fahrwerk</span>
+      <span class="marquee__item" aria-hidden="true">Klimaservice</span>
+      <span class="marquee__item" aria-hidden="true">Elektronik</span>
+      <span class="marquee__item" aria-hidden="true">Mercedes-Benz Teile</span>
+      <span class="marquee__item" aria-hidden="true">Reparatur</span>
+    </div>
+  </section>
+
   <!-- ===== SPEC-STRIP — Signatur statt Trust-Cards ===== -->
   <section class="section--tight">
     <div class="container">
-      <div class="spec-strip reveal-scroll">
+      <div class="spec-strip" data-animate>
         <div class="spec-strip__item">
-          <span class="spec-strip__num">142</span>
+          <span class="spec-strip__num"><span class="spec-count" style="--to: 142;"></span></span>
           <span class="spec-strip__label">Google-Bewertungen</span>
         </div>
         <div class="spec-strip__item">
@@ -193,7 +215,7 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
           <span class="spec-strip__label">Durchschnitt</span>
         </div>
         <div class="spec-strip__item">
-          <span class="spec-strip__num">100 %</span>
+          <span class="spec-strip__num"><span class="spec-count" style="--to: 100;"></span> %</span>
           <span class="spec-strip__label">Mercedes-Benz fokussiert</span>
         </div>
         <div class="spec-strip__item">
@@ -204,96 +226,88 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
     </div>
   </section>
 
-  <!-- ===== MERCEDES-BENZ TEASER ===== -->
-  <section class="section">
-    <div class="container">
-      <div class="mb-section reveal-scroll">
-        <div>
-          <p class="marker marker--light"><span class="marker__num">№ 02</span><span class="marker__sep">/</span>Spezialisierung</p>
-          <h2>Eine Marke. Wirklich verstanden.</h2>
-          <p class="lead">Mercedes-Benz Fahrzeuge sind technisch anspruchsvoll. Wer eine Marke jahrelang konsequent macht, erkennt typische Symptome schneller und findet Ursachen, wo andere noch suchen.</p>
-          <ul class="mb-list">
-            <li>Erfahrung über die gängigen Modellreihen – A bis S, AMG, GLA bis GLE, V-Klasse, EQ</li>
-            <li>Offizieller Mercedes-Benz Teilepartner: zuverlässige Versorgung mit passenden Komponenten</li>
-            <li>Inspektion und Wartung nach Herstellervorgaben, sauber dokumentiert</li>
-            <li>Empfehlungen werden vorab besprochen – inklusive der Hinweise, was warten kann</li>
-          </ul>
-          <div style="display:flex;gap:12px;flex-wrap:wrap;">
-            <a class="btn btn--blue" href="mercedes-spezialist.html">Mehr zur Spezialisierung</a>
-            <a class="btn btn--light" href="teilepartner.html">Teilepartner-Vorteile</a>
-          </div>
-          <p class="mb-section__legal">Walker GmbH ist eine eigenständige Fachwerkstatt – keine offizielle Mercedes-Benz Niederlassung. „Mercedes-Benz" ist eine eingetragene Marke der Mercedes-Benz Group AG.</p>
-        </div>
-        <div class="mb-section__visual">
-          <img src="foto-bremsen.jpg" alt="Bremsscheibe und Bremssattel an einem Mercedes-Benz" loading="lazy" width="800" height="1000">
-        </div>
+  <!-- ===== BIG STATEMENT ===== -->
+  <section class="statement">
+    <div class="statement__inner">
+      <p class="statement__text">
+        Wir reparieren nicht. <em>Wir verstehen, was Ihr Mercedes braucht — und tun&nbsp;genau&nbsp;das.</em>
+      </p>
+      <div class="statement__meta">
+        <span><span class="statement__meta-num">№</span>Mercedes-Benz Spezialist</span>
+        <span><span class="statement__meta-num">№</span>Offizieller Teilepartner</span>
+        <span><span class="statement__meta-num">№</span>Hamburg-Hohenfelde seit Jahren</span>
       </div>
     </div>
   </section>
 
-  <!-- ===== LEISTUNGEN TEASER ===== -->
-  <section class="section section--soft" aria-labelledby="leistungen-h">
-    <div class="container">
+  <!-- ===== MERCEDES-BENZ — STICKY-PIN ===== -->
+  <section class="pinned">
+    <div class="pinned__grid">
+      <div class="pinned__head">
+        <p class="marker"><span class="marker__num">№ 02</span><span class="marker__sep">/</span>Spezialisierung</p>
+        <h2>Eine Marke.<br>Wirklich verstanden.</h2>
+        <p class="lead">Wer eine Marke jahrelang konsequent macht, erkennt Symptome schneller und findet Ursachen, wo andere noch suchen.</p>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:18px;">
+          <a class="btn btn--primary" href="mercedes-spezialist.html">Zur Spezialisierung</a>
+          <a class="btn btn--secondary" href="teilepartner.html" style="color:var(--ink);">Teilepartner-Vorteile <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </div>
+      </div>
+      <div class="pinned__body">
+        <div class="pinned__block">
+          <span class="pinned__block-label">А — S</span>
+          <h3>Erfahrung über alle Modellreihen.</h3>
+          <p>A-Klasse bis S-Klasse, AMG, GLA bis GLE, V-Klasse, EQ. Die typischen Symptome jeder Reihe sind uns vertraut.</p>
+        </div>
+        <div class="pinned__block">
+          <span class="pinned__block-label">Teile</span>
+          <h3>Offizieller Mercedes-Benz Teilepartner.</h3>
+          <p>Zuverlässige Versorgung mit passenden Komponenten. Alternative Optionen werden vorab besprochen.</p>
+        </div>
+        <div class="pinned__block">
+          <span class="pinned__block-label">Inspektion</span>
+          <h3>Wartung nach Herstellervorgaben.</h3>
+          <p>Inspektion sauber dokumentiert. Sie wissen nach dem Termin, was gemacht wurde — und warum.</p>
+        </div>
+        <div class="pinned__block">
+          <span class="pinned__block-label">Beratung</span>
+          <h3>Was warten kann, sagen wir vorab.</h3>
+          <p>Empfehlungen werden vor der Reparatur besprochen — inklusive der Hinweise, was sich später erledigen lässt.</p>
+        </div>
+        <p class="mb-section__legal" style="margin-top:24px;font-size:0.8rem;color:var(--muted);">Walker GmbH ist eine eigenständige Fachwerkstatt — keine offizielle Mercedes-Benz Niederlassung. „Mercedes-Benz" ist eine eingetragene Marke der Mercedes-Benz Group AG.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LEISTUNGEN — 3 große statt 8 Karten ===== -->
+  <section aria-labelledby="leistungen-h">
+    <div class="container" style="padding-top: clamp(80px, 12vw, 168px);">
       <div class="section__head section__head--editorial">
         <div>
           <p class="marker"><span class="marker__num">№ 03</span><span class="marker__sep">/</span>Leistungen</p>
-          <h2 id="leistungen-h">Was wir für Ihren Mercedes-Benz tun.</h2>
+          <h2 id="leistungen-h">Drei Bereiche.<br>Vollständige Werkstatt.</h2>
         </div>
-        <p class="lead">Diagnose, Wartung, Reparatur, Klimaservice und Mercedes-Benz Ersatzteile — aus einer Hand und ohne Umwege.</p>
+        <p class="lead">Diagnose, Service, Mercedes-Benz Ersatzteile — aus einer Hand. Die vollständige Liste finden Sie auf der Leistungen-Seite.</p>
       </div>
-      <div class="services reveal">
-        <article class="service">
-          <span class="service__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 2"/></svg></span>
-          <h3>Diagnose &amp; Fehleranalyse</h3>
-          <p>Wir grenzen die Ursache ein, bevor Teile getauscht werden.</p>
-          <a class="service__more" href="leistungen.html#diagnose">Mehr <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-        </article>
-        <article class="service">
-          <span class="service__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0-1.4 0L4 15.6V20h4.4l9.3-9.3a1 1 0 0 0 0-1.4l-3-3z"/><path d="m13 8 3 3"/></svg></span>
-          <h3>Inspektion &amp; Wartung</h3>
-          <p>Wartung nach Herstellervorgaben, sauber dokumentiert.</p>
-          <a class="service__more" href="leistungen.html#wartung">Mehr <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-        </article>
-        <article class="service">
-          <span class="service__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg></span>
-          <h3>Bremsen &amp; Fahrwerk</h3>
-          <p>Prüfung und Reparatur sicherheitsrelevanter Teile.</p>
-          <a class="service__more" href="leistungen.html#bremsen">Mehr <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-        </article>
-        <article class="service">
-          <span class="service__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18"/><path d="M6 7v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></svg></span>
-          <h3>Ölservice &amp; Filter</h3>
-          <p>Motoröl, Innenraum-, Luft- und Pollenfilter.</p>
-          <a class="service__more" href="leistungen.html#oel">Mehr <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-        </article>
-        <article class="service">
-          <span class="service__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 18a3 3 0 0 0 6 0V6a3 3 0 0 1 6 0v12"/><circle cx="12" cy="12" r="2"/></svg></span>
-          <h3>Elektronik &amp; Steuergeräte</h3>
-          <p>Analyse von Sensorik und Steuergeräten.</p>
-          <a class="service__more" href="leistungen.html#elektronik">Mehr <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-        </article>
-        <article class="service">
-          <span class="service__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 18 0"/><path d="M12 3v9l5 3"/></svg></span>
-          <h3>Klimaservice</h3>
-          <p>Prüfung und Wartung der Fahrzeugklimaanlage.</p>
-          <a class="service__more" href="leistungen.html#klima">Mehr <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-        </article>
-        <article class="service">
-          <span class="service__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-12V5l-8-3-8 3v5c0 8 8 12 8 12Z"/><path d="m9 12 2 2 4-4"/></svg></span>
-          <h3>Reparatur &amp; Instandsetzung</h3>
-          <p>Vom Verschleißteil bis zur größeren Reparatur.</p>
-          <a class="service__more" href="leistungen.html#reparatur">Mehr <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-        </article>
-        <article class="service">
-          <span class="service__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-12V5l-8-3-8 3v5c0 8 8 12 8 12Z"/></svg></span>
-          <h3>Mercedes-Benz Ersatzteile</h3>
-          <p>Als offizieller Teilepartner – passende Komponenten.</p>
-          <a class="service__more" href="teilepartner.html">Mehr <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-        </article>
-      </div>
-      <div style="text-align:center;margin-top:32px;">
-        <a class="btn btn--primary" href="leistungen.html">Alle Leistungen ansehen</a>
-      </div>
+    </div>
+    <div class="hero-services">
+      <a class="hs-card" href="leistungen.html#diagnose">
+        <span class="hs-card__num">№ 01</span>
+        <h3 class="hs-card__title">Diagnose &amp;<br>Fehleranalyse</h3>
+        <p class="hs-card__body">Fehlerspeicher auslesen, eingrenzen, verstehen. Die Ursache vor der Reparatur.</p>
+        <span class="hs-card__more">Mehr lesen <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+      </a>
+      <a class="hs-card" href="leistungen.html#wartung">
+        <span class="hs-card__num">№ 02</span>
+        <h3 class="hs-card__title">Wartung &amp;<br>Reparatur</h3>
+        <p class="hs-card__body">Inspektion nach Herstellervorgaben. Bremsen, Fahrwerk, Klimaservice, Elektronik.</p>
+        <span class="hs-card__more">Mehr lesen <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+      </a>
+      <a class="hs-card" href="teilepartner.html">
+        <span class="hs-card__num">№ 03</span>
+        <h3 class="hs-card__title">Mercedes-Benz<br>Ersatzteile</h3>
+        <p class="hs-card__body">Als offizieller Teilepartner: zuverlässige Versorgung mit passenden Komponenten.</p>
+        <span class="hs-card__more">Mehr lesen <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+      </a>
     </div>
   </section>
 
@@ -396,51 +410,41 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
 
 </main>
 
-<footer class="footer">
+<footer class="footer footer--brand">
+  <span class="footer__mark" aria-hidden="true">W</span>
   <div class="container">
-    <div class="footer__grid">
+    <div class="footer__top">
       <div>
-        <img class="footer__logo" src="logo.png" alt="Walker GmbH – Mercedes-Benz Spezialist" width="240" height="84">
-        <p>Auf Mercedes-Benz spezialisierte Kfz-Werkstatt und offizieller Mercedes-Benz Teilepartner in Hamburg-Hohenfelde.</p>
+        <p class="marker marker--light"><span class="marker__num">№ —</span><span class="marker__sep">/</span>Walker GmbH</p>
+        <p class="footer__lead">Auf Mercedes-Benz spezialisierte Werkstatt in Hamburg-Hohenfelde.</p>
       </div>
-      <div>
-        <h4>Leistungen</h4>
+      <div class="footer__col">
+        <h4>Werkstatt</h4>
         <ul>
-          <li><a href="leistungen.html">Diagnose &amp; Fehleranalyse</a></li>
-          <li><a href="leistungen.html">Inspektion &amp; Wartung</a></li>
-          <li><a href="leistungen.html">Bremsen &amp; Fahrwerk</a></li>
-          <li><a href="leistungen.html">Elektronik &amp; Steuergeräte</a></li>
-          <li><a href="leistungen.html">Klimaservice</a></li>
-          <li><a href="teilepartner.html">Mercedes-Benz Teile</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Kontakt</h4>
-        <ul>
-          <li>Walker GmbH</li>
           <li>Ifflandstraße 71</li>
           <li>22087 Hamburg</li>
           <li><a href="tel:+4940225536">+49 40 225536</a></li>
-          <li>Mo–Do 07:30–18:30</li>
-          <li>Fr 07:00–12:00</li>
+          <li>Mo–Do · 07:30 – 18:30</li>
+          <li>Fr · 07:00 – 12:00</li>
         </ul>
       </div>
-      <div>
-        <h4>Rechtliches</h4>
+      <div class="footer__col">
+        <h4>Navigation</h4>
         <ul>
-          <li><a href="impressum.html">Impressum</a></li>
-          <li><a href="datenschutz.html">Datenschutz</a></li>
+          <li><a href="leistungen.html">Leistungen</a></li>
+          <li><a href="mercedes-spezialist.html">Mercedes-Benz Spezialist</a></li>
+          <li><a href="teilepartner.html">Teilepartner</a></li>
+          <li><a href="mein-fahrzeug.html">Mein Fahrzeug</a></li>
           <li><a href="kontakt.html">Kontakt &amp; Anfahrt</a></li>
-          <li><a href="admin.html">Mitgliederbereich</a></li>
-          <li><button class="btn--link" type="button" data-cookie-open>Cookies anpassen</button></li>
         </ul>
       </div>
     </div>
     <div class="footer__bottom">
-      <span>© <span data-year>2026</span> Walker GmbH · Mercedes-Benz Spezialist</span>
+      <span>© <span data-year>2026</span> Walker GmbH</span>
+      <span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="admin.html">Mitglieder</a> · <button class="btn--link" type="button" data-cookie-open style="color:inherit;text-transform:inherit;letter-spacing:inherit;font-family:inherit;font-size:inherit;">Cookies</button></span>
     </div>
     <p class="footer__legal-note">
-      Walker GmbH ist eine eigenständige Kfz-Fachwerkstatt mit Spezialisierung auf Mercedes-Benz und offizieller Mercedes-Benz Teilepartner. Keine offizielle Mercedes-Benz Niederlassung. „Mercedes-Benz“ ist eine eingetragene Marke der Mercedes-Benz Group AG.
+      Walker GmbH ist eine eigenständige Kfz-Fachwerkstatt mit Spezialisierung auf Mercedes-Benz und offizieller Mercedes-Benz Teilepartner. Keine offizielle Mercedes-Benz Niederlassung. „Mercedes-Benz" ist eine eingetragene Marke der Mercedes-Benz Group AG.
     </p>
   </div>
 </footer>
