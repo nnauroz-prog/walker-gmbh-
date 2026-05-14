@@ -16,9 +16,10 @@
   --line-soft:   #EEF2F7;
   --white:       #FFFFFF;
 
-  --radius-sm: 10px;
-  --radius-md: 14px;
-  --radius-lg: 22px;
+  /* Anti-AI: harte Kanten, max 4px Radius (KI-Default ist 8-16px) */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 4px;
 
   --shadow-sm: 0 6px 18px -10px rgba(6, 19, 39, 0.20);
   --shadow-md: 0 18px 40px -24px rgba(6, 19, 39, 0.35);
@@ -1390,6 +1391,34 @@ h1, h2, h3, .hero__title {
 }
 .hero__meta-sep { opacity: 0.4; }
 .hero__meta-item { display: inline-flex; align-items: center; gap: 8px; }
+
+/* Magazine-Caption am Hero — anti-KI Editorial-Detail */
+.hero__caption {
+  position: absolute;
+  right: clamp(20px, 4vw, 40px);
+  bottom: clamp(28px, 4vw, 56px);
+  max-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: rgba(255,255,255,0.7);
+  padding: 14px 16px 0;
+  border-top: 1px solid rgba(255,255,255,0.18);
+  font-style: italic;
+}
+.hero__caption-num {
+  font-style: normal;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+}
+@media (max-width: 880px) {
+  .hero__caption { position: static; max-width: none; margin-top: 28px; padding: 14px 0 0; }
+}
 @media (max-width: 760px) {
   .hero { min-height: min(82vh, 720px); }
   .hero__visual img { object-position: center 30%; }
