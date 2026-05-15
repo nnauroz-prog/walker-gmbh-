@@ -1,13 +1,23 @@
 # Walker GmbH – Übergabe
 
-> Diese Datei wächst mit jeder Etappe. Aktueller Stand: **Etappe 1 – Repo-Grundgerüst**.
+> **Aktueller Stand (Mai 2026):** Design-System auf Mercedes-Benz
+> Premium-Schnitt, Texte komplett in Walker-Werkstatt-Stimme,
+> Auftragsstatus-Tracker live, Subpages konsolidiert.
 
 ## Stand
 
-Die Webseite ist im Kern fertig: Inhalte aller öffentlichen Seiten,
-Telefon + persönliche Vorbeifahrt als Kontaktwege und ein
-**Auftragsstatus-Tracker** für Kunden („Mein Fahrzeug"), den Walker
-in 10 Sekunden pro Auto pflegen kann.
+Die Webseite ist fertig zum Deploy:
+
+- **Designsprache**: MB-Premium-Minimalismus — Inter/Inter Tight,
+  Schwarz/Anthrazit/Chrome, kein Bernstein, keine Editorial-Spielerei.
+- **Tonalität**: konkrete Werkstatt-Stimme statt KI-Marketing-Floskel.
+  Beispiele: „Eine Werkstatt. Für eine Marke.", „Hier steht kein Auto.",
+  „Original, wenn möglich.", „24 bis 48 Stunden auf dem Tresen."
+- **Auftragsstatus-Tracker** („Mein Fahrzeug") läuft, Owner pflegt
+  Status pro Auto in 10 Sekunden im Admin.
+- **Telefon + persönliches Vorbeikommen** als Kontaktwege.
+  Kein Termin-Formular, kein WhatsApp, kein E-Mail-Posteingang
+  zum Abarbeiten.
 
 ## Werkstatt-Konzept (Entlastung statt Mehrarbeit)
 
@@ -154,10 +164,10 @@ Alternativ: GitHub-Repo verbinden, Auto-Deploy bei jedem Push.
 
 ## Cache-Busting
 
-Alle Asset-Links in HTML tragen `?v=2026-01-01-r1`. Wenn eine neue Version
+Alle Asset-Links in HTML tragen `?v=2026-05-15-r2`. Wenn eine neue Version
 ausgerollt wird:
 
-1. In allen HTML-Dateien `2026-01-01-r1` durch neue Version ersetzen
+1. In allen HTML-Dateien `2026-05-15-r2` durch neue Version ersetzen
    (z. B. `2026-01-15-r2`).
 2. In `config.js` → `APP_VERSION` ebenfalls anpassen.
 3. Im Inline-Cache-Buster-Microscript im `<head>` jeder Seite die Variable

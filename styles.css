@@ -4,10 +4,11 @@
    ========================================================= */
 
 :root {
-  --navy:        #061327;
-  --navy-2:      #0B1F3A;
-  --blue:        #1E73BE;
-  --blue-soft:   #EAF4FF;
+  /* Legacy-Tokens auf MB-Schnitt mappen — Navy/Blue zeigen jetzt auf Anthrazit/Schwarz */
+  --navy:        #1A1A1C;
+  --navy-2:      #2A2A2D;
+  --blue:        #0A0A0B;
+  --blue-soft:   #F4F4F6;
   --chrome:      #D7DEE8;
   --silver:      #F3F6FA;
   --anthracite:  #111827;

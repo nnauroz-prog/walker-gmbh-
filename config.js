@@ -45,5 +45,5 @@ window.walkerConfig = {
   },
 
   // Cache-Buster-Version (muss mit Microscript im <head> übereinstimmen)
-  APP_VERSION: '2026-01-01-r1'
+  APP_VERSION: '2026-05-15-r2'
 };
