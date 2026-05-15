@@ -1,207 +1,279 @@
-/* Walker GmbH – UI scripts */
-(function () {
+/* =========================================================
+   Walker GmbH – Shared Frontend Logic
+   ========================================================= */
+
+(function(){
   'use strict';
 
-  // ---------- Mobile drawer ----------
-  const burger = document.querySelector('[data-burger]');
-  const drawer = document.querySelector('[data-drawer]');
-  const drawerClose = document.querySelector('[data-drawer-close]');
-  let lastFocus = null;
+  // ---------- Splash safety net ----------
+  function hideSplash(){
+    var s = document.getElementById('splash');
+    if (s) s.classList.add('hide');
+  }
+  // Safety: always hide after 2.5s regardless
+  setTimeout(hideSplash, 2500);
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(hideSplash, 50);
+  } else {
+    document.addEventListener('DOMContentLoaded', function(){ setTimeout(hideSplash, 50); });
+  }
 
-  function openDrawer() {
-    if (!drawer) return;
-    lastFocus = document.activeElement;
-    drawer.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('no-scroll');
-    burger && burger.setAttribute('aria-expanded', 'true');
-    const firstLink = drawer.querySelector('a, button');
-    firstLink && firstLink.focus();
+  // ---------- Safe-run wrapper ----------
+  function safeRun(fn){
+    try { fn(); }
+    catch(e){
+      console.warn('[walker] init error:', e);
+      hideSplash();
+    }
   }
-  function closeDrawer() {
-    if (!drawer) return;
-    drawer.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('no-scroll');
-    burger && burger.setAttribute('aria-expanded', 'false');
-    lastFocus && lastFocus.focus && lastFocus.focus();
-  }
-  burger && burger.addEventListener('click', openDrawer);
-  drawerClose && drawerClose.addEventListener('click', closeDrawer);
-  drawer && drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && drawer && drawer.getAttribute('aria-hidden') === 'false') closeDrawer();
+
+  // ---------- Global error handlers ----------
+  window.addEventListener('error', function(e){
+    console.warn('[walker] error:', e && e.message);
+    hideSplash();
+  });
+  window.addEventListener('unhandledrejection', function(e){
+    console.warn('[walker] unhandled:', e && e.reason);
+    hideSplash();
   });
 
-  // ---------- FAQ accordion (uses <details>, no JS needed except optional single-open) ----------
-  // Native <details> handles open/close. No additional script needed.
+  // ---------- Mobile drawer ----------
+  safeRun(function(){
+    var drawer = document.querySelector('[data-drawer]');
+    var burger = document.querySelector('[data-burger]');
+    if (!drawer || !burger) return;
+    var lastFocus = null;
+    var isOpen = false;
 
-  // ---------- Termin / Multi-step form ----------
-  const form = document.querySelector('[data-termin-form]');
-  if (form) {
-    const steps = Array.from(form.querySelectorAll('.form-step'));
-    const stepperItems = Array.from(document.querySelectorAll('.stepper__item'));
-    const successView = document.querySelector('[data-success]');
-    let current = 0;
-
-    function showStep(idx) {
-      steps.forEach((s, i) => s.setAttribute('data-active', i === idx ? 'true' : 'false'));
-      stepperItems.forEach((it, i) => {
-        it.classList.remove('stepper__item--active', 'stepper__item--done');
-        if (i === idx) it.classList.add('stepper__item--active');
-        else if (i < idx) it.classList.add('stepper__item--done');
+    function open(){
+      if (isOpen) return;
+      isOpen = true;
+      lastFocus = document.activeElement;
+      drawer.setAttribute('aria-hidden', 'false');
+      document.documentElement.classList.add('no-scroll');
+      document.body.classList.add('no-scroll');
+      burger.setAttribute('aria-expanded', 'true');
+      requestAnimationFrame(function(){
+        var first = drawer.querySelector('[data-drawer-close]');
+        if (first) { try { first.focus({ preventScroll: true }); } catch(e){ first.focus(); } }
       });
-      current = idx;
-      // scroll the form card into view (gentle)
-      const card = form.closest('.form-card');
-      if (card) {
-        const top = card.getBoundingClientRect().top + window.scrollY - 90;
-        window.scrollTo({ top, behavior: 'smooth' });
+    }
+    function close(){
+      if (!isOpen) return;
+      isOpen = false;
+      drawer.setAttribute('aria-hidden', 'true');
+      document.documentElement.classList.remove('no-scroll');
+      document.body.classList.remove('no-scroll');
+      burger.setAttribute('aria-expanded', 'false');
+      if (lastFocus && typeof lastFocus.focus === 'function') {
+        try { lastFocus.focus({ preventScroll: true }); } catch(e){}
       }
     }
 
-    function validateStep(idx) {
-      const step = steps[idx];
-      const required = step.querySelectorAll('[required]');
-      let ok = true;
-      required.forEach(el => {
-        if (el.type === 'radio') {
-          const name = el.name;
-          const checked = step.querySelector(`input[name="${name}"]:checked`);
-          if (!checked) ok = false;
-        } else if (el.type === 'checkbox') {
-          if (!el.checked) { ok = false; el.focus(); }
-        } else if (!el.value.trim()) {
-          ok = false;
-          el.focus();
+    burger.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      if (isOpen) close(); else open();
+    });
+    drawer.querySelectorAll('[data-drawer-close]').forEach(function(b){
+      b.addEventListener('click', function(e){ e.preventDefault(); close(); });
+    });
+    drawer.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', close);
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && isOpen) close();
+    });
+
+    var rt;
+    window.addEventListener('resize', function(){
+      clearTimeout(rt);
+      rt = setTimeout(function(){
+        if (window.innerWidth > 980 && isOpen) close();
+      }, 120);
+    });
+  });
+
+  // ---------- Reveal on scroll ----------
+  safeRun(function(){
+    var els = document.querySelectorAll('.reveal');
+    if (!els.length || !('IntersectionObserver' in window)) {
+      els.forEach(function(el){ el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
         }
       });
-      if (!ok) {
-        // Mark fields visually
-        required.forEach(el => {
-          if (el.type !== 'radio' && el.type !== 'checkbox' && !el.value.trim()) {
-            el.style.borderColor = 'var(--c-red)';
-          }
-        });
-      }
-      return ok;
-    }
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
+    els.forEach(function(el){ io.observe(el); });
+  });
 
-    form.addEventListener('input', e => {
-      if (e.target.style && e.target.style.borderColor) e.target.style.borderColor = '';
-    });
+  // ---------- Cookie banner ----------
+  safeRun(function(){
+    var KEY = 'walker:cookie-consent';
+    var banner = document.querySelector('[data-cookie-banner]');
+    if (!banner) return;
+    var stored = null;
+    try { stored = localStorage.getItem(KEY); } catch(e){}
+    if (!stored) banner.setAttribute('aria-hidden', 'false');
 
-    form.querySelectorAll('[data-next]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        if (!validateStep(current)) return;
-        if (current < steps.length - 1) showStep(current + 1);
+    banner.querySelectorAll('[data-cookie]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var v = btn.getAttribute('data-cookie');
+        try { localStorage.setItem(KEY, v); } catch(e){}
+        banner.setAttribute('aria-hidden', 'true');
       });
     });
-    form.querySelectorAll('[data-prev]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        if (current > 0) showStep(current - 1);
-      });
-    });
-
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      if (!validateStep(current)) return;
-
-      const data = new FormData(form);
-      const lines = [];
-      lines.push('Terminanfrage Walker GmbH Kfz-Reparaturen');
-      lines.push('');
-      lines.push('Anliegen: ' + (data.get('anliegen') || '-'));
-      lines.push('');
-      lines.push('Fahrzeug:');
-      lines.push('  Marke: ' + (data.get('marke') || '-'));
-      lines.push('  Modell: ' + (data.get('modell') || '-'));
-      lines.push('  Baujahr: ' + (data.get('baujahr') || '-'));
-      lines.push('  Kennzeichen: ' + (data.get('kennzeichen') || '-'));
-      lines.push('  Kilometerstand: ' + (data.get('km') || '-'));
-      lines.push('');
-      lines.push('Kontakt:');
-      lines.push('  Name: ' + (data.get('name') || '-'));
-      lines.push('  Telefon: ' + (data.get('telefon') || '-'));
-      lines.push('  E-Mail: ' + (data.get('email') || '-'));
-      lines.push('  Bevorzugte Kontaktart: ' + (data.get('kontaktart') || '-'));
-      lines.push('');
-      lines.push('Wunschtermin: ' + (data.get('wunschtermin') || '-'));
-      lines.push('');
-      lines.push('Nachricht:');
-      lines.push(data.get('nachricht') || '-');
-
-      const subject = 'Terminanfrage – ' + (data.get('name') || 'Kunde');
-      const body = lines.join('\n');
-      const mailto = 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-
-      window.location.href = mailto;
-
-      if (successView) {
-        form.style.display = 'none';
-        successView.hidden = false;
-        successView.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-
-    showStep(0);
-  }
-
-  // ---------- Cookie consent ----------
-  const STORAGE_KEY = 'walker-consent-v1';
-  const banner = document.querySelector('[data-cookie]');
-  const mapBox = document.querySelector('[data-map]');
-
-  function getConsent() {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null'); }
-    catch (e) { return null; }
-  }
-  function setConsent(value) {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(value)); } catch (e) {}
-    applyConsent(value);
-    hideBanner();
-  }
-  function showBanner() { banner && banner.setAttribute('aria-hidden', 'false'); }
-  function hideBanner() { banner && banner.setAttribute('aria-hidden', 'true'); }
-
-  function applyConsent(value) {
-    if (!mapBox) return;
-    if (value && value.maps) loadMap();
-  }
-
-  function loadMap() {
-    if (!mapBox || mapBox.dataset.loaded === '1') return;
-    const src = mapBox.getAttribute('data-map-src');
-    if (!src) return;
-    const iframe = document.createElement('iframe');
-    iframe.src = src;
-    iframe.loading = 'lazy';
-    iframe.title = 'Standort Walker GmbH Kfz-Reparaturen';
-    iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
-    iframe.setAttribute('allowfullscreen', '');
-    mapBox.innerHTML = '';
-    mapBox.appendChild(iframe);
-    mapBox.dataset.loaded = '1';
-  }
-
-  const consent = getConsent();
-  if (consent) applyConsent(consent);
-  else if (banner) showBanner();
-
-  document.querySelectorAll('[data-consent]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const action = btn.getAttribute('data-consent');
-      if (action === 'all') setConsent({ necessary: true, maps: true });
-      else if (action === 'necessary') setConsent({ necessary: true, maps: false });
-      else if (action === 'open') showBanner();
+    document.querySelectorAll('[data-cookie-open]').forEach(function(b){
+      b.addEventListener('click', function(){ banner.setAttribute('aria-hidden', 'false'); });
     });
   });
 
-  // Manual map load button (on consent)
-  document.querySelectorAll('[data-map-load]').forEach(btn => {
-    btn.addEventListener('click', () => setConsent({ necessary: true, maps: true }));
+  // ---------- Live status (Aktuell geöffnet) ----------
+  safeRun(function(){
+    var nodes = document.querySelectorAll('[data-live-status]');
+    if (!nodes.length) return;
+
+    // Parse hours table or data-* attributes. Expected format:
+    //   <table data-hours>
+    //     <tr data-day="1-4" data-from="07:30" data-to="18:30">...</tr>
+    //     <tr data-day="5" data-from="07:00" data-to="12:00">...</tr>
+    //     <tr data-day="6" data-closed>...</tr>
+    //     <tr data-day="0" data-closed>...</tr>
+    //   </table>
+    var ruleSet = [];
+    var src = document.querySelector('[data-hours]');
+    if (src) {
+      src.querySelectorAll('[data-day]').forEach(function(row){
+        var days = row.getAttribute('data-day') || '';
+        var closed = row.hasAttribute('data-closed');
+        var from = row.getAttribute('data-from') || '';
+        var to = row.getAttribute('data-to') || '';
+        days.split(',').forEach(function(d){
+          d = d.trim();
+          var range = d.split('-');
+          var start = parseInt(range[0], 10);
+          var end = range[1] ? parseInt(range[1], 10) : start;
+          if (isNaN(start)) return;
+          for (var i = start; i <= end; i++) {
+            ruleSet[(i + 7) % 7] = { closed: closed, from: from, to: to };
+          }
+        });
+      });
+    }
+
+    function evaluate(){
+      var now = new Date();
+      var weekday = now.getDay(); // 0 = Sonntag
+      // Map: 0 So, 1 Mo, ... 6 Sa
+      var rule = ruleSet[weekday === 0 ? 0 : weekday];
+      if (!rule || rule.closed) {
+        update(false);
+        return;
+      }
+      var fromParts = rule.from.split(':');
+      var toParts = rule.to.split(':');
+      var fromMin = parseInt(fromParts[0],10) * 60 + parseInt(fromParts[1],10);
+      var toMin = parseInt(toParts[0],10) * 60 + parseInt(toParts[1],10);
+      var nowMin = now.getHours() * 60 + now.getMinutes();
+      update(nowMin >= fromMin && nowMin < toMin);
+    }
+
+    function update(open){
+      nodes.forEach(function(n){
+        n.classList.toggle('is-open', open);
+        n.classList.toggle('is-closed', !open);
+        var label = n.querySelector('[data-live-label]');
+        if (label) label.textContent = open ? 'Aktuell geöffnet' : 'Aktuell geschlossen';
+      });
+    }
+
+    evaluate();
+    setInterval(evaluate, 60000);
   });
 
   // ---------- Year ----------
-  document.querySelectorAll('[data-year]').forEach(el => {
-    el.textContent = String(new Date().getFullYear());
+  safeRun(function(){
+    document.querySelectorAll('[data-year]').forEach(function(el){
+      el.textContent = String(new Date().getFullYear());
+    });
   });
+
+  // ---------- Active nav highlighting ----------
+  safeRun(function(){
+    var path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+    if (path === '') path = 'index.html';
+    document.querySelectorAll('[data-nav]').forEach(function(a){
+      var href = (a.getAttribute('href') || '').toLowerCase();
+      if (href === path || (path === 'index.html' && (href === '' || href === 'index.html' || href === './'))) {
+        a.classList.add('is-active');
+        a.setAttribute('aria-current', 'page');
+      }
+    });
+  });
+
+  // ---------- Hinweisbanner (Notice from owner) ----------
+  safeRun(function(){
+    var holder = document.querySelector('[data-notice]');
+    if (!holder || !window.walkerDb) return;
+    window.walkerDb.get('notice').then(function(value){
+      if (value && value.enabled && value.text) {
+        holder.textContent = value.text;
+        holder.hidden = false;
+      }
+    });
+  });
+
+  // ---------- Header scrolled state ----------
+  safeRun(function(){
+    var header = document.querySelector('.header');
+    if (!header) return;
+    var ticking = false;
+    function apply(){
+      header.classList.toggle('is-scrolled', window.scrollY > 8);
+      ticking = false;
+    }
+    window.addEventListener('scroll', function(){
+      if (!ticking) { window.requestAnimationFrame(apply); ticking = true; }
+    }, { passive: true });
+    apply();
+  });
+
+  // ---------- Hero zoom-in on load ----------
+  safeRun(function(){
+    var hero = document.querySelector('[data-hero]');
+    if (!hero) return;
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){ hero.classList.add('is-loaded'); });
+    });
+  });
+
+  // ---------- Custom Cursor (Desktop only, mix-blend-mode dot) ----------
+  safeRun(function(){
+    if (!window.matchMedia || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var dot = document.createElement('div');
+    dot.className = 'cursor-dot';
+    document.body.appendChild(dot);
+    var x = 0, y = 0, tx = 0, ty = 0;
+    document.addEventListener('mousemove', function(e){ tx = e.clientX; ty = e.clientY; }, { passive: true });
+    (function loop(){
+      x += (tx - x) * 0.22;
+      y += (ty - y) * 0.22;
+      dot.style.transform = 'translate(' + x + 'px,' + y + 'px) translate(-50%,-50%)';
+      requestAnimationFrame(loop);
+    })();
+    var hoverSel = 'a, button, [role="button"], .hs-card, summary, input, textarea, select, .lookup__plate';
+    document.addEventListener('mouseover', function(e){
+      if (e.target.closest && e.target.closest(hoverSel)) dot.classList.add('is-hover');
+    });
+    document.addEventListener('mouseout', function(e){
+      if (e.target.closest && e.target.closest(hoverSel)) dot.classList.remove('is-hover');
+    });
+  });
+
 })();

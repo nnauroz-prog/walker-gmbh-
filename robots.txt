@@ -1,6 +1,11 @@
 User-agent: *
 Allow: /
-Disallow: /impressum.html
-Disallow: /datenschutz.html
+Disallow: /admin.html
+Disallow: /404.html
+Disallow: /setup.sql
+Disallow: /UEBERGABE.md
+Disallow: /config.js
+Disallow: /db.js
+Disallow: /admin.js
 
 Sitemap: https://walker-kfz.de/sitemap.xml

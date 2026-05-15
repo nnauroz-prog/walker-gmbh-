@@ -20,13 +20,13 @@
   }catch(e){}
 })();
 </script>
-<title>Über uns – Walker GmbH Mercedes-Benz Spezialist Hamburg</title>
-<meta name="description" content="Walker GmbH: inhabergeführte Mercedes-Benz Werkstatt in der Ifflandstraße 71, Hamburg-Hohenfelde. Vier Punkte, die wir nicht verhandeln.">
-<link rel="canonical" href="https://walker-kfz.de/ueber-uns.html">
+<title>Mein Fahrzeug — Status abfragen | Walker GmbH</title>
+<meta name="description" content="Kennzeichen eintippen, Werkstatt-Status sehen. Wenn „abholbereit" steht, kommen Sie vorbei — Anruf nicht nötig. Walker GmbH, Hamburg-Hohenfelde.">
+<link rel="canonical" href="https://walker-kfz.de/mein-fahrzeug.html">
 <meta property="og:type" content="business.business">
-<meta property="og:title" content="Über uns – Walker GmbH Mercedes-Benz Spezialist Hamburg">
-<meta property="og:description" content="Walker GmbH: inhabergeführte Mercedes-Benz Werkstatt in der Ifflandstraße 71, Hamburg-Hohenfelde. Vier Punkte, die wir nicht verhandeln.">
-<meta property="og:url" content="https://walker-kfz.de/ueber-uns.html">
+<meta property="og:title" content="Mein Fahrzeug — Status abfragen | Walker GmbH">
+<meta property="og:description" content="Kennzeichen eintippen, Werkstatt-Status sehen. Wenn „abholbereit" steht, kommen Sie vorbei — Anruf nicht nötig.">
+<meta property="og:url" content="https://walker-kfz.de/mein-fahrzeug.html">
 <meta property="og:image" content="https://walker-kfz.de/logo.png">
 <meta property="og:site_name" content="Walker GmbH">
 <meta property="og:locale" content="de_DE">
@@ -101,7 +101,7 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
     <li><a data-nav href="mercedes-spezialist.html">Mercedes-Benz Spezialist</a></li>
     <li><a data-nav href="teilepartner.html">Teilepartner</a></li>
     <li><a data-nav href="ueber-uns.html">Über uns</a></li>
-    <li><a data-nav href="kontakt.html">Kontakt & Anfahrt</a></li>
+    <li><a data-nav href="kontakt.html">Kontakt &amp; Anfahrt</a></li>
     <li><a data-nav href="mein-fahrzeug.html">Mein Fahrzeug — Status</a></li>
   </ul>
   <div class="drawer__cta">
@@ -119,76 +119,63 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
 
   <section class="page-hero">
     <div class="container page-hero__grid">
-        <nav class="breadcrumbs" aria-label="Brotkrumennavigation">
-          <a href="index.html">Start</a> <span>›</span> <span aria-current="page">Über uns</span>
-        </nav>
-        <h1>Werkstatt in der Ifflandstraße.</h1>
-        <p class="lead">Inhabergeführt, spezialisiert auf Mercedes-Benz, offizieller Teilepartner. Kein Konzern hinter uns — und das soll auch so bleiben.</p>
-      </div>
+      <nav class="breadcrumbs" aria-label="Brotkrumennavigation">
+        <a href="index.html">Start</a> <span>›</span> <span aria-current="page">Mein Fahrzeug</span>
+      </nav>
+      <p class="eyebrow">Werkstatt-Status</p>
+      <h1>Steht mein Auto noch bei euch?</h1>
+      <p class="lead">Kennzeichen eintippen. Wenn „abholbereit" steht, können Sie während der Öffnungszeiten vorbeikommen — Anruf nicht nötig. Der Status wird in der Werkstatt von uns selbst gepflegt, oft mehrmals am Tag.</p>
+    </div>
   </section>
 
   <section class="section">
     <div class="container">
-      <div class="about-grid reveal">
-        <div>
-          <p class="eyebrow">Wer wir sind</p>
-          <h2>Werkstatt. Punkt.</h2>
-          <p>Walker GmbH ist inhabergeführt, sitzt seit Jahrzehnten in der Ifflandstraße 71 in Hamburg-Hohenfelde und schraubt überwiegend an Mercedes-Benz. Kein Werkstatt-Imperium, kein Filialnetz, kein anonymes Service-Annahme-Center.</p>
-          <p>Was wir sind: ein überschaubares Team, ein offizieller Mercedes-Benz Teilepartner, ein Telefon, an dem die Werkstatt selbst rangeht. Was wir nicht sind: Vertragshändler, Autohaus, Verkaufsraum.</p>
-          <p>Unser Ablauf ist banal: Sie schildern das Problem, wir machen Diagnose, wir besprechen Befund und Kostenrahmen, Sie geben frei, wir reparieren, Sie holen ab. Wenn unterwegs etwas Unerwartetes auftaucht — wir rufen an. Vor der Reparatur, nicht nach der Rechnung.</p>
-          <div style="display:flex;gap:12px;flex-wrap:wrap;">
-            <a class="btn btn--primary" href="tel:+4940225536">040 225536</a>
-            <a class="btn btn--ghost" href="kontakt.html">Adresse &amp; Anfahrt</a>
-          </div>
+
+      <form class="lookup" data-lookup-form novalidate>
+        <div class="field">
+          <label for="lp">Kennzeichen</label>
+          <input class="lookup__plate" id="lp" name="plate" type="text" autocomplete="off" inputmode="latin" placeholder="HH-XY 1234" required>
         </div>
-        <div class="about-visual">
-          <img src="foto-wartung.jpg" alt="Werkstatt – Fahrzeug auf der Hebebühne" loading="lazy" width="800" height="1000">
-        </div>
+        <div data-lookup-status></div>
+        <button class="btn btn--blue btn--block" type="submit">
+          Status abfragen
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </form>
+
+      <div data-lookup-result></div>
+
+      <div style="max-width:540px;margin:32px auto 0;text-align:center;font-size:0.9rem;color:var(--muted);">
+        <p>Sie sehen nur den Bearbeitungs-Status — keine personenbezogenen Daten.<br>Wenn etwas nicht passt: <a href="tel:+4940225536" style="color:var(--blue);font-weight:600;">+49 40 225536</a>.</p>
       </div>
+
     </div>
   </section>
 
   <section class="section section--soft">
     <div class="container">
-      <div class="section__head">
-        <p class="eyebrow">Vier Punkte, die wir nicht verhandeln</p>
-        <h2>Wie wir arbeiten.</h2>
-      </div>
-      <div class="services reveal">
-        <article class="service">
-          <span class="service__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="9 11 12 14 22 4"/></svg></span>
-          <h3>Vorher freigeben</h3>
-          <p>Was nicht abgesprochen ist, wird nicht gemacht. Auch wenn der Kollege „das mal eben mitgemacht hätte". Ohne Ihre Freigabe — nicht.</p>
-        </article>
-        <article class="service">
-          <span class="service__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-12V5l-8-3-8 3v5c0 8 8 12 8 12Z"/></svg></span>
-          <h3>Termine halten</h3>
-          <p>Was wir zusagen, halten wir. Wenn Teile sich verspäten oder etwas Unerwartetes auftaucht, hören Sie das, sobald wir es wissen — nicht am Abholtag.</p>
-        </article>
-        <article class="service">
-          <span class="service__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 2"/></svg></span>
-          <h3>Erst diagnostizieren</h3>
-          <p>Kein „tauschen wir mal auf Verdacht". Erst Fehlerspeicher, Sichtprüfung, Probefahrt — dann reparieren. Spart Ihnen Teile, die nicht defekt waren.</p>
-        </article>
-        <article class="service">
-          <span class="service__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7a2 2 0 0 1 1.72 2z"/></svg></span>
-          <h3>Werkstatt am Telefon</h3>
-          <p>Wer abnimmt, kann auch antworten. Direkt aus der Werkstatt. Kein Callcenter, kein Auswahlmenü, keine Weiterleitungen über drei Stationen.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
       <div class="section__head section__head--left">
-        <p class="eyebrow">Standort</p>
-        <h2>Ifflandstraße 71, Hohenfelde.</h2>
-        <p class="lead" style="max-width:60ch;">Mitten in Hamburg-Hohenfelde, mit dem Auto vom Eilbektal in wenigen Minuten erreichbar, mit dem ÖPNV vom Berliner Tor oder Mundsburg. Termine machen wir telefonisch.</p>
+        <p class="eyebrow">So funktioniert's</p>
+        <h2>Anrufen ist nicht nötig.</h2>
+        <p class="lead" style="max-width:60ch;">Wir aktualisieren den Status während der Arbeiten. Sobald „abholbereit" steht, können Sie zur Werkstatt kommen — innerhalb der Öffnungszeiten.</p>
       </div>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;">
-        <a class="btn btn--primary" href="tel:+4940225536">040 225536</a>
-        <a class="btn btn--ghost" href="kontakt.html">Adresse &amp; Anfahrt</a>
+      <div class="services">
+        <article class="service">
+          <span class="status-badge status-badge--received" style="margin-bottom:8px;"><span class="dot"></span>Angenommen</span>
+          <p>Ihr Fahrzeug ist bei uns angekommen. Wir starten zeitnah mit der Diagnose.</p>
+        </article>
+        <article class="service">
+          <span class="status-badge status-badge--in_progress" style="margin-bottom:8px;"><span class="dot"></span>In Bearbeitung</span>
+          <p>Wir arbeiten gerade an Ihrem Fahrzeug. Bei Rückfragen melden wir uns telefonisch.</p>
+        </article>
+        <article class="service">
+          <span class="status-badge status-badge--waiting_parts" style="margin-bottom:8px;"><span class="dot"></span>Warten auf Teile</span>
+          <p>Ein Teil ist bestellt. Sobald es da ist, geht es weiter. Sie hören von uns, sobald sich der Status ändert.</p>
+        </article>
+        <article class="service">
+          <span class="status-badge status-badge--ready" style="margin-bottom:8px;"><span class="dot"></span>Abholbereit</span>
+          <p>Fertig. Sie können während der Öffnungszeiten vorbeikommen — ohne Anruf.</p>
+        </article>
       </div>
     </div>
   </section>
@@ -228,7 +215,7 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
       <span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="admin.html">Mitglieder</a> · <button class="btn--link" type="button" data-cookie-open style="color:inherit;text-transform:inherit;letter-spacing:inherit;font-family:inherit;font-size:inherit;">Cookies</button></span>
     </div>
     <p class="footer__legal-note">
-      Walker GmbH ist eine eigenständige Kfz-Fachwerkstatt mit Spezialisierung auf Mercedes-Benz und offizieller Mercedes-Benz Teilepartner. Keine offizielle Mercedes-Benz Niederlassung. „Mercedes-Benz“ ist eine eingetragene Marke der Mercedes-Benz Group AG.
+      Walker GmbH ist eine eigenständige Kfz-Fachwerkstatt mit Spezialisierung auf Mercedes-Benz und offizieller Mercedes-Benz Teilepartner. Keine offizielle Mercedes-Benz Niederlassung. „Mercedes-Benz" ist eine eingetragene Marke der Mercedes-Benz Group AG.
     </p>
   </div>
 </footer>
@@ -237,7 +224,7 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
   <div class="cookie-banner__row">
     <div class="cookie-banner__text">
       <strong>Wir achten auf Ihre Daten</strong>
-      Wir verwenden nur technisch notwendige Cookies und Speicher, um die Webseite anzuzeigen. Mit Klick auf „Zustimmen“ akzeptieren Sie zusätzliche Komfort-Funktionen. Details in den <a href="datenschutz.html" style="color:#fff;text-decoration:underline;">Datenschutzhinweisen</a>.
+      Wir verwenden nur technisch notwendige Cookies und Speicher. Mit „Zustimmen" akzeptieren Sie zusätzliche Komfort-Funktionen. Details in den <a href="datenschutz.html" style="color:#fff;text-decoration:underline;">Datenschutzhinweisen</a>.
     </div>
     <div class="cookie-banner__actions">
       <button class="btn btn--ghost btn--sm" type="button" data-cookie="necessary">Nur notwendig</button>
@@ -249,5 +236,117 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
 <script src="config.js?v=2026-05-15-r2" defer></script>
 <script src="db.js?v=2026-05-15-r2" defer></script>
 <script src="script.js?v=2026-05-15-r2" defer></script>
+<script>
+/* ===== Mein-Fahrzeug Lookup ===== */
+(function(){
+  'use strict';
+
+  function relTime(ts){
+    var d = new Date(ts);
+    var diff = (Date.now() - d.getTime()) / 1000;
+    if (diff < 60) return 'gerade eben';
+    if (diff < 3600) return 'vor ' + Math.floor(diff/60) + ' Minuten';
+    if (diff < 86400) return 'vor ' + Math.floor(diff/3600) + ' Stunden';
+    var days = Math.floor(diff/86400);
+    if (days === 1) return 'gestern';
+    if (days < 7) return 'vor ' + days + ' Tagen';
+    return d.toLocaleDateString('de-DE', { day:'2-digit', month:'2-digit', year:'numeric' });
+  }
+
+  var STATUS_LABEL = {
+    received:      'Angenommen',
+    in_progress:   'In Bearbeitung',
+    waiting_parts: 'Warten auf Teile',
+    ready:         'Abholbereit',
+    done:          'Abgeschlossen'
+  };
+  var STATUS_HINT = {
+    received:      'Ihr Fahrzeug ist bei uns. Wir starten zeitnah mit der Diagnose.',
+    in_progress:   'Wir arbeiten gerade daran. Bei Rückfragen melden wir uns telefonisch.',
+    waiting_parts: 'Ein Teil ist bestellt. Sobald es da ist, geht es weiter.',
+    ready:         'Fertig. Sie können während der Öffnungszeiten vorbeikommen — ohne Anruf.',
+    done:          'Bereits abgeholt.'
+  };
+
+  document.addEventListener('DOMContentLoaded', function(){
+    var form = document.querySelector('[data-lookup-form]');
+    var statusEl = document.querySelector('[data-lookup-status]');
+    var resultEl = document.querySelector('[data-lookup-result]');
+    if (!form || !window.walkerDb) return;
+
+    function setStatus(type, msg){
+      statusEl.innerHTML = '';
+      if (!msg) return;
+      var box = document.createElement('div');
+      box.className = 'alert alert--' + type;
+      box.innerHTML = msg;
+      statusEl.appendChild(box);
+    }
+
+    function renderResult(plateDisplay, data){
+      var label = STATUS_LABEL[data.status] || data.status;
+      var hint = STATUS_HINT[data.status] || '';
+      var card = document.createElement('div');
+      card.className = 'status-result reveal in';
+      card.innerHTML = '' +
+        '<div class="status-result__plate">' + (plateDisplay || data.plate_display || data.plate) + '</div>' +
+        '<span class="status-badge status-badge--' + (data.status || 'received') + '"><span class="dot"></span>' + label + '</span>' +
+        (data.public_note ? '<div class="status-result__note">' + escapeHtml(data.public_note) + '</div>' : (hint ? '<div class="status-result__note" style="color:var(--muted);">' + hint + '</div>' : '')) +
+        '<p class="status-result__meta">Aktualisiert ' + relTime(data.updated_at) + '</p>' +
+        (data.status === 'ready'
+          ? '<div class="status-result__cta">' +
+              '<a class="btn btn--blue" href="kontakt.html">Anfahrt &amp; Adresse</a>' +
+              '<a class="btn btn--ghost" href="tel:+4940225536">+49 40 225536</a>' +
+            '</div>'
+          : '<div class="status-result__cta"><a class="btn btn--ghost" href="kontakt.html">Adresse &amp; Öffnungszeiten</a></div>');
+      resultEl.innerHTML = '';
+      resultEl.appendChild(card);
+    }
+
+    function escapeHtml(s){
+      return String(s).replace(/[&<>"']/g, function(c){
+        return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c];
+      });
+    }
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var plate = form.querySelector('[name="plate"]').value || '';
+      plate = plate.trim();
+      if (!plate) {
+        setStatus('error', 'Bitte geben Sie ein Kennzeichen ein.');
+        return;
+      }
+      setStatus('info', 'Wird geprüft …');
+      resultEl.innerHTML = '';
+
+      window.walkerDb.lookupVehicleStatus(plate, '').then(function(res){
+        setStatus('', '');
+        if (!res || !res.ok) {
+          setStatus('error', 'Abfrage konnte gerade nicht durchgeführt werden. Bitte versuchen Sie es später erneut oder rufen Sie uns kurz an.');
+          return;
+        }
+        if (!res.found) {
+          setStatus('info', 'Zu diesem Kennzeichen liegt aktuell kein Auftrag vor. Falls Ihr Fahrzeug heute angenommen wurde, kann es einen Moment dauern, bis der Status erscheint. Bei Fragen: <a href="tel:+4940225536" style="color:var(--navy);font-weight:600;">+49 40 225536</a>.');
+          return;
+        }
+        renderResult(plate.toUpperCase(), res.data);
+      }).catch(function(){
+        setStatus('error', 'Abfrage konnte gerade nicht durchgeführt werden. Bitte versuchen Sie es später erneut.');
+      });
+    });
+
+    // Pre-fill from URL ?plate=HH-XY1234
+    try {
+      var params = new URLSearchParams(window.location.search);
+      var pre = params.get('plate');
+      if (pre) {
+        form.querySelector('[name="plate"]').value = pre;
+        form.requestSubmit();
+      }
+    } catch(e){}
+  });
+})();
+</script>
 </body>
 </html>

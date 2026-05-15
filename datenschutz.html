@@ -1,77 +1,131 @@
 <!doctype html>
 <html lang="de">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Datenschutz – Walker GmbH Kfz-Reparaturen</title>
-<meta name="description" content="Datenschutzhinweise von Walker GmbH Kfz-Reparaturen, Hamburg. Informationen zu Hosting, Kontaktanfragen, Cookies und Betroffenenrechten." />
-<link rel="canonical" href="https://walker-kfz.de/datenschutz.html" />
-<meta name="robots" content="noindex,follow" />
-<meta name="theme-color" content="#141414" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>
+(function(){
+  var V='2026-05-15-r2';
+  try{
+    if(localStorage.getItem('app-version')!==V){
+      localStorage.removeItem('app-content');
+      localStorage.setItem('app-version',V);
+    }
+  }catch(e){}
+  try{
+    if('serviceWorker' in navigator){
+      navigator.serviceWorker.getRegistrations()
+        .then(function(rs){rs.forEach(function(r){r.unregister();});}).catch(function(){});
+    }
+  }catch(e){}
+})();
+</script>
+<title>Datenschutz – Walker GmbH</title>
+<meta name="description" content="Datenschutzhinweise von Walker GmbH – Verarbeitung personenbezogener Daten, Supabase, Cookies und Betroffenenrechte.">
+<link rel="canonical" href="https://walker-kfz.de/datenschutz.html">
+<meta name="robots" content="noindex,follow">
+<meta property="og:type" content="business.business">
+<meta property="og:title" content="Datenschutz – Walker GmbH">
+<meta property="og:description" content="Datenschutzhinweise von Walker GmbH – Verarbeitung personenbezogener Daten, Supabase, Cookies und Betroffenenrechte.">
+<meta property="og:url" content="https://walker-kfz.de/datenschutz.html">
+<meta property="og:image" content="https://walker-kfz.de/logo.png">
+<meta property="og:site_name" content="Walker GmbH">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0A0A0B">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Inter+Tight:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#061327;--white:#fff;--anthracite:#111827;--silver:#F3F6FA}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.splash{position:fixed;inset:0;background:var(--white);z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity .4s cubic-bezier(.22,1,.36,1)}
+.splash.hide{opacity:0;pointer-events:none}
+.splash__mark{width:56px;height:56px;border-radius:14px;background:var(--navy);display:inline-flex;align-items:center;justify-content:center;color:var(--white);font-family:Georgia,serif;font-weight:700;font-size:1.6rem}
+</style>
+<link rel="stylesheet" href="styles.css?v=2026-05-15-r2">
 </head>
 <body>
+<div class="splash" id="splash" aria-hidden="true"><span class="splash__mark">W</span></div>
 <a class="skip-link" href="#main">Zum Inhalt springen</a>
 
 <div class="topbar" role="region" aria-label="Kontakt und Adresse">
   <div class="container topbar__row">
-    <a class="topbar__item" href="tel:+4940225536"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7a2 2 0 0 1 1.72 2z"/></svg>+49 40 225536</a>
-    <span class="topbar__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Ifflandstraße 71, 22087 Hamburg</span>
-    <span class="topbar__item topbar__hint">Kfz-Reparatur · Wartung · Diagnose</span>
+    <a class="topbar__item" href="tel:+4940225536" aria-label="Telefonnummer anrufen">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7a2 2 0 0 1 1.72 2z"/></svg>
+      +49 40 225536
+    </a>
+    <span class="topbar__item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Ifflandstraße 71, Hamburg-Hohenfelde
+    </span>
+    <span class="topbar__item topbar__hint"><span class="dot"></span>Mercedes-Benz Spezialist · Offizieller Teilepartner</span>
   </div>
 </div>
 
 <header class="header">
   <div class="container header__row">
-    <a class="brand" href="index.html"><span class="brand__mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0-1.4 0L4 15.6V20h4.4l9.3-9.3a1 1 0 0 0 0-1.4l-3-3z"/><path d="m13 8 3 3"/></svg></span><span class="brand__text">Walker GmbH<small>Kfz-Reparaturen</small></span></a>
+    <a class="brand" data-nav href="index.html" aria-label="Walker GmbH – Startseite">
+      <img class="brand__logo" src="logo.png" alt="Walker GmbH – Mercedes-Benz Spezialist" width="180" height="80">
+    </a>
     <nav class="nav" aria-label="Hauptnavigation">
-      <a class="nav__link" href="index.html">Start</a>
-      <a class="nav__link" href="leistungen.html">Leistungen</a>
-      <a class="nav__link" href="termin.html">Termin</a>
-      <a class="nav__link" href="ueber-uns.html">Über uns</a>
-      <a class="nav__link" href="kontakt.html">Kontakt</a>
+      <a class="nav__link" data-nav href="index.html">Start</a>
+      <a class="nav__link" data-nav href="leistungen.html">Leistungen</a>
+      <a class="nav__link" data-nav href="mercedes-spezialist.html">Mercedes-Benz</a>
+      <a class="nav__link" data-nav href="mein-fahrzeug.html">Mein Fahrzeug</a>
+      <a class="nav__link" data-nav href="ueber-uns.html">Über uns</a>
+      <a class="nav__link" data-nav href="kontakt.html">Kontakt</a>
     </nav>
     <div class="header__cta">
-      <a class="btn btn--ghost" href="tel:+4940225536">Anrufen</a>
-      <a class="btn btn--primary" href="termin.html">Termin anfragen</a>
-      <button class="burger" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="drawer" data-burger><span></span><span></span><span></span></button>
+      <a class="btn btn--ghost btn--sm" href="mein-fahrzeug.html">Mein Fahrzeug</a>
+      <a class="btn btn--primary btn--sm" href="tel:+4940225536"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7a2 2 0 0 1 1.72 2z"/></svg>+49 40 225536</a>
+      <button class="burger" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="drawer" data-burger>
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
 </header>
 
 <aside class="drawer" id="drawer" aria-hidden="true" data-drawer aria-label="Menü">
   <div class="drawer__head">
-    <span class="brand" style="color:#fff;"><span class="brand__mark" style="background:#fff;color:#141414" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0-1.4 0L4 15.6V20h4.4l9.3-9.3a1 1 0 0 0 0-1.4l-3-3z"/><path d="m13 8 3 3"/></svg></span><span class="brand__text">Walker GmbH<small style="color:#9aa0a6">Kfz-Reparaturen</small></span></span>
-    <button class="drawer__close" type="button" aria-label="Menü schließen" data-drawer-close><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+    <img class="drawer__logo" src="logo.png" alt="Walker GmbH" width="180" height="80">
+    <button class="drawer__close" type="button" aria-label="Menü schließen" data-drawer-close>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
   </div>
   <ul class="drawer__nav" role="list">
-    <li><a href="index.html">Start</a></li>
-    <li><a href="leistungen.html">Leistungen</a></li>
-    <li><a href="termin.html">Termin</a></li>
-    <li><a href="ueber-uns.html">Über uns</a></li>
-    <li><a href="kontakt.html">Kontakt</a></li>
+    <li><a data-nav href="index.html">Start</a></li>
+    <li><a data-nav href="leistungen.html">Leistungen</a></li>
+    <li><a data-nav href="mercedes-spezialist.html">Mercedes-Benz Spezialist</a></li>
+    <li><a data-nav href="teilepartner.html">Teilepartner</a></li>
+    <li><a data-nav href="ueber-uns.html">Über uns</a></li>
+    <li><a data-nav href="kontakt.html">Kontakt & Anfahrt</a></li>
+    <li><a data-nav href="mein-fahrzeug.html">Mein Fahrzeug — Status</a></li>
   </ul>
   <div class="drawer__cta">
-    <a class="btn btn--primary btn--block" href="tel:+4940225536">Jetzt anrufen</a>
-    <a class="btn btn--light btn--block" href="termin.html">Termin anfragen</a>
+    <a class="btn btn--blue btn--block" href="tel:+4940225536">Jetzt anrufen · +49 40 225536</a>
+    <a class="btn btn--light btn--block" href="kontakt.html">Adresse &amp; Anfahrt</a>
   </div>
-  <div class="drawer__contact">Walker GmbH Kfz-Reparaturen<br/>Ifflandstraße 71, 22087 Hamburg<br/>Telefon: <a href="tel:+4940225536">+49 40 225536</a></div>
+  <div class="drawer__contact">
+    Walker GmbH<br>Ifflandstraße 71, 22087 Hamburg<br>Telefon: <a href="tel:+4940225536">+49 40 225536</a><br><br>Mo–Do 07:30–18:30<br>Fr 07:00–12:00<br>Sa, So geschlossen
+  </div>
 </aside>
+
+<div class="notice" hidden data-notice></div>
 
 <main id="main">
 
   <section class="page-hero">
     <div class="container page-hero__grid">
-      <nav class="breadcrumbs" aria-label="Brotkrumennavigation">
-        <a href="index.html">Start</a> <span>›</span> <span aria-current="page">Datenschutz</span>
-      </nav>
-      <span class="eyebrow">Datenschutz</span>
-      <h1>Datenschutzhinweise</h1>
-      <p class="lead">Diese Hinweise informieren Sie über Art, Umfang und Zweck der Verarbeitung personenbezogener Daten beim Besuch unserer Webseite und bei der Kontaktaufnahme.</p>
-    </div>
+        <nav class="breadcrumbs" aria-label="Brotkrumennavigation">
+          <a href="index.html">Start</a> <span>›</span> <span aria-current="page">Datenschutz</span>
+        </nav>
+        <h1>Datenschutz.</h1>
+        <p class="lead">Hinweise zur Verarbeitung personenbezogener Daten beim Besuch unserer Webseite.</p>
+      </div>
   </section>
 
   <section class="section">
@@ -80,20 +134,25 @@
 
         <h2>1. Verantwortliche Stelle</h2>
         <p>
-          Walker GmbH Kfz-Reparaturen<br/>
-          Ifflandstraße 71<br/>
-          22087 Hamburg<br/>
-          Telefon: <a href="tel:+4940225536">+49 40 225536</a><br/>
+          Walker GmbH<br>
+          Ifflandstraße 71<br>
+          22087 Hamburg<br>
+          Telefon: <a href="tel:+4940225536">+49 40 225536</a><br>
           E-Mail: <span class="todo">TODO: E-Mail-Adresse eintragen</span>
         </p>
 
         <h2>2. Hosting</h2>
-        <p>Diese Webseite wird bei einem externen Dienstleister gehostet (Hoster). Die personenbezogenen Daten, die auf dieser Webseite erfasst werden, werden auf den Servern des Hosters gespeichert.</p>
-        <p>Hoster: <span class="todo">TODO: Name &amp; Anschrift des Hosting-Anbieters eintragen</span></p>
+        <p>Diese Webseite wird bei einem externen Dienstleister gehostet. Die personenbezogenen Daten, die auf dieser Webseite erfasst werden, werden auf den Servern des Hosters gespeichert.</p>
+        <p>Hoster: <span class="todo">TODO: Name &amp; Anschrift des Hosting-Anbieters eintragen (z.&nbsp;B. Netlify, GitHub, eigenes Hosting)</span></p>
         <p>Der Einsatz des Hosters erfolgt zum Zwecke der Vertragserfüllung gegenüber unseren potenziellen und bestehenden Kunden (Art. 6 Abs. 1 lit. b DSGVO) und im Interesse einer sicheren, schnellen und effizienten Bereitstellung unseres Online-Angebots (Art. 6 Abs. 1 lit. f DSGVO).</p>
 
-        <h2>3. Server-Logfiles</h2>
-        <p>Der Provider der Seiten erhebt und speichert automatisch Informationen in sogenannten Server-Logfiles, die Ihr Browser automatisch übermittelt. Dies sind:</p>
+        <h2>3. Backend &amp; Datenbank (Supabase)</h2>
+        <p>Für die Speicherung von Anfragen, die Anmeldung des Mitgliederbereichs und die Pflege von Inhalten nutzen wir die Plattform <strong>Supabase</strong> der Supabase Inc. (970 Toa Payoh North, #07-04, Singapore 318992). Supabase bietet eine PostgreSQL-Datenbank, Authentifizierungs- und Speicher-Dienste an. Die Datenverarbeitung erfolgt in der EU (Frankfurt am Main).</p>
+        <p>Wenn Sie unser Anfrage-Formular nutzen, werden die übermittelten Daten in der Supabase-Datenbank gespeichert. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Anbahnung eines Vertragsverhältnisses) bzw. Art. 6 Abs. 1 lit. f DSGVO (Bearbeitung der Anfrage als berechtigtes Interesse).</p>
+        <p>Datenschutz von Supabase: <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer">https://supabase.com/privacy</a>.</p>
+
+        <h2>4. Server-Logfiles</h2>
+        <p>Der Provider erhebt und speichert automatisch Informationen in sogenannten Server-Logfiles, die Ihr Browser übermittelt:</p>
         <ul>
           <li>Browsertyp und Browserversion</li>
           <li>Verwendetes Betriebssystem</li>
@@ -102,47 +161,52 @@
           <li>Uhrzeit der Serveranfrage</li>
           <li>IP-Adresse (anonymisiert oder gekürzt, sofern technisch möglich)</li>
         </ul>
-        <p>Die Erfassung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Der Webseitenbetreiber hat ein berechtigtes Interesse an der technisch fehlerfreien Darstellung und der Optimierung seiner Webseite.</p>
+        <p>Die Erfassung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an technisch fehlerfreier Darstellung).</p>
 
-        <h2>4. Kontaktaufnahme &amp; Terminanfrage</h2>
-        <p>Wenn Sie uns per Kontaktformular, Terminformular, E-Mail oder Telefon kontaktieren, werden Ihre Angaben zur Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p>
-        <p>Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist. In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder auf Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), sofern diese abgefragt wurde.</p>
+        <h2>5. Anfrage-Formular</h2>
+        <p>Wenn Sie das Formular zur Terminanfrage nutzen, werden Ihre Angaben (Name, Telefon, E-Mail, Fahrzeugdaten, Anliegen, Wunschtermin) zur Bearbeitung Ihrer Anfrage und für eventuelle Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p>
+        <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung) oder Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an effektiver Bearbeitung).</p>
 
-        <h2>5. Cookies</h2>
-        <p>Unsere Webseite verwendet ausschließlich technisch notwendige Cookies, die zum Betrieb und zur Speicherung Ihrer Cookie-Einstellungen erforderlich sind. Diese Cookies erfordern keine Einwilligung gemäß § 25 Abs. 2 TDDDG.</p>
-        <p>Externe Inhalte (z.&nbsp;B. Karten) werden erst nach ausdrücklicher Einwilligung geladen.</p>
+        <h2>6. Cookies &amp; LocalStorage</h2>
+        <p>Unsere Webseite verwendet nur technisch notwendige Cookies und nutzt zudem den <code>localStorage</code> Ihres Browsers für:</p>
+        <ul>
+          <li>Speicherung Ihrer Cookie-Einstellung</li>
+          <li>Cache-Versionierung (damit Sie nach einem Update die aktuelle Webseite sehen)</li>
+          <li>lokaler Fallback-Speicher für Inhalte, falls die Backend-Verbindung kurzzeitig nicht erreichbar ist</li>
+        </ul>
+        <p>Diese Vorgänge sind technisch erforderlich und erfordern keine Einwilligung gemäß § 25 Abs. 2 TDDDG.</p>
 
-        <h2>6. Kartenanbieter</h2>
-        <p>Auf unserer Kontaktseite bieten wir die Möglichkeit, eine externe Karte einzubinden. Die Karte wird nicht automatisch geladen, sondern erst nach Ihrer aktiven Einwilligung. Bei Aufruf der Karte werden Daten (insbesondere Ihre IP-Adresse) an den Kartenanbieter übermittelt.</p>
-        <p>Anbieter und Datenschutzhinweise: <span class="todo">TODO: Konkreten Kartenanbieter benennen (z.&nbsp;B. OpenStreetMap Foundation, Google Maps) und auf dessen Datenschutzhinweise verlinken.</span></p>
+        <h2>7. Externe Karten (Routenplanung)</h2>
+        <p>Auf unserer Kontaktseite bieten wir Links zu Google Maps und Apple Maps für die Routenplanung. Karten werden <strong>nicht automatisch eingebunden</strong>. Erst wenn Sie auf „Route via Google Maps" oder „Route via Apple Maps" klicken, werden Sie an den jeweiligen Anbieter weitergeleitet und Daten (insbesondere Ihre IP-Adresse) dorthin übermittelt.</p>
+        <p>Datenschutzhinweise der Anbieter: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google</a> · <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer">Apple</a>.</p>
 
-        <h2>7. Rechtsgrundlagen</h2>
-        <p>Die Verarbeitung personenbezogener Daten erfolgt auf Basis der Datenschutz-Grundverordnung (DSGVO), insbesondere Art. 6 Abs. 1 DSGVO (Einwilligung, Vertragserfüllung, berechtigtes Interesse).</p>
+        <h2>8. Mitgliederbereich (Authentifizierung)</h2>
+        <p>Der Mitgliederbereich (<code>admin.html</code>) ist über Supabase Auth abgesichert. Es werden E-Mail-Adresse und Passwort verarbeitet. Die Zugangsdaten werden ausschließlich für die Authentifizierung und für die Sicherheit des Bereichs verwendet (Art. 6 Abs. 1 lit. b und f DSGVO).</p>
 
-        <h2>8. Speicherdauer</h2>
-        <p>Wir verarbeiten und speichern Ihre personenbezogenen Daten nur so lange, wie dies zur Erfüllung des jeweiligen Verarbeitungszwecks erforderlich ist oder gesetzliche Aufbewahrungsfristen dies vorschreiben. Anschließend werden die Daten gelöscht oder gesperrt.</p>
+        <h2>9. Speicherdauer</h2>
+        <p>Wir verarbeiten und speichern Ihre personenbezogenen Daten nur so lange, wie dies zur Erfüllung des jeweiligen Verarbeitungszwecks erforderlich ist oder gesetzliche Aufbewahrungsfristen dies vorschreiben.</p>
 
-        <h2>9. Ihre Rechte (Betroffenenrechte)</h2>
+        <h2>10. Ihre Rechte</h2>
         <p>Sie haben jederzeit das Recht auf:</p>
         <ul>
-          <li>Auskunft über die zu Ihrer Person gespeicherten Daten (Art. 15 DSGVO)</li>
-          <li>Berichtigung unrichtiger Daten (Art. 16 DSGVO)</li>
-          <li>Löschung („Recht auf Vergessenwerden“, Art. 17 DSGVO)</li>
+          <li>Auskunft (Art. 15 DSGVO)</li>
+          <li>Berichtigung (Art. 16 DSGVO)</li>
+          <li>Löschung (Art. 17 DSGVO)</li>
           <li>Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
           <li>Datenübertragbarkeit (Art. 20 DSGVO)</li>
-          <li>Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)</li>
+          <li>Widerspruch (Art. 21 DSGVO)</li>
         </ul>
 
-        <h2>10. Widerruf der Einwilligung</h2>
-        <p>Viele Datenverarbeitungsvorgänge sind nur mit Ihrer ausdrücklichen Einwilligung möglich. Sie können eine bereits erteilte Einwilligung jederzeit widerrufen. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt vom Widerruf unberührt.</p>
+        <h2>11. Widerruf der Einwilligung</h2>
+        <p>Eine erteilte Einwilligung können Sie jederzeit widerrufen. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt vom Widerruf unberührt.</p>
 
-        <h2>11. Beschwerderecht bei der Aufsichtsbehörde</h2>
-        <p>Im Falle datenschutzrechtlicher Verstöße steht Ihnen ein Beschwerderecht bei einer Aufsichtsbehörde zu. Zuständig ist insbesondere die Aufsichtsbehörde des Bundeslandes, in dem Sie Ihren Wohnsitz haben oder in dem sich der Sitz unseres Unternehmens befindet (Hamburgischer Beauftragter für Datenschutz und Informationsfreiheit).</p>
+        <h2>12. Beschwerderecht</h2>
+        <p>Sie haben das Recht auf Beschwerde bei einer Aufsichtsbehörde. Zuständig ist insbesondere der Hamburgische Beauftragte für Datenschutz und Informationsfreiheit.</p>
 
-        <h2>12. SSL-/TLS-Verschlüsselung</h2>
-        <p>Diese Seite nutzt aus Gründen der Sicherheit und zum Schutz der Übertragung vertraulicher Inhalte eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie an „https://“ in der Adresszeile Ihres Browsers.</p>
+        <h2>13. SSL-/TLS-Verschlüsselung</h2>
+        <p>Diese Seite nutzt aus Gründen der Sicherheit und zum Schutz der Übertragung vertraulicher Inhalte eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie an „https://" in der Adresszeile Ihres Browsers.</p>
 
-        <p style="margin-top: 2rem; font-size: 0.85rem; color: var(--c-text-muted);">Diese Datenschutzhinweise sind ein Vorlagentext, der an die konkreten Verhältnisse vor Ort angepasst werden muss. <span class="todo">TODO: rechtliche Prüfung empfohlen.</span></p>
+        <p style="margin-top:2rem;font-size:0.85rem;color:var(--muted);">Diese Datenschutzhinweise sind ein Vorlagentext, der an die konkreten Verhältnisse vor Ort angepasst werden muss. <span class="todo">TODO: rechtliche Prüfung empfohlen.</span></p>
 
       </div>
     </div>
@@ -150,58 +214,59 @@
 
 </main>
 
-<footer class="footer">
+<footer class="footer footer--brand">
   <div class="container">
-    <div class="footer__grid">
+    <div class="footer__top">
       <div>
-        <span class="footer__brand"><span class="brand__mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0-1.4 0L4 15.6V20h4.4l9.3-9.3a1 1 0 0 0 0-1.4l-3-3z"/><path d="m13 8 3 3"/></svg></span>Walker GmbH</span>
-        <p>Kfz-Werkstatt in Hamburg-Hohenfelde. Wartung, Diagnose und Reparatur mit klarer Kommunikation und sorgfältiger Arbeit.</p>
+        <p class="eyebrow eyebrow--light">Walker GmbH</p>
+        <p class="footer__lead">Werkstatt für Mercedes-Benz. In der Ifflandstraße. Seit Jahrzehnten.</p>
       </div>
-      <div>
-        <h4>Leistungen</h4>
+      <div class="footer__col">
+        <h4>Werkstatt</h4>
         <ul>
-          <li><a href="leistungen.html#wartung">Inspektion &amp; Wartung</a></li>
-          <li><a href="leistungen.html#diagnose">Fehlerdiagnose</a></li>
-          <li><a href="leistungen.html#bremsen">Bremsen &amp; Fahrwerk</a></li>
-          <li><a href="leistungen.html#oel">Ölwechsel &amp; Filter</a></li>
-          <li><a href="leistungen.html#reifen">Reifen &amp; Räder</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Kontakt</h4>
-        <ul>
-          <li>Walker GmbH Kfz-Reparaturen</li>
           <li>Ifflandstraße 71</li>
           <li>22087 Hamburg</li>
-          <li><a href="tel:+4940225536">+49 40 225536</a></li>
+          <li><a href="tel:+4940225536">040 225536</a></li>
+          <li>Mo–Do · 07:30 – 18:30</li>
+          <li>Fr · 07:00 – 12:00</li>
         </ul>
       </div>
-      <div>
-        <h4>Rechtliches</h4>
+      <div class="footer__col">
+        <h4>Navigation</h4>
         <ul>
-          <li><a href="impressum.html">Impressum</a></li>
-          <li><a href="datenschutz.html">Datenschutz</a></li>
-          <li><a href="kontakt.html">Kontakt</a></li>
+          <li><a href="leistungen.html">Leistungen</a></li>
+          <li><a href="mercedes-spezialist.html">Mercedes-Benz Spezialist</a></li>
+          <li><a href="teilepartner.html">Teilepartner</a></li>
+          <li><a href="mein-fahrzeug.html">Mein Fahrzeug</a></li>
+          <li><a href="kontakt.html">Kontakt &amp; Anfahrt</a></li>
         </ul>
       </div>
     </div>
     <div class="footer__bottom">
-      <span>© <span data-year>2026</span> Walker GmbH Kfz-Reparaturen</span>
-      <button type="button" data-consent="open">Cookies anpassen</button>
+      <span>© <span data-year>2026</span> Walker GmbH</span>
+      <span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="admin.html">Mitglieder</a> · <button class="btn--link" type="button" data-cookie-open style="color:inherit;text-transform:inherit;letter-spacing:inherit;font-family:inherit;font-size:inherit;">Cookies</button></span>
     </div>
+    <p class="footer__legal-note">
+      Walker GmbH ist eine eigenständige Kfz-Fachwerkstatt mit Spezialisierung auf Mercedes-Benz und offizieller Mercedes-Benz Teilepartner. Keine offizielle Mercedes-Benz Niederlassung. „Mercedes-Benz“ ist eine eingetragene Marke der Mercedes-Benz Group AG.
+    </p>
   </div>
 </footer>
 
-<div class="cookie" role="dialog" aria-live="polite" aria-label="Cookie-Hinweis" aria-hidden="true" data-cookie>
-  <div class="cookie__row">
-    <div class="cookie__text"><strong>Cookies &amp; externe Karten</strong>Wir verwenden nur technisch notwendige Cookies. Externe Karten (z.&nbsp;B. Kontaktseite) werden erst nach Ihrer Zustimmung geladen.</div>
-    <div class="cookie__actions">
-      <button class="btn btn--ghost" type="button" data-consent="necessary" style="color:#fff;border-color:#3a3a3a;">Nur notwendige</button>
-      <button class="btn btn--primary" type="button" data-consent="all">Alle akzeptieren</button>
+<div class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie-Hinweis" aria-hidden="true" data-cookie-banner>
+  <div class="cookie-banner__row">
+    <div class="cookie-banner__text">
+      <strong>Wir achten auf Ihre Daten</strong>
+      Wir verwenden nur technisch notwendige Cookies und Speicher, um die Webseite anzuzeigen. Mit Klick auf „Zustimmen“ akzeptieren Sie zusätzliche Komfort-Funktionen. Details in den <a href="datenschutz.html" style="color:#fff;text-decoration:underline;">Datenschutzhinweisen</a>.
+    </div>
+    <div class="cookie-banner__actions">
+      <button class="btn btn--ghost btn--sm" type="button" data-cookie="necessary">Nur notwendig</button>
+      <button class="btn btn--blue btn--sm" type="button" data-cookie="all">Zustimmen</button>
     </div>
   </div>
 </div>
 
-<script src="script.js" defer></script>
+<script src="config.js?v=2026-05-15-r2" defer></script>
+<script src="db.js?v=2026-05-15-r2" defer></script>
+<script src="script.js?v=2026-05-15-r2" defer></script>
 </body>
 </html>
