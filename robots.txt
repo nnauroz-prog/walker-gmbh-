@@ -2,8 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /admin.html
 Disallow: /404.html
-Disallow: /impressum.html
-Disallow: /datenschutz.html
 Disallow: /setup.sql
 Disallow: /UEBERGABE.md
 Disallow: /config.js
