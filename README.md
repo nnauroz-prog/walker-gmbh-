@@ -1,54 +1,91 @@
-# Walker GmbH Kfz-Reparaturen – Webseite
+# Walker GmbH — Webseite
 
-Statische Webseite für **Walker GmbH Kfz-Reparaturen**, Hamburg-Hohenfelde.
+Statische Webseite für **Walker GmbH**, Mercedes-Benz Spezialist in
+Hamburg-Hohenfelde.
 
 - Adresse: Ifflandstraße 71, 22087 Hamburg
-- Telefon: [+49 40 225536](tel:+4940225536)
+- Telefon: [040 225536](tel:+4940225536)
+- Live: https://nnauroz-prog.github.io/walker-gmbh-/ (oder eigene Domain)
+
+## Konzept
+
+Werkstatt-taugliche Webseite ohne Mehrarbeit für den Inhaber:
+
+- **Telefon + persönlich vorbeikommen** als Kontaktwege. Kein
+  Termin-Formular, kein WhatsApp, kein E-Mail-Posteingang zum
+  Abarbeiten.
+- **„Mein Fahrzeug"-Status-Tracker** — Kunden geben Kennzeichen ein,
+  sehen ob ihr Auto fertig ist. Owner pflegt im Admin in
+  10 Sekunden pro Auto.
+- **Demo-Modus per `localStorage`** läuft sofort. Supabase optional
+  für Production (Setup in `UEBERGABE.md`).
 
 ## Tech-Stack
 
-- Reines HTML, CSS und Vanilla-JavaScript
-- Kein Build-Step, kein Framework
-- Statisch deploybar (Netlify, Vercel, GitHub Pages, klassischer Webspace)
-- Mobile-First, responsive, barrierearm
-- Inline-SVG-Icons, `prefers-reduced-motion`, `:focus-visible`, iPhone Safe-Area
+- Reines HTML, CSS, Vanilla-JavaScript — kein Build, kein Framework
+- Schriften: Inter / Inter Tight (MB-Premium-Schnitt)
+- Backend optional: Supabase (Auth + Postgres mit RLS + Storage + Realtime)
+- Hosting: GitHub Pages (aktiv) oder Netlify / Vercel / klassischer Webspace
+- Mobile-First, `prefers-reduced-motion`, `:focus-visible`, iPhone Safe-Area
 
 ## Seiten
 
-| Datei              | Inhalt                                  |
-| ------------------ | --------------------------------------- |
-| `index.html`       | Startseite mit Hero, Leistungen, FAQ    |
-| `leistungen.html`  | Detaillierte Leistungsübersicht         |
-| `termin.html`      | Mehrstufige Terminanfrage (mailto)      |
-| `ueber-uns.html`   | Werkstattphilosophie und Werte          |
-| `kontakt.html`     | Kontakt, Adresse, Karte (Consent)       |
-| `impressum.html`   | Pflichtangaben gemäß § 5 DDG            |
-| `datenschutz.html` | Datenschutzhinweise                     |
+| Datei                       | Zweck                                        |
+| --------------------------- | -------------------------------------------- |
+| `index.html`                | Startseite                                   |
+| `leistungen.html`           | Vollständige Leistungsliste                  |
+| `mercedes-spezialist.html`  | Mercedes-Benz Spezialisierungs-Detailseite   |
+| `teilepartner.html`         | Offizieller Teilepartner-Status              |
+| `mein-fahrzeug.html`        | Auftragsstatus per Kennzeichen abfragen      |
+| `ueber-uns.html`            | Werkstatt-Selbstverständnis                  |
+| `kontakt.html`              | Adresse, Anfahrt, Öffnungszeiten             |
+| `impressum.html`            | Pflichtangaben § 5 TMG                       |
+| `datenschutz.html`          | DSGVO-Hinweise                               |
+| `admin.html`                | Mitgliederbereich (Login + Dashboard)        |
+| `404.html`                  | Fehlerseite                                  |
 
-## Lokales Vorschau-Setup
-
-Reine statische Seite – einfach im Browser öffnen oder einen lokalen Server nutzen:
+## Lokal entwickeln
 
 ```bash
 python3 -m http.server 8080
-# danach http://localhost:8080 aufrufen
+# → http://localhost:8080
 ```
 
-## Deployment
+DevTools öffnen, Konsole prüfen. Erwartet: Splash blendet weg,
+Mobile-Burger öffnet/schließt, keine 404 auf CSS/JS/Bilder.
 
-- **Netlify / Vercel:** Repository verbinden, Build-Command leer, Publish Directory `/`.
-- **GitHub Pages:** Branch im Repo-Setting als Pages-Source wählen.
+## Deploy
 
-## Offene TODOs (siehe Code-Markierungen)
+- **GitHub Pages**: `.github/workflows/pages.yml` deployed automatisch
+  bei jedem Push auf `main`. Settings → Pages → Source: `GitHub Actions`.
+- **Netlify**: Repo verknüpfen oder den Ordner per Drag & Drop nach
+  https://app.netlify.com/drop ziehen.
 
-- Geschäftsführung, Handelsregister, USt-ID im **Impressum**
-- E-Mail-Adresse für Kontakt & Datenschutz
-- Konkrete Öffnungszeiten in **Kontakt**
-- Hosting-Anbieter und Kartenanbieter im **Datenschutz**
-- Bestätigung, ob TÜV-Vorbereitung Teil des Angebots ist (**Leistungen**)
+## Production-Setup (Supabase)
 
-## Hinweis zum Terminformular
+Schritt-für-Schritt in `UEBERGABE.md`. Kurzfassung:
 
-Da kein Backend vorhanden ist, öffnet das Formular über `mailto:` das E-Mail-Programm des Nutzers mit
-einer vorbereiteten Nachricht. Für produktiven Betrieb empfiehlt sich die Anbindung eines
-Form-Backends (z. B. Netlify Forms, Formspree, eigener Endpoint).
+1. Projekt auf [supabase.com](https://supabase.com) anlegen
+2. `setup.sql` im SQL-Editor ausführen
+3. Anon-Key in `config.js` eintragen
+4. Owner-Account in Authentication → Users anlegen
+
+Ohne Supabase-Keys läuft die Seite im Demo-Modus via `localStorage`.
+
+## Markenrechtlicher Hinweis
+
+Walker GmbH ist eine eigenständige Fachwerkstatt mit Spezialisierung
+auf Mercedes-Benz und offizieller Mercedes-Benz Teilepartner.
+**Keine offizielle Mercedes-Benz Niederlassung. Keine Vertragswerkstatt.**
+„Mercedes-Benz" ist eine eingetragene Marke der Mercedes-Benz Group AG.
+
+## Owner-Daten zum Ausfüllen
+
+Noch offen, bevor live geschaltet wird:
+
+- Geschäftsführer-Name (Impressum)
+- HRB-Nummer + Registergericht
+- USt-IdNr.
+- E-Mail-Adresse (falls gewünscht)
+- Echtes Gründungsjahr (aktuell „seit Jahrzehnten")
+- Supabase-Projekt URL + Anon-Key (`config.js`)
