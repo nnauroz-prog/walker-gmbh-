@@ -1,8 +1,19 @@
 name: Deploy GitHub Pages
 
+# Auto-Deploy ist DEAKTIVIERT, weil aktuell der GitHub-Default-Workflow
+# "pages build and deployment" parallel deployt (Settings → Pages → Source:
+# "Deploy from a branch"). Zwei parallele Deploys lösen Lock-Konflikte aus
+# (HTTP 400, "Deployment request failed due to in progress deployment").
+#
+# Um diesen Workflow als alleinige Quelle zu nutzen:
+#   1. Settings → Pages → Source auf "GitHub Actions" umstellen
+#   2. Den push-Trigger unten wieder einkommentieren
+#
+# Bis dahin ist der File als Vorlage da; manuelles Triggern weiterhin möglich.
+
 on:
-  push:
-    branches: [main]
+  # push:
+  #   branches: [main]
   workflow_dispatch:
 
 permissions:

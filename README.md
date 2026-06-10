@@ -56,8 +56,14 @@ Mobile-Burger öffnet/schließt, keine 404 auf CSS/JS/Bilder.
 
 ## Deploy
 
-- **GitHub Pages**: `.github/workflows/pages.yml` deployed automatisch
-  bei jedem Push auf `main`. Settings → Pages → Source: `GitHub Actions`.
+- **GitHub Pages (aktuell aktiv)**: Settings → Pages → Source: `Deploy
+  from a branch` → der GitHub-Default-Workflow `pages build and
+  deployment` baut bei jedem Push automatisch. Stabil.
+- **Optional sauberere Variante**: Settings → Pages → Source auf
+  `GitHub Actions` umstellen, dann den Push-Trigger in
+  `.github/workflows/pages.yml` einkommentieren. Beide Quellen
+  parallel führen zu Lock-Konflikten (`actions/deploy-pages`
+  scheitert mit „in progress deployment").
 - **Netlify**: Repo verknüpfen oder den Ordner per Drag & Drop nach
   https://app.netlify.com/drop ziehen.
 
