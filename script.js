@@ -133,21 +133,71 @@
     });
   });
 
-  // ---------- Live status (Aktuell geöffnet) ----------
+  // ---------- Hours rendering from DB + Live status ----------
+  // Renders a [data-hours] table from custom owner data (overrides static markup).
+  // Visible tables (with th/td cells) get text rows; tracker tables (hidden) get attribute-only rows.
+  var DAY_LABELS_DE = { 0:'Sonntag', 1:'Montag', 2:'Dienstag', 3:'Mittwoch', 4:'Donnerstag', 5:'Freitag', 6:'Samstag' };
+  var DAY_ORDER_MOSO = [1, 2, 3, 4, 5, 6, 0];
+
+  function renderHoursTable(tbl, days) {
+    var target = (tbl.tBodies && tbl.tBodies[0]) ? tbl.tBodies[0] : tbl;
+    // Probe whether this table is the visible one (has any cell content)
+    var isVisible = !!tbl.querySelector('tbody tr th, tbody tr td');
+    var html = '';
+    DAY_ORDER_MOSO.forEach(function(k){
+      var d = null;
+      for (var i = 0; i < days.length; i++) {
+        if (Number(days[i].key) === k) { d = days[i]; break; }
+      }
+      if (!d) return;
+      var attrs;
+      if (d.closed || !d.from || !d.to) {
+        attrs = 'data-day="' + k + '" data-closed';
+      } else {
+        attrs = 'data-day="' + k + '" data-from="' + d.from + '" data-to="' + d.to + '"';
+      }
+      if (isVisible) {
+        var display = (d.closed || !d.from || !d.to) ? 'Geschlossen' : (d.from + ' – ' + d.to);
+        var cls = (d.closed || !d.from || !d.to) ? ' class="closed"' : '';
+        html += '<tr ' + attrs + cls + '><th>' + DAY_LABELS_DE[k] + '</th><td>' + display + '</td></tr>';
+      } else {
+        html += '<tr ' + attrs + '></tr>';
+      }
+    });
+    target.innerHTML = html;
+  }
+
+  function applyCustomHoursIfAny() {
+    if (!window.walkerDb || !window.walkerDb.get) return Promise.resolve(false);
+    return window.walkerDb.get('hours').then(function(custom){
+      if (!custom || !Array.isArray(custom.days) || custom.days.length !== 7) return false;
+      document.querySelectorAll('[data-hours]').forEach(function(tbl){
+        renderHoursTable(tbl, custom.days);
+      });
+      return true;
+    }).catch(function(){ return false; });
+  }
+
   safeRun(function(){
     var nodes = document.querySelectorAll('[data-live-status]');
-    if (!nodes.length) return;
+    if (!nodes.length) {
+      // Even without live-status badges, custom hours can rewrite the hours table on kontakt.html
+      applyCustomHoursIfAny();
+      return;
+    }
 
-    // Parse hours table or data-* attributes. Expected format:
-    //   <table data-hours>
-    //     <tr data-day="1-4" data-from="07:30" data-to="18:30">...</tr>
-    //     <tr data-day="5" data-from="07:00" data-to="12:00">...</tr>
-    //     <tr data-day="6" data-closed>...</tr>
-    //     <tr data-day="0" data-closed>...</tr>
-    //   </table>
+    // Parse rules from any [data-hours] table currently in DOM.
+    // Static format examples:
+    //   <tr data-day="1-4" data-from="07:30" data-to="18:30">  (Mon–Thu)
+    //   <tr data-day="5"   data-from="07:00" data-to="12:00">  (Fri)
+    //   <tr data-day="6"   data-closed>                          (Sat)
+    //   <tr data-day="0"   data-closed>                          (Sun)
     var ruleSet = [];
-    var src = document.querySelector('[data-hours]');
-    if (src) {
+
+    function parseHoursIntoRuleset() {
+      ruleSet = [];
+      var src = document.querySelector('[data-hours]');
+      if (!src) return;
       src.querySelectorAll('[data-day]').forEach(function(row){
         var days = row.getAttribute('data-day') || '';
         var closed = row.hasAttribute('data-closed');
@@ -168,10 +218,9 @@
 
     function evaluate(){
       var now = new Date();
-      var weekday = now.getDay(); // 0 = Sonntag
-      // Map: 0 So, 1 Mo, ... 6 Sa
-      var rule = ruleSet[weekday === 0 ? 0 : weekday];
-      if (!rule || rule.closed) {
+      var weekday = now.getDay(); // 0 = Sonntag, 1 = Montag, ...
+      var rule = ruleSet[weekday];
+      if (!rule || rule.closed || !rule.from || !rule.to) {
         update(false);
         return;
       }
@@ -192,8 +241,18 @@
       });
     }
 
+    // Initial: parse static markup so the badge renders immediately.
+    parseHoursIntoRuleset();
     evaluate();
     setInterval(evaluate, 60000);
+
+    // Then check for owner-customized hours; if present, rewrite tables and re-evaluate.
+    applyCustomHoursIfAny().then(function(changed){
+      if (changed) {
+        parseHoursIntoRuleset();
+        evaluate();
+      }
+    });
   });
 
   // ---------- Year ----------

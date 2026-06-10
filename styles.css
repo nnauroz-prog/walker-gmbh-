@@ -1236,6 +1236,61 @@ h1, h2, h3, .hero__title {
 }
 @media (max-width: 760px) { .vs-add { grid-template-columns: 1fr; } }
 
+/* ---------- Admin: Öffnungszeiten-Editor (Etappe 4b) ---------- */
+.hours-edit {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+}
+.hours-edit th, .hours-edit td {
+  padding: 10px 8px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.94rem;
+  vertical-align: middle;
+}
+.hours-edit thead th {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  font-weight: 600;
+  border-bottom: 1px solid var(--rule);
+}
+.hours-edit tbody th {
+  font-weight: 600;
+  color: var(--ink);
+  min-width: 110px;
+}
+.hours-edit input[type="time"] {
+  font: inherit;
+  font-size: 0.94rem;
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  min-height: 36px;
+  color: var(--ink);
+  min-width: 120px;
+}
+.hours-edit input[type="time"]:focus {
+  border-color: var(--ink);
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(10,10,11,0.08);
+}
+.hours-edit input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--ink);
+  cursor: pointer;
+}
+.hours-edit td:nth-child(2) { text-align: center; }
+@media (max-width: 560px) {
+  .hours-edit th, .hours-edit td { padding: 8px 4px; font-size: 0.88rem; }
+  .hours-edit input[type="time"] { min-width: 0; width: 100%; padding: 4px 6px; }
+  .hours-edit tbody th { min-width: 0; }
+}
+
 /* ---------- Termin-Anfragen Form ---------- */
 .termin-wrap {
   display: grid;
