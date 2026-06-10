@@ -455,6 +455,45 @@ h1, h2, h3, .hero__title {
 
 /* (Drop-Cap entfernt – passt nicht zum MB-Schliff) */
 
+/* ---- Status-Lookup Skeleton (Loading-State) ---- */
+.status-skeleton {
+  max-width: 540px;
+  margin: 18px auto 0;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: clamp(24px, 3.5vw, 36px);
+  box-shadow: var(--shadow-sm);
+}
+.status-skeleton__plate {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+.status-skeleton__badge,
+.status-skeleton__note,
+.status-skeleton__meta {
+  background: linear-gradient(90deg, var(--bg-soft, #F4F4F6) 0%, var(--rule, #E5E5E7) 50%, var(--bg-soft, #F4F4F6) 100%);
+  background-size: 200% 100%;
+  border-radius: 6px;
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+}
+.status-skeleton__badge { height: 38px; width: 60%; margin-bottom: 16px; }
+.status-skeleton__note  { height: 50px; width: 100%; margin-bottom: 14px; }
+.status-skeleton__meta  { height: 14px; width: 40%; }
+@keyframes skeleton-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .status-skeleton__badge,
+  .status-skeleton__note,
+  .status-skeleton__meta { animation: none; }
+}
+
 /* ---- Footer MB-Anthrazit (klar, ruhig, premium) ---- */
 .footer--brand {
   position: relative;
