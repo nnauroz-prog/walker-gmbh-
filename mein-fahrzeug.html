@@ -332,21 +332,29 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
         setStatus('error', 'Bitte geben Sie ein Kennzeichen ein.');
         return;
       }
-      setStatus('info', 'Wird geprüft …');
-      resultEl.innerHTML = '';
+      setStatus('', '');
+      resultEl.innerHTML =
+        '<div class="status-skeleton" role="status" aria-busy="true" aria-label="Status wird geprüft">' +
+          '<div class="status-skeleton__plate">' + plate.toUpperCase().replace(/[<>&"]/g, '') + '</div>' +
+          '<div class="status-skeleton__badge"></div>' +
+          '<div class="status-skeleton__note"></div>' +
+          '<div class="status-skeleton__meta"></div>' +
+        '</div>';
 
       window.walkerDb.lookupVehicleStatus(plate, '').then(function(res){
         setStatus('', '');
+        resultEl.innerHTML = '';
         if (!res || !res.ok) {
           setStatus('error', 'Abfrage konnte gerade nicht durchgeführt werden. Bitte versuchen Sie es später erneut oder rufen Sie uns kurz an.');
           return;
         }
         if (!res.found) {
-          setStatus('info', 'Zu diesem Kennzeichen liegt aktuell kein Auftrag vor. Falls Ihr Fahrzeug heute angenommen wurde, kann es einen Moment dauern, bis der Status erscheint. Bei Fragen: <a href="tel:+4940225536" style="color:var(--navy);font-weight:600;">+49 40 225536</a>.');
+          setStatus('info', 'Zu diesem Kennzeichen liegt aktuell kein Auftrag vor. Falls Ihr Fahrzeug heute angenommen wurde, kann es einen Moment dauern, bis der Status erscheint. Bei Fragen: <a href="tel:+4940225536" style="color:var(--navy);font-weight:600;"><span data-bind="phone">+49 40 225536</span></a>.');
           return;
         }
         renderResult(plate.toUpperCase(), res.data);
       }).catch(function(){
+        resultEl.innerHTML = '';
         setStatus('error', 'Abfrage konnte gerade nicht durchgeführt werden. Bitte versuchen Sie es später erneut.');
       });
     });

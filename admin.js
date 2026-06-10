@@ -359,6 +359,21 @@
             + '</div>';
         });
         servicesListEl.innerHTML = html;
+        renderServicesPreview(items);
+      }
+
+      function renderServicesPreview(items){
+        var box = $('[data-services-preview]');
+        if (!box) return;
+        // Render like the public service-card grid (no icons — would need mapping; titles + body suffice for preview)
+        var html = '';
+        items.forEach(function(it){
+          html += '<article class="service">'
+            + '<h3>' + escAttr(it.title || '(ohne Titel)') + '</h3>'
+            + '<p>' + (it.body || '<em style="color:var(--muted);">(keine Beschreibung)</em>') + '</p>'
+            + '</article>';
+        });
+        box.innerHTML = html;
       }
 
       function readServicesFromForm(){
@@ -400,6 +415,16 @@
       }
 
       if (servicesForm) {
+        // Live-Vorschau bei jedem Tastendruck/Input
+        servicesForm.addEventListener('input', function(e){
+          var t = e.target;
+          if (!t || !t.matches) return;
+          if (t.matches('[data-srv-title], [data-srv-body]')) {
+            var data = readServicesFromForm();
+            if (data && data.items) renderServicesPreview(data.items);
+          }
+        });
+
         servicesForm.addEventListener('submit', function(e){
           e.preventDefault();
           var data = readServicesFromForm();
