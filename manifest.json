@@ -1,0 +1,33 @@
+{
+  "name": "Walker GmbH — Mercedes-Benz Werkstatt",
+  "short_name": "Walker GmbH",
+  "description": "Auf Mercedes-Benz spezialisierte Werkstatt in der Ifflandstraße 71, Hamburg-Hohenfelde.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "minimal-ui",
+  "orientation": "portrait",
+  "background_color": "#FFFFFF",
+  "theme_color": "#0A0A0B",
+  "lang": "de-DE",
+  "dir": "ltr",
+  "categories": ["business", "automotive"],
+  "icons": [
+    { "src": "favicon.png", "sizes": "256x256", "type": "image/png", "purpose": "any" },
+    { "src": "favicon.png", "sizes": "256x256", "type": "image/png", "purpose": "maskable" },
+    { "src": "logo.png", "sizes": "any", "type": "image/png", "purpose": "any" }
+  ],
+  "shortcuts": [
+    {
+      "name": "Mein Fahrzeug — Status",
+      "short_name": "Status",
+      "url": "/mein-fahrzeug.html",
+      "description": "Status des eigenen Autos in der Werkstatt prüfen"
+    },
+    {
+      "name": "Anrufen",
+      "short_name": "Anrufen",
+      "url": "/kontakt.html",
+      "description": "Telefonnummer und Anfahrt"
+    }
+  ]
+}

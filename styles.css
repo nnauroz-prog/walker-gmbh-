@@ -1921,3 +1921,107 @@ h1, h2, h3, .hero__title {
   line-height: 1;
   margin: 0;
 }
+
+/* =========================================================
+   Print-Stylesheet
+   Für sauberen Druck von Impressum, Datenschutz, Kontakt, etc.
+   Versteckt UI-Chrome, schaltet auf Schwarz-auf-Weiß, hängt
+   tel:/mailto: Werte als Klartext an Links.
+   ========================================================= */
+@media print {
+  /* UI-Chrome aus */
+  .topbar,
+  .header,
+  .drawer,
+  .footer,
+  .footer--brand,
+  .cookie-banner,
+  .notice,
+  .splash,
+  .skip-link,
+  .breadcrumbs,
+  .header__cta,
+  .burger,
+  .nav,
+  .hero__cta,
+  .hero__visual,
+  .hero-services,
+  .marquee,
+  .cursor-dot,
+  .topbar__hint,
+  [data-cookie-banner],
+  button[data-cookie-open] {
+    display: none !important;
+  }
+
+  /* Schwarz auf Weiß, keine Schatten/Hover-Effekte */
+  *,
+  *::before,
+  *::after {
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  html, body {
+    background: #fff !important;
+    font-size: 11pt;
+    line-height: 1.45;
+  }
+
+  a {
+    color: #000 !important;
+    text-decoration: underline;
+  }
+  /* tel: und mailto: Werte als Klartext anhängen, damit sie auf Papier sichtbar sind */
+  a[href^="tel:"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.9em;
+  }
+  a[href^="mailto:"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.9em;
+  }
+  /* Interne Links: kein Suffix */
+  a[href^="#"]::after,
+  a[href^="/"]::after,
+  a[href^="."]::after {
+    content: "";
+  }
+
+  /* Hero und Sektionen kompakter */
+  .hero,
+  .pinned,
+  .statement,
+  .section,
+  .section--tight,
+  .section--soft,
+  .page-hero {
+    padding: 16pt 0 !important;
+    min-height: 0 !important;
+    background: transparent !important;
+    color: #000 !important;
+  }
+
+  h1 { font-size: 22pt; margin: 0 0 10pt; }
+  h2 { font-size: 16pt; margin: 0 0 8pt; }
+  h3 { font-size: 13pt; margin: 0 0 6pt; }
+  h4 { font-size: 11pt; }
+  p, li { font-size: 11pt; }
+
+  /* Listen kompakt */
+  ul, ol { padding-left: 20pt; }
+
+  /* Hours-Tabelle bleibt sichtbar */
+  .hours { width: auto; border-collapse: collapse; }
+  .hours th, .hours td { padding: 4pt 12pt 4pt 0; border: 0; }
+
+  /* Page-Breaks */
+  section, article { page-break-inside: avoid; break-inside: avoid; }
+  h1, h2, h3 { page-break-after: avoid; break-after: avoid; }
+
+  /* Hintergrundbilder (Hero etc.) — bewusst nicht drucken */
+  .hero__visual::after,
+  .hero::before { display: none !important; }
+}
