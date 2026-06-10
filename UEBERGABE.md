@@ -164,10 +164,10 @@ Alternativ: GitHub-Repo verbinden, Auto-Deploy bei jedem Push.
 
 ## Cache-Busting
 
-Alle Asset-Links in HTML tragen `?v=2026-05-15-r2`. Wenn eine neue Version
+Alle Asset-Links in HTML tragen `?v=2026-06-10-r3`. Wenn eine neue Version
 ausgerollt wird:
 
-1. In allen HTML-Dateien `2026-05-15-r2` durch neue Version ersetzen
+1. In allen HTML-Dateien `2026-06-10-r3` durch neue Version ersetzen
    (z. B. `2026-01-15-r2`).
 2. In `config.js` → `APP_VERSION` ebenfalls anpassen.
 3. Im Inline-Cache-Buster-Microscript im `<head>` jeder Seite die Variable
@@ -205,6 +205,34 @@ viele Fahrzeuge gerade „Abholbereit" sind.
   vom Hersteller anerkannt wird. Falls nicht, Formulierung ändern.
 
 ---
+
+## Admin-Editoren — aktueller Stand
+
+| Editor | Status | Wo |
+|---|---|---|
+| Auftragsstatus „Mein Fahrzeug" | ✅ live | Karte 1 im Admin |
+| Hinweisbanner | ✅ live (Etappe 4a) | Karte „Hinweisbanner aktivieren" |
+| Öffnungszeiten | ✅ live (Etappe 4b) | Karte „Öffnungszeiten ändern" |
+| Kontakt & Standort | ✅ Editor (Etappe 4c, Live-Binding folgt) | Karte „Kontakt & Standort" |
+| Leistungen | ⏳ folgt | Karte „Leistungen bearbeiten" |
+| Bilder | ⏳ folgt | Karte „Bilder hochladen" |
+
+**Öffnungszeiten** sind voll integriert: Werte werden in `content.hours` gespeichert, beim
+nächsten Seitenaufruf rendert `script.js` alle `[data-hours]`-Tabellen aus den Owner-Werten,
+und der „Aktuell geöffnet/geschlossen"-Hinweis nutzt automatisch die neuen Zeiten. Schema:
+
+```json
+{ "days": [
+  { "key": 1, "closed": false, "from": "07:30", "to": "18:30" },
+  …
+  { "key": 0, "closed": true, "from": "", "to": "" }
+] }
+```
+`key` ist `Date#getDay()`-Wert: 0=Sonntag, 1=Montag, …, 6=Samstag.
+
+**Kontakt & Standort** speichert die Felder `street`, `city`, `district`, `phone`, `phoneRaw`,
+`email` in `content.contact`. Die Anzeige in HTML ist aktuell hartkodiert; das automatische
+Nachziehen über `data-bind`-Marker folgt, sobald die Texte gefroren sind.
 
 ## Nächste Etappen (folgen)
 

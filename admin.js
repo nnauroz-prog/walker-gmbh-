@@ -105,6 +105,8 @@
         if (ov) ov.style.display = name ? 'none' : '';
         if (name === 'vehicle-status') renderVehicleStatus();
         if (name === 'notice') loadNotice();
+        if (name === 'hours') loadHours();
+        if (name === 'contact') loadContact();
       }
 
       // ===== Hinweisbanner-Editor =====
@@ -163,6 +165,145 @@
             noticePreviewUpdate();
             setNoticeStatus('success', 'Banner gelöscht.');
             setTimeout(function(){ setNoticeStatus('', ''); }, 2500);
+          });
+        });
+      }
+
+      // ===== Öffnungszeiten-Editor =====
+      var DEFAULT_HOURS = {
+        days: [
+          { key: 1, closed: false, from: '07:30', to: '18:30' },
+          { key: 2, closed: false, from: '07:30', to: '18:30' },
+          { key: 3, closed: false, from: '07:30', to: '18:30' },
+          { key: 4, closed: false, from: '07:30', to: '18:30' },
+          { key: 5, closed: false, from: '07:00', to: '12:00' },
+          { key: 6, closed: true,  from: '', to: '' },
+          { key: 0, closed: true,  from: '', to: '' }
+        ]
+      };
+      var DAY_LABELS = { 0:'Sonntag', 1:'Montag', 2:'Dienstag', 3:'Mittwoch', 4:'Donnerstag', 5:'Freitag', 6:'Samstag' };
+
+      var hoursForm = $('[data-hours-form]');
+      var hoursStatusEl = $('[data-hours-status]');
+
+      function setHoursStatus(type, msg){
+        if (!hoursStatusEl) return;
+        hoursStatusEl.innerHTML = msg ? '<div class="alert alert--' + type + '">' + msg + '</div>' : '';
+      }
+
+      function applyHoursValuesToForm(days){
+        if (!hoursForm) return;
+        days.forEach(function(d){
+          var row = hoursForm.querySelector('[data-row-day="' + d.key + '"]');
+          if (!row) return;
+          row.querySelector('[data-closed]').checked = !!d.closed;
+          row.querySelector('[data-from]').value = d.from || '';
+          row.querySelector('[data-to]').value = d.to || '';
+        });
+      }
+
+      function readHoursFromForm(){
+        if (!hoursForm) return null;
+        var days = [];
+        $$('[data-row-day]', hoursForm).forEach(function(row){
+          var key = parseInt(row.getAttribute('data-row-day'), 10);
+          var closed = row.querySelector('[data-closed]').checked;
+          var from = row.querySelector('[data-from]').value;
+          var to = row.querySelector('[data-to]').value;
+          days.push({ key: key, closed: closed, from: from, to: to });
+        });
+        return { days: days };
+      }
+
+      function loadHours(){
+        if (!hoursForm) return;
+        window.walkerDb.get('hours').then(function(value){
+          var data = (value && Array.isArray(value.days) && value.days.length === 7) ? value : DEFAULT_HOURS;
+          applyHoursValuesToForm(data.days);
+          setHoursStatus('', '');
+        });
+      }
+
+      if (hoursForm) {
+        hoursForm.addEventListener('submit', function(e){
+          e.preventDefault();
+          var data = readHoursFromForm();
+          // Validate non-closed days
+          for (var i = 0; i < data.days.length; i++) {
+            var d = data.days[i];
+            if (d.closed) continue;
+            if (!d.from || !d.to) {
+              setHoursStatus('error', DAY_LABELS[d.key] + ': Bitte „Geschlossen" anhaken oder Von- und Bis-Zeit setzen.');
+              return;
+            }
+            if (d.from >= d.to) {
+              setHoursStatus('error', DAY_LABELS[d.key] + ': „Schließt" muss später sein als „Öffnet".');
+              return;
+            }
+          }
+          window.walkerDb.set('hours', data).then(function(res){
+            if (res && res.ok === false) {
+              setHoursStatus('error', 'Speichern fehlgeschlagen: ' + ((res.error && res.error.message) || 'unbekannter Fehler'));
+            } else {
+              setHoursStatus('success', 'Öffnungszeiten gespeichert. Beim nächsten Seitenaufruf werden sie überall übernommen.');
+              setTimeout(function(){ setHoursStatus('', ''); }, 3500);
+            }
+          });
+        });
+
+        var hoursResetBtn = $('[data-hours-reset]');
+        if (hoursResetBtn) hoursResetBtn.addEventListener('click', function(){
+          if (!window.confirm('Standard-Öffnungszeiten (Mo–Do 07:30–18:30, Fr 07:00–12:00, Sa/So geschlossen) wiederherstellen? Noch nicht gespeichert — Sie müssen anschließend auf „Speichern" klicken.')) return;
+          applyHoursValuesToForm(DEFAULT_HOURS.days);
+          setHoursStatus('info', 'Standardwerte eingetragen. Klicken Sie auf „Speichern", um sie zu übernehmen.');
+        });
+      }
+
+      // ===== Kontakt-Editor =====
+      var CONTACT_FIELDS = ['street', 'city', 'district', 'phone', 'phoneRaw', 'email'];
+      var contactForm = $('[data-contact-form]');
+      var contactStatusEl = $('[data-contact-status]');
+
+      function setContactStatus(type, msg){
+        if (!contactStatusEl) return;
+        contactStatusEl.innerHTML = msg ? '<div class="alert alert--' + type + '">' + msg + '</div>' : '';
+      }
+
+      function loadContact(){
+        if (!contactForm) return;
+        window.walkerDb.get('contact').then(function(value){
+          if (!value) return;
+          CONTACT_FIELDS.forEach(function(k){
+            var input = contactForm.querySelector('[name="' + k + '"]');
+            if (input && typeof value[k] === 'string') input.value = value[k];
+          });
+          setContactStatus('', '');
+        });
+      }
+
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(e){
+          e.preventDefault();
+          var data = {};
+          CONTACT_FIELDS.forEach(function(k){
+            var input = contactForm.querySelector('[name="' + k + '"]');
+            data[k] = input ? input.value.trim() : '';
+          });
+          if (data.phoneRaw && !/^\+?[0-9]+$/.test(data.phoneRaw)) {
+            setContactStatus('error', 'Telefon (tel:-Link): nur Ziffern und optional ein führendes „+". Keine Leerzeichen oder Bindestriche.');
+            return;
+          }
+          if (data.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+            setContactStatus('error', 'E-Mail-Format wirkt nicht korrekt. Bitte prüfen.');
+            return;
+          }
+          window.walkerDb.set('contact', data).then(function(res){
+            if (res && res.ok === false) {
+              setContactStatus('error', 'Speichern fehlgeschlagen: ' + ((res.error && res.error.message) || 'unbekannter Fehler'));
+            } else {
+              setContactStatus('success', 'Kontaktdaten gespeichert.');
+              setTimeout(function(){ setContactStatus('', ''); }, 3000);
+            }
           });
         });
       }

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <script>
 (function(){
-  var V='2026-05-15-r2';
+  var V='2026-06-10-r3';
   try{
     if(localStorage.getItem('app-version')!==V){
       localStorage.removeItem('app-content');
@@ -38,7 +38,7 @@ html,body{margin:0;background:var(--silver);color:var(--anthracite);font-family:
 .splash.hide{opacity:0;pointer-events:none}
 .splash__mark{width:56px;height:56px;border-radius:14px;background:var(--navy);display:inline-flex;align-items:center;justify-content:center;color:var(--white);font-family:Georgia,serif;font-weight:700;font-size:1.6rem}
 </style>
-<link rel="stylesheet" href="styles.css?v=2026-05-15-r2">
+<link rel="stylesheet" href="styles.css?v=2026-06-10-r3">
 </head>
 <body>
 <div class="splash" id="splash" aria-hidden="true"><span class="splash__mark">W</span></div>
@@ -231,23 +231,91 @@ html,body{margin:0;background:var(--silver);color:var(--anthracite);font-family:
 
     <section class="admin-overview" style="margin-top:18px;" data-panel="hours">
       <button class="admin-panel__back" type="button" data-back-overview>← Zurück zur Übersicht</button>
-      <h2 class="admin-overview__title">Öffnungszeiten</h2>
-      <p style="color:var(--muted);">Editor für Wochentage / Zeiten – Etappe 4. Speichert in <code>content</code> unter ID <code>hours</code>.</p>
+      <div class="admin-overview__head" style="margin-bottom:14px;">
+        <div>
+          <h2 class="admin-overview__title">Öffnungszeiten</h2>
+          <p style="font-size:0.9rem;color:var(--muted);margin:4px 0 0;">Hier eingetragene Zeiten überschreiben die Standardanzeige. „Aktuell geöffnet/geschlossen" und die Tabelle auf der Kontakt-Seite werden beim nächsten Laden automatisch nachgezogen.</p>
+        </div>
+      </div>
+
+      <form data-hours-form novalidate>
+        <table class="hours-edit">
+          <thead>
+            <tr>
+              <th>Wochentag</th>
+              <th>Geschlossen</th>
+              <th>Öffnet</th>
+              <th>Schließt</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-row-day="1"><th>Montag</th><td><input type="checkbox" data-closed aria-label="Montag geschlossen"></td><td><input type="time" data-from aria-label="Montag öffnet"></td><td><input type="time" data-to aria-label="Montag schließt"></td></tr>
+            <tr data-row-day="2"><th>Dienstag</th><td><input type="checkbox" data-closed aria-label="Dienstag geschlossen"></td><td><input type="time" data-from aria-label="Dienstag öffnet"></td><td><input type="time" data-to aria-label="Dienstag schließt"></td></tr>
+            <tr data-row-day="3"><th>Mittwoch</th><td><input type="checkbox" data-closed aria-label="Mittwoch geschlossen"></td><td><input type="time" data-from aria-label="Mittwoch öffnet"></td><td><input type="time" data-to aria-label="Mittwoch schließt"></td></tr>
+            <tr data-row-day="4"><th>Donnerstag</th><td><input type="checkbox" data-closed aria-label="Donnerstag geschlossen"></td><td><input type="time" data-from aria-label="Donnerstag öffnet"></td><td><input type="time" data-to aria-label="Donnerstag schließt"></td></tr>
+            <tr data-row-day="5"><th>Freitag</th><td><input type="checkbox" data-closed aria-label="Freitag geschlossen"></td><td><input type="time" data-from aria-label="Freitag öffnet"></td><td><input type="time" data-to aria-label="Freitag schließt"></td></tr>
+            <tr data-row-day="6"><th>Samstag</th><td><input type="checkbox" data-closed aria-label="Samstag geschlossen"></td><td><input type="time" data-from aria-label="Samstag öffnet"></td><td><input type="time" data-to aria-label="Samstag schließt"></td></tr>
+            <tr data-row-day="0"><th>Sonntag</th><td><input type="checkbox" data-closed aria-label="Sonntag geschlossen"></td><td><input type="time" data-from aria-label="Sonntag öffnet"></td><td><input type="time" data-to aria-label="Sonntag schließt"></td></tr>
+          </tbody>
+        </table>
+        <div data-hours-status></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;">
+          <button class="btn btn--primary" type="submit">Speichern</button>
+          <button class="btn btn--ghost" type="button" data-hours-reset>Standard wiederherstellen</button>
+        </div>
+      </form>
     </section>
 
     <section class="admin-overview" style="margin-top:18px;" data-panel="contact">
       <button class="admin-panel__back" type="button" data-back-overview>← Zurück zur Übersicht</button>
-      <h2 class="admin-overview__title">Kontakt &amp; Standort</h2>
-      <p style="color:var(--muted);">Adresse, Telefon und E-Mail – Etappe 4. Speichert in <code>content</code> unter ID <code>contact</code>.</p>
+      <div class="admin-overview__head" style="margin-bottom:14px;">
+        <div>
+          <h2 class="admin-overview__title">Kontakt &amp; Standort</h2>
+          <p style="font-size:0.9rem;color:var(--muted);margin:4px 0 0;">Single-Source-of-Truth für Adresse, Telefon und E-Mail. Daten werden gespeichert; das automatische Nachziehen auf den öffentlichen Seiten kommt in einem späteren Update.</p>
+        </div>
+      </div>
+
+      <form data-contact-form novalidate style="max-width:680px;">
+        <div class="field-row">
+          <div class="field">
+            <label for="ct-street">Straße + Hausnummer</label>
+            <input id="ct-street" name="street" type="text" value="Ifflandstraße 71" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="ct-city">PLZ + Stadt</label>
+            <input id="ct-city" name="city" type="text" value="22087 Hamburg" autocomplete="off">
+          </div>
+        </div>
+        <div class="field">
+          <label for="ct-district">Stadtteil <small class="field-hint">(z. B. Hamburg-Hohenfelde)</small></label>
+          <input id="ct-district" name="district" type="text" value="Hamburg-Hohenfelde" autocomplete="off">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="ct-phone">Telefon (Anzeige)</label>
+            <input id="ct-phone" name="phone" type="text" value="+49 40 225536" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="ct-phoneRaw">Telefon (tel:-Link) <small class="field-hint">nur Ziffern + führendes „+"</small></label>
+            <input id="ct-phoneRaw" name="phoneRaw" type="tel" value="+4940225536" autocomplete="off" pattern="\+?[0-9]+">
+          </div>
+        </div>
+        <div class="field">
+          <label for="ct-email">E-Mail (optional)</label>
+          <input id="ct-email" name="email" type="email" placeholder="info@walker-kfz.de" autocomplete="off">
+        </div>
+        <div data-contact-status></div>
+        <button class="btn btn--primary" type="submit" style="margin-top:8px;">Speichern</button>
+      </form>
     </section>
 
   </section>
 
 </main>
 
-<script src="config.js?v=2026-05-15-r2" defer></script>
-<script src="db.js?v=2026-05-15-r2" defer></script>
-<script src="script.js?v=2026-05-15-r2" defer></script>
-<script src="admin.js?v=2026-05-15-r2" defer></script>
+<script src="config.js?v=2026-06-10-r3" defer></script>
+<script src="db.js?v=2026-06-10-r3" defer></script>
+<script src="script.js?v=2026-06-10-r3" defer></script>
+<script src="admin.js?v=2026-06-10-r3" defer></script>
 </body>
 </html>
