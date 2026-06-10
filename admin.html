@@ -165,7 +165,6 @@ html,body{margin:0;background:var(--silver);color:var(--anthracite);font-family:
         </div>
         <button type="submit" class="btn btn--blue">Speichern</button>
       </form>
-      <p style="font-size:0.82rem;color:var(--muted);margin-top:8px;">PIN-Schutz (optional): in der Detail-Ansicht je Eintrag setzbar.</p>
 
       <div data-vs-status></div>
 
@@ -193,16 +192,35 @@ html,body{margin:0;background:var(--silver);color:var(--anthracite);font-family:
       <p style="color:var(--muted);">Editor wird in Etappe 4 implementiert. Speichert in Tabelle <code>content</code> unter ID <code>services</code>.</p>
     </section>
 
-    <section class="admin-overview" style="margin-top:18px;" data-panel="requests">
-      <button class="admin-panel__back" type="button" data-back-overview>← Zurück zur Übersicht</button>
-      <h2 class="admin-overview__title">Kundenanfragen</h2>
-      <p style="color:var(--muted);">Liste der Anfragen mit Status, Tel/Mail-Klick und Realtime-Updates – Etappe 4.</p>
-    </section>
-
     <section class="admin-overview" style="margin-top:18px;" data-panel="notice">
       <button class="admin-panel__back" type="button" data-back-overview>← Zurück zur Übersicht</button>
-      <h2 class="admin-overview__title">Hinweisbanner</h2>
-      <p style="color:var(--muted);">Banner-Editor – Etappe 4. Speichert in <code>content</code> unter ID <code>notice</code>.</p>
+      <div class="admin-overview__head" style="margin-bottom:14px;">
+        <div>
+          <h2 class="admin-overview__title">Hinweisbanner</h2>
+          <p style="font-size:0.9rem;color:var(--muted);margin:4px 0 0;">Erscheint oben auf allen öffentlichen Seiten. Für Urlaub, geänderte Zeiten oder kurzfristige Hinweise. Leer lassen + deaktivieren = kein Banner.</p>
+        </div>
+      </div>
+
+      <form data-notice-form novalidate style="max-width:640px;">
+        <div class="field">
+          <label for="notice-text">Banner-Text</label>
+          <input id="notice-text" name="text" type="text" maxlength="180" placeholder="z. B. Betriebsurlaub vom 14.–25. Juli — ab dem 28. sind wir wieder da.">
+        </div>
+        <label class="checkbox-row" style="margin:4px 0 16px;">
+          <input type="checkbox" name="enabled">
+          <span>Banner anzeigen (sichtbar für alle Besucher)</span>
+        </label>
+        <div data-notice-status></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn btn--primary" type="submit">Speichern</button>
+          <button class="btn btn--ghost" type="button" data-notice-clear>Banner löschen</button>
+        </div>
+      </form>
+
+      <div style="margin-top:22px;max-width:640px;">
+        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:8px;">Vorschau:</p>
+        <div class="notice" style="display:block;border:1px solid var(--rule);" data-notice-preview>—</div>
+      </div>
     </section>
 
     <section class="admin-overview" style="margin-top:18px;" data-panel="images">

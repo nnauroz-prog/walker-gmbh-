@@ -104,6 +104,67 @@
         var ov = $('[data-overview]');
         if (ov) ov.style.display = name ? 'none' : '';
         if (name === 'vehicle-status') renderVehicleStatus();
+        if (name === 'notice') loadNotice();
+      }
+
+      // ===== Hinweisbanner-Editor =====
+      var noticeForm = $('[data-notice-form]');
+      var noticeStatusEl = $('[data-notice-status]');
+
+      function setNoticeStatus(type, msg){
+        if (!noticeStatusEl) return;
+        noticeStatusEl.innerHTML = msg ? '<div class="alert alert--' + type + '">' + msg + '</div>' : '';
+      }
+
+      function noticePreviewUpdate(){
+        var prev = $('[data-notice-preview]');
+        if (!prev || !noticeForm) return;
+        var text = noticeForm.querySelector('[name="text"]').value.trim();
+        var enabled = noticeForm.querySelector('[name="enabled"]').checked;
+        prev.textContent = text || '—';
+        prev.style.opacity = (enabled && text) ? '1' : '0.45';
+      }
+
+      function loadNotice(){
+        if (!noticeForm) return;
+        window.walkerDb.get('notice').then(function(value){
+          noticeForm.querySelector('[name="text"]').value = (value && value.text) || '';
+          noticeForm.querySelector('[name="enabled"]').checked = !!(value && value.enabled);
+          noticePreviewUpdate();
+        });
+      }
+
+      if (noticeForm) {
+        noticeForm.addEventListener('input', noticePreviewUpdate);
+
+        noticeForm.addEventListener('submit', function(e){
+          e.preventDefault();
+          var text = noticeForm.querySelector('[name="text"]').value.trim();
+          var enabled = noticeForm.querySelector('[name="enabled"]').checked;
+          if (enabled && !text) {
+            setNoticeStatus('error', 'Banner-Text fehlt. Entweder Text eintragen oder Haken entfernen.');
+            return;
+          }
+          window.walkerDb.set('notice', { enabled: enabled, text: text }).then(function(res){
+            if (res && res.ok === false) {
+              setNoticeStatus('error', 'Speichern fehlgeschlagen: ' + ((res.error && res.error.message) || 'unbekannter Fehler'));
+            } else {
+              setNoticeStatus('success', enabled ? 'Gespeichert. Banner ist jetzt auf allen Seiten sichtbar.' : 'Gespeichert. Banner ist ausgeblendet.');
+              setTimeout(function(){ setNoticeStatus('', ''); }, 2500);
+            }
+          });
+        });
+
+        var noticeClearBtn = $('[data-notice-clear]');
+        if (noticeClearBtn) noticeClearBtn.addEventListener('click', function(){
+          noticeForm.querySelector('[name="text"]').value = '';
+          noticeForm.querySelector('[name="enabled"]').checked = false;
+          window.walkerDb.set('notice', { enabled: false, text: '' }).then(function(){
+            noticePreviewUpdate();
+            setNoticeStatus('success', 'Banner gelöscht.');
+            setTimeout(function(){ setNoticeStatus('', ''); }, 2500);
+          });
+        });
       }
 
       // ===== Vehicle Status Editor =====
