@@ -208,36 +208,91 @@ viele Fahrzeuge gerade „Abholbereit" sind.
 
 ## Admin-Editoren — aktueller Stand
 
-| Editor | Status | Wo |
+| Editor | Status | content-Key |
 |---|---|---|
-| Auftragsstatus „Mein Fahrzeug" | ✅ live | Karte 1 im Admin |
-| Hinweisbanner | ✅ live (Etappe 4a) | Karte „Hinweisbanner aktivieren" |
-| Öffnungszeiten | ✅ live (Etappe 4b) | Karte „Öffnungszeiten ändern" |
-| Kontakt & Standort | ✅ Editor (Etappe 4c, Live-Binding folgt) | Karte „Kontakt & Standort" |
-| Leistungen | ⏳ folgt | Karte „Leistungen bearbeiten" |
-| Bilder | ⏳ folgt | Karte „Bilder hochladen" |
+| Auftragsstatus „Mein Fahrzeug" | ✅ live | (eigene Tabelle `vehicle_status`) |
+| Hinweisbanner | ✅ live (Etappe 4a) | `notice` |
+| Öffnungszeiten | ✅ live + Live-Binding (Etappe 4b) | `hours` |
+| Kontakt & Standort | ✅ live + Live-Binding (Etappe 4c + Folge-PR) | `contact` |
+| Leistungen | ✅ live + Live-Binding (Etappe 4d) | `services` |
+| Bilder | ⏳ folgt (braucht Supabase Storage Bucket `images`) | (Storage) |
 
-**Öffnungszeiten** sind voll integriert: Werte werden in `content.hours` gespeichert, beim
-nächsten Seitenaufruf rendert `script.js` alle `[data-hours]`-Tabellen aus den Owner-Werten,
-und der „Aktuell geöffnet/geschlossen"-Hinweis nutzt automatisch die neuen Zeiten. Schema:
+### content.hours
 
 ```json
 { "days": [
   { "key": 1, "closed": false, "from": "07:30", "to": "18:30" },
   …
-  { "key": 0, "closed": true, "from": "", "to": "" }
+  { "key": 0, "closed": true,  "from": "",      "to": "" }
 ] }
 ```
 `key` ist `Date#getDay()`-Wert: 0=Sonntag, 1=Montag, …, 6=Samstag.
 
-**Kontakt & Standort** speichert die Felder `street`, `city`, `district`, `phone`, `phoneRaw`,
-`email` in `content.contact`. Die Anzeige in HTML ist aktuell hartkodiert; das automatische
-Nachziehen über `data-bind`-Marker folgt, sobald die Texte gefroren sind.
+### content.contact
 
-## Nächste Etappen (folgen)
+```json
+{
+  "street":   "Ifflandstraße 71",
+  "city":     "22087 Hamburg",
+  "district": "Hamburg-Hohenfelde",
+  "phone":    "+49 40 225536",
+  "phoneRaw": "+4940225536",
+  "email":    "info@walker-kfz.de"
+}
+```
 
-- **Etappe 2** – Vollständige Inhalte aller öffentlichen Seiten.
-- **Etappe 3** – Termin-Formular live an Supabase angeschlossen.
-- **Etappe 4** – Admin-Editoren (Leistungen, Anfragen, Banner, Bilder,
-  Öffnungszeiten, Kontakt) inkl. Realtime.
-- **Etappe 5** – SEO-Politur, Lighthouse-Check, finale Übergabe.
+Live-Binding (`script.js#applyCustomContactIfAny`):
+- Alle `<a href^="tel:">` → `href` aus `phoneRaw` (automatisch, kein Marker nötig)
+- Alle `<a href^="mailto:">` analog
+- `[data-bind="phone|email|street|city|district"]` → `textContent`
+
+### content.services
+
+```json
+{ "items": [
+  { "id": "diagnose",   "title": "…", "body": "…" },
+  { "id": "wartung",    "title": "…", "body": "…" },
+  { "id": "oel",        "title": "…", "body": "…" },
+  { "id": "bremsen",    "title": "…", "body": "…" },
+  { "id": "elektronik", "title": "…", "body": "…" },
+  { "id": "klima",      "title": "…", "body": "…" },
+  { "id": "reparatur",  "title": "…", "body": "…" },
+  { "id": "teile",      "title": "…", "body": "…" }
+] }
+```
+
+- Reihenfolge + IDs sind fix (`mergeServices()` korrigiert versehentliche Umsortierung)
+- Title: `textContent`, Body: `innerHTML` (Links erlaubt — Admin-only Auth)
+- Live-Binding nur auf `leistungen.html` aktiv (kein-op auf anderen Seiten)
+
+### content.notice
+
+```json
+{ "enabled": true, "text": "Betriebsurlaub vom 14.–25. Juli — ab dem 28. sind wir wieder da." }
+```
+
+## SEO-Stand
+
+- `BreadcrumbList` JSON-LD auf allen 8 Subseiten
+- `AutoRepair` JSON-LD auf Index (mit `aggregateRating`, `openingHoursSpecification`)
+- `og:image` zeigt auf `foto-diagnose.jpg` (1200×800)
+- `<link rel="preload" as="image" fetchpriority="high">` auf Hero (LCP)
+- Sitemap mit `<lastmod>` aktuell, robots.txt mit korrekten Disallows
+
+## Deployment
+
+- **Production**: `.github/workflows/pages.yml` deployt automatisch bei
+  jedem Push auf `main`. Trigger: `Settings → Pages → Source: GitHub Actions`.
+- Cache-Buster `2026-06-10-r3` synchron in allen Files; bei nächstem
+  Release: APP_VERSION in `config.js` + `V=` in den Microscripts hochzählen.
+
+## Nächste Etappen (folgen, optional)
+
+- **Etappe 4e** — Bilder-Upload (Logo, Hero, Werkstatt-Fotos) via Supabase
+  Storage Bucket `images`. Braucht aktive Supabase-Konfig.
+- **Lighthouse-Lauf in Production** — sobald `walker-kfz.de` live ist,
+  Werte messen, Detail-Optimierungen ergänzen.
+- **Performance**: WebP-/AVIF-Konvertierung der drei Werkstatt-Fotos
+  (manueller Schritt, spart ~60 % Image-Payload).
+- **Eigene Domain anbinden** — `walker-kfz.de` per CNAME auf
+  `nnauroz-prog.github.io` zeigen lassen, Pages → Custom domain eintragen.
