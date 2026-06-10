@@ -69,18 +69,42 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
     "addressLocality": "Hamburg",
     "addressCountry": "DE"
   },
-  "areaServed": "Hamburg",
+  "areaServed": { "@type": "City", "name": "Hamburg" },
   "priceRange": "€€",
-  "knowsAbout": ["Mercedes-Benz", "Kfz-Diagnose", "Inspektion", "Wartung", "Reparatur", "Klimaservice", "Elektronik"],
+  "knowsAbout": ["Mercedes-Benz", "Kfz-Diagnose", "Inspektion", "Wartung", "Reparatur", "Klimaservice", "Elektronik", "AMG", "EQ", "V-Klasse"],
   "openingHoursSpecification": [
     { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"], "opens": "07:30", "closes": "18:30" },
     { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "07:00", "closes": "12:00" }
   ],
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+49 40 225536",
+      "contactType": "Werkstatt",
+      "areaServed": "DE",
+      "availableLanguage": ["de"]
+    }
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Werkstatt-Leistungen",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Diagnose & Fehleranalyse",  "url": "https://walker-kfz.de/leistungen.html#diagnose" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Inspektion & Wartung",      "url": "https://walker-kfz.de/leistungen.html#wartung" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ölservice & Filterwechsel", "url": "https://walker-kfz.de/leistungen.html#oel" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Bremsen & Fahrwerk",        "url": "https://walker-kfz.de/leistungen.html#bremsen" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Elektronik & Steuergeräte", "url": "https://walker-kfz.de/leistungen.html#elektronik" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Klimaservice",              "url": "https://walker-kfz.de/leistungen.html#klima" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Reparatur & Instandsetzung","url": "https://walker-kfz.de/leistungen.html#reparatur" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mercedes-Benz Ersatzteile", "url": "https://walker-kfz.de/teilepartner.html" } }
+    ]
+  },
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "4.3",
     "reviewCount": "142",
-    "bestRating": "5"
+    "bestRating": "5",
+    "worstRating": "1"
   }
 }
 </script>
