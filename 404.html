@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <script>
 (function(){
-  var V='2026-06-10-r3';
+  var V='2026-06-10-r4';
   try{
     if(localStorage.getItem('app-version')!==V){
       localStorage.removeItem('app-content');
@@ -20,6 +20,9 @@
 <meta name="theme-color" content="#0A0A0B">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="color-scheme" content="light">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://*.supabase.co wss://*.supabase.co; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Inter+Tight:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -28,7 +31,7 @@
 *,*::before,*::after{box-sizing:border-box}
 html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
 </style>
-<link rel="stylesheet" href="styles.css?v=2026-06-10-r3">
+<link rel="stylesheet" href="styles.css?v=2026-06-10-r4">
 </head>
 <body>
 <a class="skip-link" href="#main">Zum Inhalt springen</a>
@@ -49,11 +52,20 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
     <div>
       <p class="error-page__num">404</p>
       <h1 style="font-size:clamp(1.8rem, 3vw + 0.6rem, 2.4rem);">Hier steht kein Auto.</h1>
-      <p class="lead" style="margin:14px auto;max-width:48ch;">Die Seite gibt es nicht — entweder ist sie umgezogen oder der Link hat einen Tippfehler. Bei akuten Anliegen einfach durchklingeln: <a href="tel:+4940225536" style="color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:3px;">040 225536</a>.</p>
+      <p class="lead" style="margin:14px auto;max-width:48ch;">Die Seite gibt es nicht — entweder ist sie umgezogen oder der Link hat einen Tippfehler. Bei akuten Anliegen einfach durchklingeln: <a href="tel:+4940225536" style="color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:3px;"><span data-bind="phone">040 225536</span></a>.</p>
       <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px;">
         <a class="btn btn--primary" href="index.html">Zur Startseite</a>
         <a class="btn btn--ghost" href="kontakt.html">Adresse &amp; Anfahrt</a>
       </div>
+      <nav aria-label="Häufig gesuchte Seiten" style="margin-top:36px;padding-top:24px;border-top:1px solid var(--rule);">
+        <p style="font-size:0.78rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin:0 0 14px;">Vielleicht suchen Sie</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:0.96rem;">
+          <li><a href="mein-fahrzeug.html" style="color:var(--ink);text-decoration:underline;text-underline-offset:3px;">Status Ihres Autos</a></li>
+          <li><a href="leistungen.html" style="color:var(--ink);text-decoration:underline;text-underline-offset:3px;">Was wir machen</a></li>
+          <li><a href="mercedes-spezialist.html" style="color:var(--ink);text-decoration:underline;text-underline-offset:3px;">Mercedes-Benz Spezialist</a></li>
+          <li><a href="ueber-uns.html" style="color:var(--ink);text-decoration:underline;text-underline-offset:3px;">Werkstatt in der Ifflandstraße</a></li>
+        </ul>
+      </nav>
     </div>
   </div>
 </main>
@@ -67,6 +79,6 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
   </div>
 </footer>
 
-<script src="script.js?v=2026-06-10-r3" defer></script>
+<script src="script.js?v=2026-06-10-r4" defer></script>
 </body>
 </html>

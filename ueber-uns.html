@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <script>
 (function(){
-  var V='2026-06-10-r3';
+  var V='2026-06-10-r4';
   try{
     if(localStorage.getItem('app-version')!==V){
       localStorage.removeItem('app-content');
@@ -36,6 +36,9 @@
 <meta name="theme-color" content="#0A0A0B">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="color-scheme" content="light">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://*.supabase.co wss://*.supabase.co; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Inter+Tight:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -47,7 +50,7 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
 .splash.hide{opacity:0;pointer-events:none}
 .splash__mark{width:56px;height:56px;border-radius:14px;background:var(--navy);display:inline-flex;align-items:center;justify-content:center;color:var(--white);font-family:Georgia,serif;font-weight:700;font-size:1.6rem}
 </style>
-<link rel="stylesheet" href="styles.css?v=2026-06-10-r3">
+<link rel="stylesheet" href="styles.css?v=2026-06-10-r4">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -258,8 +261,8 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
   </div>
 </div>
 
-<script src="config.js?v=2026-06-10-r3" defer></script>
-<script src="db.js?v=2026-06-10-r3" defer></script>
-<script src="script.js?v=2026-06-10-r3" defer></script>
+<script src="config.js?v=2026-06-10-r4" defer></script>
+<script src="db.js?v=2026-06-10-r4" defer></script>
+<script src="script.js?v=2026-06-10-r4" defer></script>
 </body>
 </html>
