@@ -494,6 +494,46 @@ h1, h2, h3, .hero__title {
   .status-skeleton__meta { animation: none; }
 }
 
+/* ---- Status-Lookup Empty-State (Kennzeichen nicht gefunden) ---- */
+.status-empty {
+  max-width: 540px;
+  margin: 18px auto 0;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: clamp(24px, 3.5vw, 36px);
+  box-shadow: var(--shadow-sm);
+}
+.status-empty__plate {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule);
+}
+.status-empty__head {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--ink);
+  margin: 0 0 12px;
+}
+.status-empty__body {
+  font-size: 0.96rem;
+  color: var(--muted);
+  margin: 0 0 12px;
+  line-height: 1.55;
+}
+.status-empty__cta {
+  margin-top: 18px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
 /* ---- Footer MB-Anthrazit (klar, ruhig, premium) ---- */
 .footer--brand {
   position: relative;

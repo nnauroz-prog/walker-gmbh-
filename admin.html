@@ -259,6 +259,12 @@ html,body{margin:0;background:var(--silver);color:var(--anthracite);font-family:
         </div>
       </div>
 
+      <div class="hours-preview" data-hours-preview-wrap style="margin-bottom:18px;padding:14px 16px;background:var(--bg-soft);border-radius:var(--radius-sm);font-size:0.92rem;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <span style="font-weight:600;color:var(--ink);">Mit Ihren Eingaben wäre jetzt</span>
+        <span data-hours-preview-status>—</span>
+        <span data-hours-preview-detail style="color:var(--muted);font-size:0.86rem;"></span>
+      </div>
+
       <form data-hours-form novalidate>
         <table class="hours-edit">
           <thead>
@@ -328,6 +334,14 @@ html,body{margin:0;background:var(--silver);color:var(--anthracite);font-family:
         <div data-contact-status></div>
         <button class="btn btn--primary" type="submit" style="margin-top:8px;">Speichern</button>
       </form>
+
+      <div style="margin-top:32px;padding-top:24px;border-top:1px solid var(--rule);max-width:680px;">
+        <p style="font-size:0.78rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin:0 0 14px;">So sieht die Topbar mit Ihren Eingaben aus</p>
+        <div class="contact-preview" data-contact-preview style="background:var(--bg-dark);color:rgba(255,255,255,0.78);padding:10px 16px;border-radius:var(--radius-sm);font-size:0.84rem;display:flex;gap:24px;flex-wrap:wrap;align-items:center;">
+          <span data-cp-phone style="display:inline-flex;align-items:center;gap:8px;color:#fff;">📞 +49 40 225536</span>
+          <span data-cp-address style="display:inline-flex;align-items:center;gap:8px;">📍 Ifflandstraße 71, Hamburg-Hohenfelde</span>
+        </div>
+      </div>
     </section>
 
   </section>
