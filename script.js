@@ -210,6 +210,36 @@
 
   safeRun(function(){ applyCustomContactIfAny(); });
 
+  // ---------- Services: owner data overrides static markup on leistungen.html ----------
+  // Each card has data-service-id on the <article>, and its first
+  // [data-service-title] / [data-service-body] children get updated.
+  // Title via textContent (no HTML), body via innerHTML (Owner-only admin, links allowed).
+  function applyCustomServicesIfAny() {
+    if (!window.walkerDb || !window.walkerDb.get) return Promise.resolve();
+    var cards = document.querySelectorAll('[data-service-id]');
+    if (!cards.length) return Promise.resolve();
+    return window.walkerDb.get('services').then(function(data){
+      if (!data || !Array.isArray(data.items)) return;
+      var byId = {};
+      data.items.forEach(function(it){ if (it && it.id) byId[it.id] = it; });
+      cards.forEach(function(card){
+        var id = card.getAttribute('data-service-id');
+        var it = byId[id];
+        if (!it) return;
+        if (it.title) {
+          var tEl = card.querySelector('[data-service-title]');
+          if (tEl) tEl.textContent = it.title;
+        }
+        if (it.body) {
+          var bEl = card.querySelector('[data-service-body]');
+          if (bEl) bEl.innerHTML = it.body;
+        }
+      });
+    }).catch(function(){});
+  }
+
+  safeRun(function(){ applyCustomServicesIfAny(); });
+
   safeRun(function(){
     var nodes = document.querySelectorAll('[data-live-status]');
     if (!nodes.length) {

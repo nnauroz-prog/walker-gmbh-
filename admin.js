@@ -107,6 +107,7 @@
         if (name === 'notice') loadNotice();
         if (name === 'hours') loadHours();
         if (name === 'contact') loadContact();
+        if (name === 'services') loadServices();
       }
 
       // ===== Hinweisbanner-Editor =====
@@ -305,6 +306,127 @@
               setTimeout(function(){ setContactStatus('', ''); }, 3000);
             }
           });
+        });
+      }
+
+      // ===== Leistungen-Editor (Etappe 4d) =====
+      var DEFAULT_SERVICES = {
+        items: [
+          { id: 'diagnose',   title: 'Diagnose & Fehleranalyse',     body: 'Fehlerspeicher auslesen, Sichtprüfung, kurze Probefahrt. Etwa eine Stunde, dann wissen wir, was los ist — und Sie hören, was es kosten würde, bevor wir anfangen.' },
+          { id: 'wartung',    title: 'Inspektion & Wartung',         body: 'Service A oder B nach Vorgabe, Eintrag im Heft, Sichtprüfung der Sicherheits-Komponenten. Wenn beim Aufbocken noch etwas auffällt, rufen wir Sie an — wir machen es nicht einfach mit.' },
+          { id: 'oel',        title: 'Ölservice & Filterwechsel',    body: 'Motoröl nach Mercedes-Vorgabe, Ölfilter, Luftfilter, Innenraumfilter. Service-Intervall im Bordcomputer zurückgesetzt — sonst piept das Auto in zwei Wochen wieder.' },
+          { id: 'bremsen',    title: 'Bremsen & Fahrwerk',           body: 'Bremsbeläge, Bremsscheiben, Bremsflüssigkeit alle zwei Jahre, Stoßdämpfer und Spurstangen wenn fällig. Wir tauschen sicherheitsrelevante Teile nicht prophylaktisch — nur, wenn sie es brauchen.' },
+          { id: 'elektronik', title: 'Elektronik & Steuergeräte',    body: 'Sensorik, Steuergeräte, Komfort-Elektronik, Assistenzsysteme. Codierung nach dem Tausch, damit das Auto nicht in einer Endlosschleife meldet, was wir gerade repariert haben.' },
+          { id: 'klima',      title: 'Klimaservice',                 body: 'Kältemittel kontrollieren, Dichtheit prüfen, Innenraumfilter wechseln. Sinnvoll einmal pro Jahr, am besten vor dem ersten warmen Tag — sonst sitzt man im Stau und schwitzt.' },
+          { id: 'reparatur',  title: 'Reparatur & Instandsetzung',   body: 'Motorlauf, Kühlsystem, Riemen, Undichtigkeiten — die größeren Brocken. Diagnose kommt zuerst, Kostenrahmen kommt vor der Reparatur, Sie geben frei.' },
+          { id: 'teile',      title: 'Mercedes-Benz Ersatzteile',    body: 'Als offizieller Teilepartner haben wir die meisten Komponenten in 24–48 Stunden hier. Alternativ-Teile setzen wir nur auf Ihre Freigabe ein. <a href="teilepartner.html" style="color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:3px;">Was der Status bedeutet</a>.' }
+        ]
+      };
+
+      var servicesForm = $('[data-services-form]');
+      var servicesListEl = $('[data-services-list]');
+      var servicesStatusEl = $('[data-services-status]');
+
+      function setServicesStatus(type, msg){
+        if (!servicesStatusEl) return;
+        servicesStatusEl.innerHTML = msg ? '<div class="alert alert--' + type + '">' + msg + '</div>' : '';
+      }
+
+      function escAttr(s){
+        return String(s == null ? '' : s)
+          .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+      }
+
+      function renderServicesEditor(items){
+        if (!servicesListEl) return;
+        var html = '';
+        items.forEach(function(it, idx){
+          html += ''
+            + '<div class="services-edit__row" data-srv-row="' + escAttr(it.id) + '">'
+            +   '<div class="services-edit__head">'
+            +     '<span class="services-edit__num">' + String(idx + 1).padStart(2, '0') + '</span>'
+            +     '<span class="services-edit__id">#' + escAttr(it.id) + '</span>'
+            +   '</div>'
+            +   '<div class="field" style="margin-bottom:10px;">'
+            +     '<label>Titel</label>'
+            +     '<input type="text" data-srv-title value="' + escAttr(it.title) + '">'
+            +   '</div>'
+            +   '<div class="field" style="margin-bottom:0;">'
+            +     '<label>Beschreibung <small class="field-hint">HTML erlaubt für Links, max. 4 Sätze</small></label>'
+            +     '<textarea data-srv-body rows="3">' + escAttr(it.body) + '</textarea>'
+            +   '</div>'
+            + '</div>';
+        });
+        servicesListEl.innerHTML = html;
+      }
+
+      function readServicesFromForm(){
+        if (!servicesListEl) return null;
+        var items = [];
+        $$('[data-srv-row]', servicesListEl).forEach(function(row){
+          items.push({
+            id: row.getAttribute('data-srv-row'),
+            title: row.querySelector('[data-srv-title]').value.trim(),
+            body: row.querySelector('[data-srv-body]').value.trim()
+          });
+        });
+        return { items: items };
+      }
+
+      function mergeServices(stored){
+        // Use default order/ids; merge in any stored values per id.
+        if (!stored || !Array.isArray(stored.items)) return DEFAULT_SERVICES;
+        var byId = {};
+        stored.items.forEach(function(it){ if (it && it.id) byId[it.id] = it; });
+        return {
+          items: DEFAULT_SERVICES.items.map(function(def){
+            var match = byId[def.id];
+            return {
+              id: def.id,
+              title: (match && match.title) ? match.title : def.title,
+              body:  (match && match.body)  ? match.body  : def.body
+            };
+          })
+        };
+      }
+
+      function loadServices(){
+        if (!servicesForm) return;
+        window.walkerDb.get('services').then(function(value){
+          renderServicesEditor(mergeServices(value).items);
+          setServicesStatus('', '');
+        });
+      }
+
+      if (servicesForm) {
+        servicesForm.addEventListener('submit', function(e){
+          e.preventDefault();
+          var data = readServicesFromForm();
+          if (!data || !data.items.length) return;
+          // Validate non-empty titles
+          for (var i = 0; i < data.items.length; i++) {
+            var it = data.items[i];
+            if (!it.title) {
+              setServicesStatus('error', 'Karte ' + (i+1) + ' (#' + it.id + '): Titel darf nicht leer sein.');
+              return;
+            }
+          }
+          window.walkerDb.set('services', data).then(function(res){
+            if (res && res.ok === false) {
+              setServicesStatus('error', 'Speichern fehlgeschlagen: ' + ((res.error && res.error.message) || 'unbekannter Fehler'));
+            } else {
+              setServicesStatus('success', 'Gespeichert. Auf leistungen.html werden die neuen Texte beim nächsten Aufruf gezeigt.');
+              setTimeout(function(){ setServicesStatus('', ''); }, 3500);
+            }
+          });
+        });
+
+        var servicesResetBtn = $('[data-services-reset]');
+        if (servicesResetBtn) servicesResetBtn.addEventListener('click', function(){
+          if (!window.confirm('Standard-Texte aller acht Karten in das Formular laden? Erst durch „Speichern" werden sie übernommen.')) return;
+          renderServicesEditor(DEFAULT_SERVICES.items);
+          setServicesStatus('info', 'Standardtexte eingetragen. Klicken Sie „Speichern", um sie zu übernehmen.');
         });
       }
 

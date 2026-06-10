@@ -188,8 +188,21 @@ html,body{margin:0;background:var(--silver);color:var(--anthracite);font-family:
     <!-- ===== LEISTUNGEN ===== -->
     <section class="admin-overview" style="margin-top:18px;" data-panel="services">
       <button class="admin-panel__back" type="button" data-back-overview>← Zurück zur Übersicht</button>
-      <h2 class="admin-overview__title">Leistungen bearbeiten</h2>
-      <p style="color:var(--muted);">Editor wird in Etappe 4 implementiert. Speichert in Tabelle <code>content</code> unter ID <code>services</code>.</p>
+      <div class="admin-overview__head" style="margin-bottom:14px;">
+        <div>
+          <h2 class="admin-overview__title">Leistungen bearbeiten</h2>
+          <p style="font-size:0.9rem;color:var(--muted);margin:4px 0 0;">Texte der acht Leistungs-Karten auf <code>leistungen.html</code>. Reihenfolge und Icons sind fix. Wenn Sie hier nichts speichern, bleiben die ursprünglichen Texte aktiv.</p>
+        </div>
+      </div>
+
+      <form data-services-form novalidate>
+        <div data-services-list></div>
+        <div data-services-status></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;">
+          <button class="btn btn--primary" type="submit">Speichern</button>
+          <button class="btn btn--ghost" type="button" data-services-reset>Standard wiederherstellen</button>
+        </div>
+      </form>
     </section>
 
     <section class="admin-overview" style="margin-top:18px;" data-panel="notice">
