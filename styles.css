@@ -1291,6 +1291,54 @@ h1, h2, h3, .hero__title {
   .hours-edit tbody th { min-width: 0; }
 }
 
+/* ---------- Admin: Leistungen-Editor (Etappe 4d) ---------- */
+.services-edit__row {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  margin-bottom: 12px;
+  background: var(--white);
+}
+.services-edit__head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule);
+}
+.services-edit__num {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--ink);
+  font-feature-settings: 'tnum' 1;
+}
+.services-edit__id {
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.services-edit__row textarea {
+  font: inherit;
+  font-size: 0.94rem;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--ink);
+  width: 100%;
+  min-height: 80px;
+  resize: vertical;
+  line-height: 1.5;
+}
+.services-edit__row textarea:focus,
+.services-edit__row input[type="text"]:focus {
+  border-color: var(--ink);
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(10,10,11,0.08);
+}
+
 /* ---------- Termin-Anfragen Form ---------- */
 .termin-wrap {
   display: grid;
