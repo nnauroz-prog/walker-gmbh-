@@ -281,10 +281,18 @@ Live-Binding (`script.js#applyCustomContactIfAny`):
 
 ## Deployment
 
-- **Production**: `.github/workflows/pages.yml` deployt automatisch bei
-  jedem Push auf `main`. Trigger: `Settings → Pages → Source: GitHub Actions`.
-- Cache-Buster `2026-06-10-r3` synchron in allen Files; bei nächstem
-  Release: APP_VERSION in `config.js` + `V=` in den Microscripts hochzählen.
+- **Aktuell aktiv**: Der von GitHub bereitgestellte Workflow
+  `pages build and deployment` deployt bei jedem Push automatisch.
+  Source-Setting: `Settings → Pages → Source: Deploy from a branch`.
+- **Eigener Workflow `pages.yml`**: liegt im Repo als Vorlage, ist aber
+  via `workflow_dispatch only` (manueller Trigger) konfiguriert.
+  Hintergrund: zwei parallele Deploys auf Pages lösen `HTTP 400 — in
+  progress deployment` aus. Wer den eigenen Workflow als alleinige
+  Quelle nutzen will: Settings auf `GitHub Actions` umstellen und in
+  `pages.yml` den `push`-Trigger einkommentieren.
+- **Cache-Buster** `2026-06-10-r3` synchron in allen Files; bei
+  nächstem Release: `APP_VERSION` in `config.js` + `V=` in den
+  Microscripts der HTML-Seiten hochzählen.
 
 ## Nächste Etappen (folgen, optional)
 
