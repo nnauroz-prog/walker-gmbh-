@@ -349,7 +349,17 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
           return;
         }
         if (!res.found) {
-          setStatus('info', 'Zu diesem Kennzeichen liegt aktuell kein Auftrag vor. Falls Ihr Fahrzeug heute angenommen wurde, kann es einen Moment dauern, bis der Status erscheint. Bei Fragen: <a href="tel:+4940225536" style="color:var(--navy);font-weight:600;"><span data-bind="phone">+49 40 225536</span></a>.');
+          resultEl.innerHTML =
+            '<div class="status-empty" role="status">' +
+              '<div class="status-empty__plate">' + plate.toUpperCase().replace(/[<>&"]/g, '') + '</div>' +
+              '<p class="status-empty__head">Kein Auftrag unter diesem Kennzeichen.</p>' +
+              '<p class="status-empty__body">Wenn Sie heute frisch dagewesen sind, kann es ein paar Minuten dauern, bis der Status erscheint — wir tragen ihn von der Werkstatt aus ein.</p>' +
+              '<p class="status-empty__body">Falls etwas nicht passt: einfach kurz durchklingeln.</p>' +
+              '<div class="status-empty__cta">' +
+                '<a class="btn btn--primary" href="tel:+4940225536"><span data-bind="phone">+49 40 225536</span></a>' +
+                '<a class="btn btn--ghost" href="kontakt.html">Adresse &amp; Anfahrt</a>' +
+              '</div>' +
+            '</div>';
           return;
         }
         renderResult(plate.toUpperCase(), res.data);

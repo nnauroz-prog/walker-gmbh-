@@ -222,10 +222,45 @@
           var data = (value && Array.isArray(value.days) && value.days.length === 7) ? value : DEFAULT_HOURS;
           applyHoursValuesToForm(data.days);
           setHoursStatus('', '');
+          renderHoursPreview();
         });
       }
 
+      function renderHoursPreview(){
+        var statusEl = $('[data-hours-preview-status]');
+        var detailEl = $('[data-hours-preview-detail]');
+        if (!statusEl || !hoursForm) return;
+        var data = readHoursFromForm();
+        if (!data || !data.days) return;
+        var now = new Date();
+        var wd = now.getDay();
+        var nowMin = now.getHours() * 60 + now.getMinutes();
+        var today = null;
+        for (var i = 0; i < data.days.length; i++) {
+          if (Number(data.days[i].key) === wd) { today = data.days[i]; break; }
+        }
+        if (!today || today.closed || !today.from || !today.to) {
+          statusEl.innerHTML = '<span style="color:var(--muted);font-weight:600;">⚫ geschlossen</span>';
+          if (detailEl) detailEl.textContent = '(Heute: ' + DAY_LABELS[wd] + ')';
+          return;
+        }
+        var fp = today.from.split(':'), tp = today.to.split(':');
+        var fromMin = parseInt(fp[0],10)*60 + parseInt(fp[1],10);
+        var toMin = parseInt(tp[0],10)*60 + parseInt(tp[1],10);
+        var open = nowMin >= fromMin && nowMin < toMin;
+        if (open) {
+          statusEl.innerHTML = '<span style="color:#047857;font-weight:600;">🟢 geöffnet</span>';
+          if (detailEl) detailEl.textContent = '(Heute ' + DAY_LABELS[wd] + ', bis ' + today.to + ')';
+        } else {
+          statusEl.innerHTML = '<span style="color:var(--muted);font-weight:600;">⚫ geschlossen</span>';
+          if (detailEl) detailEl.textContent = '(Heute ' + DAY_LABELS[wd] + ', ' + today.from + '–' + today.to + ')';
+        }
+      }
+
       if (hoursForm) {
+        hoursForm.addEventListener('input', renderHoursPreview);
+        hoursForm.addEventListener('change', renderHoursPreview);
+
         hoursForm.addEventListener('submit', function(e){
           e.preventDefault();
           var data = readHoursFromForm();
@@ -256,6 +291,7 @@
         if (hoursResetBtn) hoursResetBtn.addEventListener('click', function(){
           if (!window.confirm('Standard-Öffnungszeiten (Mo–Do 07:30–18:30, Fr 07:00–12:00, Sa/So geschlossen) wiederherstellen? Noch nicht gespeichert — Sie müssen anschließend auf „Speichern" klicken.')) return;
           applyHoursValuesToForm(DEFAULT_HOURS.days);
+          renderHoursPreview();
           setHoursStatus('info', 'Standardwerte eingetragen. Klicken Sie auf „Speichern", um sie zu übernehmen.');
         });
       }
@@ -273,16 +309,32 @@
       function loadContact(){
         if (!contactForm) return;
         window.walkerDb.get('contact').then(function(value){
-          if (!value) return;
-          CONTACT_FIELDS.forEach(function(k){
-            var input = contactForm.querySelector('[name="' + k + '"]');
-            if (input && typeof value[k] === 'string') input.value = value[k];
-          });
+          if (value) {
+            CONTACT_FIELDS.forEach(function(k){
+              var input = contactForm.querySelector('[name="' + k + '"]');
+              if (input && typeof value[k] === 'string') input.value = value[k];
+            });
+          }
           setContactStatus('', '');
+          renderContactPreview();
         });
       }
 
+      function renderContactPreview(){
+        if (!contactForm) return;
+        var phoneEl = $('[data-cp-phone]');
+        var addrEl  = $('[data-cp-address]');
+        if (!phoneEl || !addrEl) return;
+        var phone = (contactForm.querySelector('[name="phone"]') || {}).value || '+49 40 225536';
+        var street = (contactForm.querySelector('[name="street"]') || {}).value || 'Ifflandstraße 71';
+        var district = (contactForm.querySelector('[name="district"]') || {}).value || 'Hamburg-Hohenfelde';
+        phoneEl.textContent = '📞 ' + (phone || '—');
+        addrEl.textContent = '📍 ' + (street || '—') + ', ' + (district || '—');
+      }
+
       if (contactForm) {
+        contactForm.addEventListener('input', renderContactPreview);
+
         contactForm.addEventListener('submit', function(e){
           e.preventDefault();
           var data = {};
