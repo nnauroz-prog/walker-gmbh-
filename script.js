@@ -178,6 +178,38 @@
     }).catch(function(){ return false; });
   }
 
+  // ---------- Contact: owner data overrides static markup ----------
+  // - Every <a href^="tel:"> gets its href rebound to phoneRaw (automatic, no marker needed).
+  // - Every <a href^="mailto:"> gets its href rebound to email (automatic).
+  // - Opt-in text bindings via [data-bind="<key>"]: phone, email, street, city, district.
+  function applyCustomContactIfAny() {
+    if (!window.walkerDb || !window.walkerDb.get) return Promise.resolve();
+    return window.walkerDb.get('contact').then(function(c){
+      if (!c) return;
+
+      if (c.phoneRaw) {
+        document.querySelectorAll('a[href^="tel:"]').forEach(function(a){
+          a.setAttribute('href', 'tel:' + c.phoneRaw);
+        });
+      }
+      if (c.email) {
+        document.querySelectorAll('a[href^="mailto:"]').forEach(function(a){
+          a.setAttribute('href', 'mailto:' + c.email);
+        });
+      }
+
+      var TEXT_KEYS = ['phone', 'email', 'street', 'city', 'district'];
+      TEXT_KEYS.forEach(function(key){
+        if (!c[key]) return;
+        document.querySelectorAll('[data-bind="' + key + '"]').forEach(function(el){
+          el.textContent = c[key];
+        });
+      });
+    }).catch(function(){});
+  }
+
+  safeRun(function(){ applyCustomContactIfAny(); });
+
   safeRun(function(){
     var nodes = document.querySelectorAll('[data-live-status]');
     if (!nodes.length) {

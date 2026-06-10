@@ -56,7 +56,7 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
   <div class="container topbar__row">
     <a class="topbar__item" href="tel:+4940225536" aria-label="Telefonnummer anrufen">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7a2 2 0 0 1 1.72 2z"/></svg>
-      +49 40 225536
+      <span data-bind="phone">+49 40 225536</span>
     </a>
     <span class="topbar__item">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -81,7 +81,7 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
     </nav>
     <div class="header__cta">
       <a class="btn btn--ghost btn--sm" href="mein-fahrzeug.html">Mein Fahrzeug</a>
-      <a class="btn btn--primary btn--sm" href="tel:+4940225536"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7a2 2 0 0 1 1.72 2z"/></svg>+49 40 225536</a>
+      <a class="btn btn--primary btn--sm" href="tel:+4940225536"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7a2 2 0 0 1 1.72 2z"/></svg><span data-bind="phone">+49 40 225536</span></a>
       <button class="burger" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="drawer" data-burger>
         <span></span><span></span><span></span>
       </button>
@@ -106,11 +106,11 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
     <li><a data-nav href="mein-fahrzeug.html">Mein Fahrzeug — Status</a></li>
   </ul>
   <div class="drawer__cta">
-    <a class="btn btn--blue btn--block" href="tel:+4940225536">Jetzt anrufen · +49 40 225536</a>
+    <a class="btn btn--blue btn--block" href="tel:+4940225536">Jetzt anrufen · <span data-bind="phone">+49 40 225536</span></a>
     <a class="btn btn--light btn--block" href="kontakt.html">Adresse &amp; Anfahrt</a>
   </div>
   <div class="drawer__contact">
-    Walker GmbH<br>Ifflandstraße 71, 22087 Hamburg<br>Telefon: <a href="tel:+4940225536">+49 40 225536</a><br><br>Mo–Do 07:30–18:30<br>Fr 07:00–12:00<br>Sa, So geschlossen
+    Walker GmbH<br>Ifflandstraße 71, 22087 Hamburg<br>Telefon: <a href="tel:+4940225536"><span data-bind="phone">+49 40 225536</span></a><br><br>Mo–Do 07:30–18:30<br>Fr 07:00–12:00<br>Sa, So geschlossen
   </div>
 </aside>
 
@@ -143,7 +143,7 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
 
         <h2>Kontakt</h2>
         <p>
-          Telefon: <a href="tel:+4940225536">+49 40 225536</a><br>
+          Telefon: <a href="tel:+4940225536"><span data-bind="phone">+49 40 225536</span></a><br>
           E-Mail: <span class="todo">TODO: Geschäfts-E-Mail-Adresse eintragen</span>
         </p>
 
