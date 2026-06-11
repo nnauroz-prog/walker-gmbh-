@@ -620,6 +620,21 @@ h1, h2, h3, .hero__title {
 }
 .section { padding: clamp(80px, 12vw, 168px) 0; }
 .section--tight { padding: clamp(56px, 7vw, 112px) 0; }
+
+/* Performance: Browser darf untere Sektionen erst rendern, wenn sie sichtbar werden.
+   contain-intrinsic-size hält den Scroll-Indikator stabil, kein Jumpiness beim Reveal. */
+.section,
+.section--soft,
+.statement,
+.pinned {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 600px;
+}
+/* Hero und page-hero bleiben sofort gerendert (above-the-fold) */
+.hero,
+.page-hero {
+  content-visibility: visible;
+}
 .section--soft { background: var(--silver); }
 .section--dark {
   background: linear-gradient(160deg, var(--navy) 0%, #020812 100%);
