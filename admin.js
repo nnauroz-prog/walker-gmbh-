@@ -103,11 +103,32 @@
         });
         var ov = $('[data-overview]');
         if (ov) ov.style.display = name ? 'none' : '';
-        if (name === 'vehicle-status') renderVehicleStatus();
+        if (name === 'vehicle-status') {
+          renderVehicleStatus();
+          ensureVsRealtimeSubscription();
+        }
         if (name === 'notice') loadNotice();
         if (name === 'hours') loadHours();
         if (name === 'contact') loadContact();
         if (name === 'services') loadServices();
+      }
+
+      // Realtime: refresh table when ANY vehicle_status row changes (own edits + parallel admin tabs).
+      var vsRealtimeUnsub = null;
+      var vsRefreshTimer = null;
+      function ensureVsRealtimeSubscription(){
+        if (vsRealtimeUnsub) return;
+        if (!window.walkerDb || !window.walkerDb.subscribe) return;
+        vsRealtimeUnsub = window.walkerDb.subscribe(function(payload){
+          // Filter: only react to vehicle-status-related changes
+          var key = payload && payload.key;
+          var table = payload && payload.table;
+          if (key && key.indexOf('vehicle_status') === -1) return;
+          if (table && table !== 'vehicle_status') return;
+          // Debounce: bei mehreren rapid-fire Events nur 1× rendern
+          if (vsRefreshTimer) clearTimeout(vsRefreshTimer);
+          vsRefreshTimer = setTimeout(renderVehicleStatus, 250);
+        });
       }
 
       // ===== Hinweisbanner-Editor =====
