@@ -17,18 +17,21 @@
   --line-soft:   #ECE7DB;
   --white:       #FFFFFF;
 
-  --radius-sm: 2px;
-  --radius-md: 4px;
-  --radius-lg: 4px;
+  /* Weichere Radien für sanftere Anmutung */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
 
-  /* Tiefere, wärmere Schatten — Premium-Werkstätten haben weiche, satte Schatten */
-  --shadow-sm: 0 1px 2px rgba(22, 22, 24, 0.04), 0 8px 24px -12px rgba(22, 22, 24, 0.14);
-  --shadow-md: 0 4px 8px rgba(22, 22, 24, 0.06), 0 24px 48px -20px rgba(22, 22, 24, 0.22);
-  --shadow-lg: 0 8px 16px rgba(22, 22, 24, 0.08), 0 40px 80px -28px rgba(22, 22, 24, 0.32);
+  /* Sehr weiche, lange Schatten — Floating-Effekt, kein harter Drop */
+  --shadow-sm: 0 1px 2px rgba(22, 22, 24, 0.03), 0 12px 32px -16px rgba(22, 22, 24, 0.10);
+  --shadow-md: 0 4px 12px rgba(22, 22, 24, 0.04), 0 32px 64px -24px rgba(22, 22, 24, 0.16);
+  --shadow-lg: 0 8px 24px rgba(22, 22, 24, 0.06), 0 56px 96px -32px rgba(22, 22, 24, 0.22);
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-quint: cubic-bezier(0.16, 1, 0.3, 1);
-  --dur-base: 320ms;
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-base: 480ms;
+  --dur-slow: 720ms;
 
   --container: 1180px;
   --header-h: 72px;
@@ -48,7 +51,9 @@
   --rule:          #D8D2C5;   /* warme Trennlinie statt kühles Grau */
   --rule-dark:     rgba(255,255,255,0.08);
   --silver-chrome: #B9BCC2;   /* MB-Chrome-Akzent */
-  --champagne:     #A88B5A;   /* warmer Champagne-Akzent für Highlights, Hover */
+  --champagne:       #A88B5A;   /* warmer Champagne-Akzent für Highlights, Hover */
+  --champagne-soft:  #B8A37F;   /* hellere Variante für dezentere Flächen */
+  --champagne-dim:   rgba(168,139,90,0.55); /* gedimmt für Hairlines, dezenter */
   --accent:        #0E0E10;
   --accent-soft:   #F1ECE2;
   --silver-chrome: #C9C9CE;
@@ -337,8 +342,12 @@ h1, h2, h3, .hero__title {
 
 /* ---- Statement-Sektion: tiefes Carbon mit Champagne-Akzent ---- */
 .statement {
-  padding: clamp(96px, 14vw, 200px) 0;
-  background: linear-gradient(180deg, #161618 0%, #0E0E10 100%);
+  padding: clamp(112px, 15vw, 220px) 0;
+  background:
+    /* Soft fade-ins an Top und Bottom für weiche Sektionsübergänge */
+    linear-gradient(180deg, rgba(22,22,24,0) 0%, rgba(22,22,24,1) 80px),
+    linear-gradient(0deg, rgba(14,14,16,0) 0%, rgba(14,14,16,1) 80px),
+    linear-gradient(180deg, #161618 0%, #0E0E10 100%);
   color: var(--bone);
   position: relative;
   overflow: hidden;
@@ -348,8 +357,8 @@ h1, h2, h3, .hero__title {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 80% 20%, rgba(168,139,90,0.08) 0%, transparent 50%),
-    repeating-linear-gradient(135deg, transparent 0px, transparent 28px, rgba(255,255,255,0.012) 28px, rgba(255,255,255,0.012) 29px);
+    radial-gradient(ellipse at 80% 20%, rgba(168,139,90,0.06) 0%, transparent 60%),
+    repeating-linear-gradient(135deg, transparent 0px, transparent 32px, rgba(255,255,255,0.010) 32px, rgba(255,255,255,0.010) 33px);
   pointer-events: none;
   z-index: 0;
 }
@@ -483,9 +492,13 @@ h1, h2, h3, .hero__title {
   color: inherit;
   overflow: hidden;
   isolation: isolate;
-  transition: transform 0.45s var(--ease-quint);
+  transition: transform 0.7s var(--ease-soft), box-shadow 0.7s var(--ease-soft);
+  box-shadow: 0 0 0 1px var(--rule);
 }
-.hs-card:hover { transform: translateY(-6px); }
+.hs-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 1px 0 var(--rule), 0 20px 48px -24px rgba(22,22,24,0.18);
+}
 .hs-card__media {
   position: relative;
   aspect-ratio: 4/3;
@@ -2122,19 +2135,20 @@ h1, h2, h3, .hero__title {
   border-bottom: 1px solid var(--rule);
   position: relative;
   background: transparent;
-  transition: background 0.3s var(--ease-out);
+  transition: background 0.6s var(--ease-soft);
 }
 .step:last-child { border-right: 0; }
 .step:hover { background: var(--bone); }
-/* Champagne-Hairline beim Hover über Step */
+/* Champagne-Hairline beim Hover über Step — weicher und dezenter */
 .step::before {
   content: "";
   position: absolute;
   top: -1px; left: 0;
-  height: 2px;
+  height: 1px;
   width: 0;
   background: var(--champagne);
-  transition: width 0.4s var(--ease-quint);
+  opacity: 0.7;
+  transition: width 0.8s var(--ease-soft);
 }
 .step:hover::before { width: 100%; }
 .step__num {
