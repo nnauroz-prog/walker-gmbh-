@@ -324,8 +324,29 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
       });
     }
 
+    // Holds the unsubscribe function from the active realtime subscription.
+    var activeUnsub = null;
+    function stopActiveSubscription(){
+      if (activeUnsub) { try { activeUnsub(); } catch(e){} activeUnsub = null; }
+    }
+
+    // Re-fetches the current plate's status and re-renders.
+    function refreshStatus(plate){
+      window.walkerDb.lookupVehicleStatus(plate, '').then(function(res){
+        if (!res || !res.ok || !res.found) return;  // ignore transient errors; keep current view
+        renderResult(plate.toUpperCase(), res.data);
+        // Subtle visual ping: flash the result card briefly
+        var card = resultEl.querySelector('.status-result');
+        if (card) {
+          card.classList.add('status-result--updated');
+          setTimeout(function(){ card.classList.remove('status-result--updated'); }, 1500);
+        }
+      });
+    }
+
     form.addEventListener('submit', function(e){
       e.preventDefault();
+      stopActiveSubscription();
       var plate = form.querySelector('[name="plate"]').value || '';
       plate = plate.trim();
       if (!plate) {
@@ -363,6 +384,12 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
           return;
         }
         renderResult(plate.toUpperCase(), res.data);
+        // Subscribe to live updates for THIS plate
+        if (window.walkerDb && window.walkerDb.subscribeVehicleStatus) {
+          activeUnsub = window.walkerDb.subscribeVehicleStatus(plate, function(){
+            refreshStatus(plate);
+          });
+        }
       }).catch(function(){
         resultEl.innerHTML = '';
         setStatus('error', 'Abfrage konnte gerade nicht durchgeführt werden. Bitte versuchen Sie es später erneut.');

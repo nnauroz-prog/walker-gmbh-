@@ -155,13 +155,59 @@
   // ---------- Realtime subscribe ----------
   function subscribe(cb){
     if (typeof cb !== 'function') return function(){};
-    if (!isProd) return function(){};
+    // Demo-Modus: cross-tab sync via localStorage 'storage' event
+    if (!isProd) {
+      function onStorage(e){
+        if (!e || !e.key) return;
+        // Watch our walker:-prefixed keys (content:* + vehicle_status)
+        if (e.key.indexOf(LS_PREFIX) === 0) {
+          cb({ source: 'demo', key: e.key, newValue: e.newValue });
+        }
+      }
+      global.addEventListener('storage', onStorage);
+      return function(){ global.removeEventListener('storage', onStorage); };
+    }
     var unsub = null;
     ready().then(function(){
       if (!supabaseClient) return;
       var channel = supabaseClient.channel('walker-changes')
         .on('postgres_changes', { event: '*', schema: 'public', table: 'content' }, cb)
         .on('postgres_changes', { event: '*', schema: 'public', table: 'service_requests' }, cb)
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'vehicle_status' }, cb)
+        .subscribe();
+      unsub = function(){ try { supabaseClient.removeChannel(channel); } catch(e){} };
+    });
+    return function(){ if (unsub) unsub(); };
+  }
+
+  // Specialized subscription for a single plate's status updates.
+  // Returns unsubscribe function. Callback fires on any change to that plate.
+  function subscribeVehicleStatus(plate, cb){
+    if (typeof cb !== 'function' || !plate) return function(){};
+    var normalized = normalizePlate(plate);
+    // Demo-Modus: storage event auf walker:vehicle_status (gesamte Liste).
+    // Trigger fires for ANY plate-change; consumer prüft selber, ob das eigene plate betroffen ist.
+    if (!isProd) {
+      function onStorage(e){
+        if (!e || !e.key) return;
+        if (e.key === lsKey('vehicle_status')) {
+          cb({ source: 'demo', plate: normalized });
+        }
+      }
+      global.addEventListener('storage', onStorage);
+      return function(){ global.removeEventListener('storage', onStorage); };
+    }
+    var unsub = null;
+    ready().then(function(){
+      if (!supabaseClient) return;
+      var channel = supabaseClient
+        .channel('vs-' + normalized)
+        .on('postgres_changes', {
+          event: '*',
+          schema: 'public',
+          table: 'vehicle_status',
+          filter: 'plate=eq.' + normalized
+        }, function(payload){ cb(payload); })
         .subscribe();
       unsub = function(){ try { supabaseClient.removeChannel(channel); } catch(e){} };
     });
@@ -436,6 +482,7 @@
     remove: remove,
     uploadImage: uploadImage,
     subscribe: subscribe,
+    subscribeVehicleStatus: subscribeVehicleStatus,
     auth: auth,
     addServiceRequest: addServiceRequest,
     listServiceRequests: listServiceRequests,
