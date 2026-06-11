@@ -246,8 +246,96 @@ html,body{margin:0;background:var(--silver);color:var(--anthracite);font-family:
 
     <section class="admin-overview" style="margin-top:18px;" data-panel="images">
       <button class="admin-panel__back" type="button" data-back-overview>← Zurück zur Übersicht</button>
-      <h2 class="admin-overview__title">Bilder</h2>
-      <p style="color:var(--muted);">Upload-Slots (Logo, Hero, About, Galerie) in den Bucket <code>images</code> – Etappe 4.</p>
+      <div class="admin-overview__head" style="margin-bottom:14px;">
+        <div>
+          <h2 class="admin-overview__title">Bilder hochladen</h2>
+          <p style="font-size:0.9rem;color:var(--muted);margin:4px 0 0;">JPEG/PNG/WebP, max. ca. 2 MB pro Datei. Im Demo-Modus werden Bilder lokal im Browser gespeichert. In Production: Supabase Storage Bucket <code>images</code>.</p>
+        </div>
+      </div>
+
+      <div class="img-slots">
+        <div class="img-slot" data-slot="logo">
+          <div class="img-slot__head">
+            <span class="img-slot__num">01</span>
+            <div><strong>Logo</strong><p>Header, Footer, Drawer — transparentes PNG empfohlen.</p></div>
+          </div>
+          <div class="img-slot__preview" data-slot-preview-wrap>
+            <span class="img-slot__preview-placeholder">noch nicht gesetzt</span>
+          </div>
+          <label class="img-slot__input">
+            <input type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" data-slot-input>
+            <span>Datei wählen oder hierher ziehen…</span>
+          </label>
+          <div data-slot-status></div>
+          <p class="img-slot__meta" data-slot-meta></p>
+        </div>
+
+        <div class="img-slot" data-slot="hero">
+          <div class="img-slot__head">
+            <span class="img-slot__num">02</span>
+            <div><strong>Hero-Foto (Startseite)</strong><p>Vollbild oben auf <code>index.html</code> — am besten 2400×1600.</p></div>
+          </div>
+          <div class="img-slot__preview" data-slot-preview-wrap>
+            <span class="img-slot__preview-placeholder">noch nicht gesetzt</span>
+          </div>
+          <label class="img-slot__input">
+            <input type="file" accept="image/jpeg,image/webp,image/png" data-slot-input>
+            <span>Datei wählen oder hierher ziehen…</span>
+          </label>
+          <div data-slot-status></div>
+          <p class="img-slot__meta" data-slot-meta></p>
+        </div>
+
+        <div class="img-slot" data-slot="diagnose">
+          <div class="img-slot__head">
+            <span class="img-slot__num">03</span>
+            <div><strong>Werkstatt-Foto: Diagnose</strong><p>Service-Karte „Erst lesen, dann schrauben".</p></div>
+          </div>
+          <div class="img-slot__preview" data-slot-preview-wrap>
+            <span class="img-slot__preview-placeholder">noch nicht gesetzt</span>
+          </div>
+          <label class="img-slot__input">
+            <input type="file" accept="image/jpeg,image/webp,image/png" data-slot-input>
+            <span>Datei wählen oder hierher ziehen…</span>
+          </label>
+          <div data-slot-status></div>
+          <p class="img-slot__meta" data-slot-meta></p>
+        </div>
+
+        <div class="img-slot" data-slot="wartung">
+          <div class="img-slot__head">
+            <span class="img-slot__num">04</span>
+            <div><strong>Werkstatt-Foto: Wartung</strong><p>Service-Karte „Inspektion, Bremsen, Klima".</p></div>
+          </div>
+          <div class="img-slot__preview" data-slot-preview-wrap>
+            <span class="img-slot__preview-placeholder">noch nicht gesetzt</span>
+          </div>
+          <label class="img-slot__input">
+            <input type="file" accept="image/jpeg,image/webp,image/png" data-slot-input>
+            <span>Datei wählen oder hierher ziehen…</span>
+          </label>
+          <div data-slot-status></div>
+          <p class="img-slot__meta" data-slot-meta></p>
+        </div>
+
+        <div class="img-slot" data-slot="bremsen">
+          <div class="img-slot__head">
+            <span class="img-slot__num">05</span>
+            <div><strong>Werkstatt-Foto: Teile</strong><p>Service-Karte „Original, wenn möglich".</p></div>
+          </div>
+          <div class="img-slot__preview" data-slot-preview-wrap>
+            <span class="img-slot__preview-placeholder">noch nicht gesetzt</span>
+          </div>
+          <label class="img-slot__input">
+            <input type="file" accept="image/jpeg,image/webp,image/png" data-slot-input>
+            <span>Datei wählen oder hierher ziehen…</span>
+          </label>
+          <div data-slot-status></div>
+          <p class="img-slot__meta" data-slot-meta></p>
+        </div>
+      </div>
+
+      <p style="margin-top:18px;font-size:0.84rem;color:var(--muted);">Hinweis: Bilder werden nach dem Upload zwar gespeichert, aber der automatische Austausch der Bilder auf den öffentlichen Seiten erfolgt erst, wenn die jeweiligen Bilder-Marker dort gesetzt sind. Sprechen Sie uns an, wenn ein neues Bild live geschaltet werden soll.</p>
     </section>
 
     <section class="admin-overview" style="margin-top:18px;" data-panel="hours">
