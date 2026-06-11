@@ -210,6 +210,29 @@
 
   safeRun(function(){ applyCustomContactIfAny(); });
 
+  // ---------- Images: owner-uploaded photos override defaults ----------
+  // Markup: <img data-img-slot="logo|hero|diagnose|wartung|bremsen" src="...">
+  // If walkerDb has 'image:<slot>' set, replace src and tear down any <picture>
+  // <source> siblings so owner's URL wins regardless of MIME.
+  function applyCustomImagesIfAny() {
+    if (!window.walkerDb || !window.walkerDb.get) return;
+    document.querySelectorAll('[data-img-slot]').forEach(function(img){
+      var slot = img.getAttribute('data-img-slot');
+      if (!slot) return;
+      window.walkerDb.get('image:' + slot).then(function(v){
+        if (!v || !v.url) return;
+        img.setAttribute('src', v.url);
+        img.removeAttribute('srcset');
+        var picture = img.closest('picture');
+        if (picture) {
+          picture.querySelectorAll('source').forEach(function(s){ s.remove(); });
+        }
+      }).catch(function(){});
+    });
+  }
+
+  safeRun(function(){ applyCustomImagesIfAny(); });
+
   // ---------- Services: owner data overrides static markup on leistungen.html ----------
   // Each card has data-service-id on the <article>, and its first
   // [data-service-title] / [data-service-body] children get updated.
