@@ -42,8 +42,19 @@
     var drawer = document.querySelector('[data-drawer]');
     var burger = document.querySelector('[data-burger]');
     if (!drawer || !burger) return;
+    // Ensure dialog semantics for screen readers
+    drawer.setAttribute('role', 'dialog');
+    drawer.setAttribute('aria-modal', 'true');
     var lastFocus = null;
     var isOpen = false;
+    var FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+    function focusableInDrawer(){
+      return Array.prototype.filter.call(
+        drawer.querySelectorAll(FOCUSABLE),
+        function(el){ return !el.hasAttribute('disabled') && el.offsetParent !== null; }
+      );
+    }
 
     function open(){
       if (isOpen) return;
@@ -53,6 +64,9 @@
       document.documentElement.classList.add('no-scroll');
       document.body.classList.add('no-scroll');
       burger.setAttribute('aria-expanded', 'true');
+      // Make rest of page inert (prevents focus + interaction outside the modal)
+      var main = document.getElementById('main');
+      if (main && 'inert' in main) main.inert = true;
       requestAnimationFrame(function(){
         var first = drawer.querySelector('[data-drawer-close]');
         if (first) { try { first.focus({ preventScroll: true }); } catch(e){ first.focus(); } }
@@ -65,6 +79,8 @@
       document.documentElement.classList.remove('no-scroll');
       document.body.classList.remove('no-scroll');
       burger.setAttribute('aria-expanded', 'false');
+      var main = document.getElementById('main');
+      if (main && 'inert' in main) main.inert = false;
       if (lastFocus && typeof lastFocus.focus === 'function') {
         try { lastFocus.focus({ preventScroll: true }); } catch(e){}
       }
@@ -82,7 +98,17 @@
       a.addEventListener('click', close);
     });
     document.addEventListener('keydown', function(e){
-      if (e.key === 'Escape' && isOpen) close();
+      if (!isOpen) return;
+      if (e.key === 'Escape') { close(); return; }
+      // Focus-Trap: Tab + Shift-Tab cycle within the drawer
+      if (e.key === 'Tab') {
+        var items = focusableInDrawer();
+        if (!items.length) return;
+        var first = items[0], last = items[items.length - 1];
+        var active = document.activeElement;
+        if (e.shiftKey && active === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && active === last) { e.preventDefault(); first.focus(); }
+      }
     });
 
     var rt;
@@ -91,7 +117,7 @@
       rt = setTimeout(function(){
         if (window.innerWidth > 980 && isOpen) close();
       }, 120);
-    });
+    }, { passive: true });
   });
 
   // ---------- Reveal on scroll ----------
