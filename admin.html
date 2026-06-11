@@ -50,7 +50,7 @@ html,body{margin:0;background:var(--silver);color:var(--anthracite);font-family:
 <header class="header">
   <div class="container header__row">
     <a class="brand" href="index.html" aria-label="Walker GmbH – Startseite">
-      <img class="brand__logo" src="logo.png" alt="Walker GmbH" width="180" height="80">
+      <img class="brand__logo" data-img-slot="logo" src="logo.png" alt="Walker GmbH" width="180" height="80">
     </a>
     <div class="header__cta">
       <a class="btn btn--ghost btn--sm" href="index.html">Zur Webseite</a>
@@ -335,7 +335,7 @@ html,body{margin:0;background:var(--silver);color:var(--anthracite);font-family:
         </div>
       </div>
 
-      <p style="margin-top:18px;font-size:0.84rem;color:var(--muted);">Hinweis: Bilder werden nach dem Upload zwar gespeichert, aber der automatische Austausch der Bilder auf den öffentlichen Seiten erfolgt erst, wenn die jeweiligen Bilder-Marker dort gesetzt sind. Sprechen Sie uns an, wenn ein neues Bild live geschaltet werden soll.</p>
+      <p style="margin-top:18px;font-size:0.84rem;color:var(--muted);">Beim nächsten Seitenaufruf werden die hochgeladenen Bilder automatisch auf den öffentlichen Seiten gezeigt: Logo erscheint in Topbar, Drawer und Footer. Hero ersetzt das große Foto auf der Startseite. „Diagnose/Wartung/Bremsen" tauschen die zugehörigen Service-Karten-Bilder. Bei Demo-Modus sind die Bilder nur in diesem Browser sichtbar; in Production über alle Geräte.</p>
     </section>
 
     <section class="admin-overview" style="margin-top:18px;" data-panel="hours">

@@ -130,7 +130,7 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
 <header class="header">
   <div class="container header__row">
     <a class="brand" data-nav href="index.html" aria-label="Walker GmbH – Startseite">
-      <img class="brand__logo" src="logo.png" alt="Walker GmbH – Mercedes-Benz Spezialist" width="180" height="80">
+      <img class="brand__logo" data-img-slot="logo" src="logo.png" alt="Walker GmbH – Mercedes-Benz Spezialist" width="180" height="80">
     </a>
     <nav class="nav" aria-label="Hauptnavigation">
       <a class="nav__link" data-nav href="index.html">Start</a>
@@ -152,7 +152,7 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
 
 <aside class="drawer" id="drawer" aria-hidden="true" data-drawer aria-label="Menü">
   <div class="drawer__head">
-    <img class="drawer__logo" src="logo.png" alt="Walker GmbH" width="180" height="80">
+    <img class="drawer__logo" data-img-slot="logo" src="logo.png" alt="Walker GmbH" width="180" height="80">
     <button class="drawer__close" type="button" aria-label="Menü schließen" data-drawer-close>
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
     </button>
@@ -182,7 +182,7 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
   <!-- ===== HERO ===== -->
   <section class="hero" data-hero>
     <div class="hero__visual">
-      <picture><source media="(max-width: 700px)" srcset="foto-diagnose-sm.webp" type="image/webp"><source srcset="foto-diagnose.webp" type="image/webp"><img src="foto-diagnose.jpg" alt="Werkstattszene: Diagnosegerät an einer Mercedes-Benz E-Klasse" loading="eager" fetchpriority="high" decoding="async" width="2400" height="1600"></picture>
+      <picture><source media="(max-width: 700px)" srcset="foto-diagnose-sm.webp" type="image/webp"><source srcset="foto-diagnose.webp" type="image/webp"><img data-img-slot="hero" src="foto-diagnose.jpg" alt="Werkstattszene: Diagnosegerät an einer Mercedes-Benz E-Klasse" loading="eager" fetchpriority="high" decoding="async" width="2400" height="1600"></picture>
     </div>
     <div class="hero__inner">
       <div class="hero__copy">
@@ -306,7 +306,7 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
     </div>
     <div class="hero-services">
       <a class="hs-card" href="leistungen.html#diagnose">
-        <div class="hs-card__media"><picture><source media="(max-width: 700px)" srcset="foto-diagnose-sm.webp" type="image/webp"><source srcset="foto-diagnose.webp" type="image/webp"><img src="foto-diagnose.jpg" alt="Werkstattdiagnose an einer Mercedes-Benz E-Klasse" loading="lazy" width="1200" height="900"></picture></div>
+        <div class="hs-card__media"><picture><source media="(max-width: 700px)" srcset="foto-diagnose-sm.webp" type="image/webp"><source srcset="foto-diagnose.webp" type="image/webp"><img data-img-slot="diagnose" src="foto-diagnose.jpg" alt="Werkstattdiagnose an einer Mercedes-Benz E-Klasse" loading="lazy" width="1200" height="900"></picture></div>
         <div class="hs-card__body">
           <span class="hs-card__num">01 — Diagnose</span>
           <h3 class="hs-card__title">Erst lesen, dann schrauben.</h3>
@@ -315,7 +315,7 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
         </div>
       </a>
       <a class="hs-card" href="leistungen.html#wartung">
-        <div class="hs-card__media"><picture><source media="(max-width: 700px)" srcset="foto-wartung-sm.webp" type="image/webp"><source srcset="foto-wartung.webp" type="image/webp"><img src="foto-wartung.jpg" alt="Inspektion auf der Hebebühne, Mercedes-Benz" loading="lazy" width="1200" height="900"></picture></div>
+        <div class="hs-card__media"><picture><source media="(max-width: 700px)" srcset="foto-wartung-sm.webp" type="image/webp"><source srcset="foto-wartung.webp" type="image/webp"><img data-img-slot="wartung" src="foto-wartung.jpg" alt="Inspektion auf der Hebebühne, Mercedes-Benz" loading="lazy" width="1200" height="900"></picture></div>
         <div class="hs-card__body">
           <span class="hs-card__num">02 — Service</span>
           <h3 class="hs-card__title">Inspektion, Bremsen, Klima.</h3>
@@ -324,7 +324,7 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
         </div>
       </a>
       <a class="hs-card" href="teilepartner.html">
-        <div class="hs-card__media"><picture><source media="(max-width: 700px)" srcset="foto-bremsen-sm.webp" type="image/webp"><source srcset="foto-bremsen.webp" type="image/webp"><img src="foto-bremsen.jpg" alt="Mercedes-Benz Bremssattel und -scheibe nach Wechsel" loading="lazy" width="1200" height="900"></picture></div>
+        <div class="hs-card__media"><picture><source media="(max-width: 700px)" srcset="foto-bremsen-sm.webp" type="image/webp"><source srcset="foto-bremsen.webp" type="image/webp"><img data-img-slot="bremsen" src="foto-bremsen.jpg" alt="Mercedes-Benz Bremssattel und -scheibe nach Wechsel" loading="lazy" width="1200" height="900"></picture></div>
         <div class="hs-card__body">
           <span class="hs-card__num">03 — Teile</span>
           <h3 class="hs-card__title">Original, wenn möglich.</h3>
@@ -383,7 +383,7 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
           </div>
         </div>
         <div class="mb-section__visual">
-          <picture><source media="(max-width: 700px)" srcset="foto-wartung-sm.webp" type="image/webp"><source srcset="foto-wartung.webp" type="image/webp"><img src="foto-wartung.jpg" alt="Mercedes-Benz auf der Hebebühne in der Werkstatt" loading="lazy" width="800" height="1000"></picture>
+          <picture><source media="(max-width: 700px)" srcset="foto-wartung-sm.webp" type="image/webp"><source srcset="foto-wartung.webp" type="image/webp"><img data-img-slot="wartung" src="foto-wartung.jpg" alt="Mercedes-Benz auf der Hebebühne in der Werkstatt" loading="lazy" width="800" height="1000"></picture>
         </div>
       </div>
     </div>
