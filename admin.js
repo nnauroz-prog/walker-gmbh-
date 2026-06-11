@@ -528,6 +528,77 @@
         });
       }
 
+      // ===== Bilder-Upload (Etappe 4e) =====
+      function setupImageSlots(){
+        $$('.img-slot').forEach(function(slotEl){
+          if (slotEl.dataset.bound === '1') return;
+          slotEl.dataset.bound = '1';
+          var slotName = slotEl.getAttribute('data-slot');
+          var input = slotEl.querySelector('[data-slot-input]');
+          var previewWrap = slotEl.querySelector('[data-slot-preview-wrap]');
+          var statusEl = slotEl.querySelector('[data-slot-status]');
+          var metaEl = slotEl.querySelector('[data-slot-meta]');
+
+          function setSlotStatus(type, msg){
+            if (!statusEl) return;
+            statusEl.innerHTML = msg ? '<div class="alert alert--' + type + '">' + msg + '</div>' : '';
+          }
+          function showPreview(url){
+            if (!previewWrap) return;
+            previewWrap.innerHTML = '<img src="' + url + '" alt="Vorschau ' + slotName + '">';
+          }
+          function setMeta(text){ if (metaEl) metaEl.textContent = text || ''; }
+          function formatDate(ts){
+            var d = new Date(ts);
+            return d.toLocaleDateString('de-DE') + ' ' + d.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+          }
+
+          // Bestehenden Stand laden
+          window.walkerDb.get('image:' + slotName).then(function(v){
+            if (v && v.url) {
+              showPreview(v.url);
+              if (v.updated) setMeta('zuletzt aktualisiert: ' + formatDate(v.updated));
+            }
+          });
+
+          if (!input) return;
+          input.addEventListener('change', function(e){
+            var file = e.target.files && e.target.files[0];
+            if (!file) return;
+            if (file.size > 5 * 1024 * 1024) {
+              setSlotStatus('error', 'Datei zu groß (' + (file.size / 1024 / 1024).toFixed(1) + ' MB). Maximal 5 MB.');
+              input.value = '';
+              return;
+            }
+            setSlotStatus('info', 'Lade hoch …');
+            window.walkerDb.uploadImage(file, slotName).then(function(res){
+              if (res && res.ok) {
+                showPreview(res.url);
+                window.walkerDb.set('image:' + slotName, {
+                  url: res.url,
+                  path: res.path || null,
+                  filename: file.name,
+                  size: file.size,
+                  type: file.type,
+                  updated: Date.now()
+                });
+                setSlotStatus('success', 'Hochgeladen.');
+                setMeta('zuletzt aktualisiert: gerade eben');
+                setTimeout(function(){ setSlotStatus('', ''); }, 2500);
+              } else {
+                var msg = (res && res.error && res.error.message) ? res.error.message : 'unbekannter Fehler';
+                setSlotStatus('error', 'Upload fehlgeschlagen: ' + msg);
+              }
+              input.value = '';
+            }).catch(function(err){
+              setSlotStatus('error', 'Upload fehlgeschlagen: ' + (err && err.message ? err.message : err));
+              input.value = '';
+            });
+          });
+        });
+      }
+      setupImageSlots();
+
       // ===== Vehicle Status Editor =====
       var STATUS_LABEL = {
         received:      'Angenommen',
