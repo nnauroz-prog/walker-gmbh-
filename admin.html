@@ -167,8 +167,16 @@ html,body{margin:0;background:var(--silver);color:var(--anthracite);font-family:
           <label for="vs-note">Hinweis (optional, kunden­sichtbar)</label>
           <input id="vs-note" name="public_note" type="text" placeholder="z. B. Bremsen erledigt, Räder folgen">
         </div>
+        <div class="field" style="margin:0;">
+          <label for="vs-phone">Kunden-Telefon <small class="field-hint">(optional, für SMS bei Fertigstellung)</small></label>
+          <input id="vs-phone" name="customer_phone" type="tel" autocomplete="off" placeholder="z. B. 0151 23456789">
+        </div>
         <button type="submit" class="btn btn--blue">Speichern</button>
       </form>
+      <label class="checkbox-row" style="margin:8px 0 0;font-size:0.9rem;">
+        <input type="checkbox" id="vs-consent" name="sms_consent">
+        <span>Kunde hat zugestimmt, eine SMS bei „abholbereit" zu erhalten. <small style="color:var(--muted);display:block;">(nur ankreuzen, wenn der Kunde explizit „ja" gesagt hat)</small></span>
+      </label>
 
       <div data-vs-status></div>
 

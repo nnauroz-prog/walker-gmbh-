@@ -635,13 +635,22 @@
             if (r.status === 'ready') readyCount++;
             var tr = document.createElement('tr');
             tr.dataset.plate = r.plate;
+            // Phone + consent als data-Attribute mitführen, damit Save-Handler sie erhält
+            tr.dataset.customerPhone = r.customer_phone || '';
+            tr.dataset.smsConsent = r.sms_consent ? '1' : '';
+            tr.dataset.smsSentAt = r.sms_sent_at || '';
+            var smsLabel = '';
+            if (r.sms_sent_at) {
+              smsLabel = ' <small style="color:var(--champagne);font-weight:600;" title="SMS am ' + new Date(r.sms_sent_at).toLocaleString('de-DE') + ' versendet">· SMS ✓</small>';
+            } else if (r.customer_phone && r.sms_consent) {
+              smsLabel = ' <small style="color:var(--muted);" title="Telefon hinterlegt, SMS folgt bei Abholbereit">· SMS bereit</small>';
+            }
             tr.innerHTML = '' +
-              '<td><strong style="font-family:var(--font-display);letter-spacing:0.04em;">' + escapeHtml(r.plate_display || r.plate) + '</strong>' +
-                (r.pin ? ' <small style="color:var(--muted);">PIN gesetzt</small>' : '') + '</td>' +
+              '<td><strong style="font-family:var(--font-display);letter-spacing:0.04em;">' + escapeHtml(r.plate_display || r.plate) + '</strong>' + smsLabel + '</td>' +
               '<td>' + buildStatusSelect(r.status) + '</td>' +
               '<td><input type="text" class="vs-note-input" value="' + escapeHtmlAttr(r.public_note || '') + '" placeholder="Hinweis (optional)" style="width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:6px;font:inherit;font-size:0.9rem;"></td>' +
               '<td style="color:var(--muted);font-size:0.86rem;">' + relTime(r.updated_at) + '</td>' +
-              '<td style="white-space:nowrap;"><button class="btn--link vs-save" type="button" style="color:var(--blue);font-weight:600;">Speichern</button> · <button class="btn--link vs-delete" type="button" style="color:#B91C1C;">Löschen</button></td>';
+              '<td style="white-space:nowrap;"><button class="btn--link vs-save" type="button" style="color:var(--ink);font-weight:600;">Speichern</button> · <button class="btn--link vs-delete" type="button" style="color:#B91C1C;">Löschen</button></td>';
             tbody.appendChild(tr);
           });
           updateBadge(readyCount);
@@ -674,14 +683,21 @@
           var saveBtn = tr.querySelector('.vs-save');
           var deleteBtn = tr.querySelector('.vs-delete');
 
-          if (saveBtn) saveBtn.addEventListener('click', function(){
-            saveBtn.textContent = 'Speichere …';
-            window.walkerDb.upsertVehicleStatus({
+          // Phone + consent aus dataset zurücklesen, damit Updates sie nicht überschreiben
+          function buildPayload(){
+            return {
               plate: plate,
               plate_display: tr.querySelector('strong').textContent.trim(),
               status: statusSel.value,
-              public_note: noteInput.value
-            }).then(function(){
+              public_note: noteInput.value,
+              customer_phone: tr.dataset.customerPhone || null,
+              sms_consent: tr.dataset.smsConsent === '1'
+            };
+          }
+
+          if (saveBtn) saveBtn.addEventListener('click', function(){
+            saveBtn.textContent = 'Speichere …';
+            window.walkerDb.upsertVehicleStatus(buildPayload()).then(function(){
               saveBtn.textContent = 'Gespeichert ✓';
               setTimeout(function(){ saveBtn.textContent = 'Speichern'; renderVehicleStatus(); }, 800);
             });
@@ -696,12 +712,7 @@
 
           // Auto-save on status change
           if (statusSel) statusSel.addEventListener('change', function(){
-            window.walkerDb.upsertVehicleStatus({
-              plate: plate,
-              plate_display: tr.querySelector('strong').textContent.trim(),
-              status: statusSel.value,
-              public_note: noteInput.value
-            }).then(renderVehicleStatus);
+            window.walkerDb.upsertVehicleStatus(buildPayload()).then(renderVehicleStatus);
           });
         });
       }
@@ -717,23 +728,43 @@
       var addForm = $('[data-vs-add]');
       var addStatus = $('[data-vs-status]');
       if (addForm) {
+        // Consent-Checkbox lebt außerhalb des Forms (für Layout-Klarheit), bleibt aber zugeordnet
+        var consentBox = document.getElementById('vs-consent');
+
         addForm.addEventListener('submit', function(e){
           e.preventDefault();
           var plate = addForm.querySelector('[name="plate"]').value.trim().toUpperCase();
           var status = addForm.querySelector('[name="status"]').value;
           var note = addForm.querySelector('[name="public_note"]').value.trim();
+          var phone = (addForm.querySelector('[name="customer_phone"]') || {}).value || '';
+          var consent = consentBox ? consentBox.checked : false;
+          phone = phone.trim();
           if (!plate) return;
+
+          // UX-Hinweis: Walker hat Telefon eingetragen aber Haken vergessen
+          if (phone && !consent) {
+            addStatus.innerHTML = '<div class="alert alert--error">Telefon eingetragen, aber Häkchen für SMS-Zustimmung fehlt. Entweder Haken setzen (Kunde hat „ja" gesagt) oder Telefon-Feld leer lassen.</div>';
+            return;
+          }
           addStatus.innerHTML = '';
+
           window.walkerDb.upsertVehicleStatus({
             plate: plate,
             plate_display: plate,
             status: status,
-            public_note: note
+            public_note: note,
+            customer_phone: phone || null,
+            sms_consent: consent
           }).then(function(res){
             if (res.ok) {
-              addStatus.innerHTML = '<div class="alert alert--success">Gespeichert.</div>';
+              var msg = 'Gespeichert.';
+              if (phone && consent && status === 'ready') {
+                msg += ' SMS-Versand wird angestoßen (sobald Provider aktiv).';
+              }
+              addStatus.innerHTML = '<div class="alert alert--success">' + msg + '</div>';
               addForm.reset();
-              setTimeout(function(){ addStatus.innerHTML = ''; }, 2000);
+              if (consentBox) consentBox.checked = false;
+              setTimeout(function(){ addStatus.innerHTML = ''; }, 3000);
               renderVehicleStatus();
             } else {
               addStatus.innerHTML = '<div class="alert alert--error">Speichern fehlgeschlagen: ' + ((res.error && res.error.message) || 'unbekannter Fehler') + '</div>';

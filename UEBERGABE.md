@@ -279,6 +279,36 @@ Live-Binding (`script.js#applyCustomContactIfAny`):
 - `<link rel="preload" as="image" fetchpriority="high">` auf Hero (LCP)
 - Sitemap mit `<lastmod>` aktuell, robots.txt mit korrekten Disallows
 
+## SMS bei „Abholbereit" (optional, einmaliges Setup)
+
+**Was Walker sieht:** Beim Anlegen eines Autos im Admin erscheint ein optionales Telefon-Feld plus eine Checkbox „Kunde hat zugestimmt". Wenn beides gesetzt ist und der Status später auf „Abholbereit" wechselt, geht **automatisch** eine SMS an den Kunden raus. Walker tut sonst nichts. Status-Spalte zeigt „SMS bereit" (Telefon hinterlegt) bzw. „SMS ✓" (SMS wurde versendet).
+
+**Walker fragt den Kunden bei Auftragsannahme mündlich:** „Soll ich Ihnen eine SMS schicken, wenn das Auto fertig ist?" — bei Ja: Telefon + Häkchen, sonst beide Felder leer lassen.
+
+**Setup (einmal, NICHT Walker — Übergabeperson oder Webseiten-Betreuung):**
+
+1. **Provider-Account bei seven.io** (DE-Server, DSGVO-konform, ~7 Cent/SMS):
+   - https://seven.io → Account anlegen
+   - Guthaben aufladen (z. B. 20 € → reicht für ~280 SMS)
+   - Dashboard → Developer → API-Key kopieren
+2. **Supabase Secrets setzen:**
+   ```bash
+   supabase login
+   supabase link --project-ref <PROJECT_REF>
+   supabase secrets set SMS_API_KEY=<seven.io-key>
+   supabase secrets set SMS_SENDER="Walker GmbH"
+   ```
+3. **Edge Function deployen:**
+   ```bash
+   supabase functions deploy send-sms
+   ```
+4. **Database-Trigger aktivieren:** In `setup.sql` Abschnitt 7 das auskommentierte SQL einkommentieren, `<PROJECT_REF>` einsetzen, im Supabase SQL-Editor ausführen.
+5. **Test:** Im Admin ein Test-Auto mit eigener Mobilnummer anlegen, Häkchen setzen, Status auf „Abholbereit" → SMS sollte innerhalb von 2–3 Sekunden ankommen.
+
+**Wenn der SMS-Versand mal nicht funktioniert:** Walker merkt nichts — die Spalte „SMS ✓" bleibt einfach leer. Im Supabase-Dashboard unter Edge Functions → Logs gibt's die Fehlermeldung. Häufigste Ursache: Guthaben bei seven.io aufgebraucht.
+
+**Provider-Wechsel:** seven.io kann durch jeden REST-API-fähigen SMS-Anbieter ersetzt werden (Sipgate, Vonage, Twilio, …). In `supabase/functions/send-sms/index.ts` die Funktion `sendSms()` anpassen, alles andere bleibt.
+
 ## Deployment
 
 - **Aktuell aktiv**: Der von GitHub bereitgestellte Workflow
