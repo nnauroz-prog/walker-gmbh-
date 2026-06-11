@@ -127,6 +127,14 @@ CREATE TABLE IF NOT EXISTS public.vehicle_status (
   updated_at     timestamptz NOT NULL DEFAULT now()
 );
 
+-- Additive Migration: SMS-Benachrichtigung beim Status "Abholbereit".
+-- customer_phone wird nach Abschluss/Löschung des Eintrags entfernt
+-- (DSGVO-Datensparsamkeit). sms_consent dokumentiert die Kunden-
+-- Zustimmung beim Auftragsannahme-Gespräch.
+ALTER TABLE public.vehicle_status ADD COLUMN IF NOT EXISTS customer_phone text;
+ALTER TABLE public.vehicle_status ADD COLUMN IF NOT EXISTS sms_consent    boolean NOT NULL DEFAULT false;
+ALTER TABLE public.vehicle_status ADD COLUMN IF NOT EXISTS sms_sent_at    timestamptz;
+
 CREATE INDEX IF NOT EXISTS idx_vehicle_status_updated_at
   ON public.vehicle_status (updated_at DESC);
 
@@ -275,6 +283,50 @@ EXCEPTION WHEN OTHERS THEN
 END $$;
 
 
+-- ---------- 7. (OPTIONAL) SMS-Trigger an Edge Function -------
+-- Nur einmal nach dem Deploy der Edge Function `send-sms` ausführen.
+-- pg_net muss im Supabase-Projekt aktiviert sein (Settings → Database → Extensions).
+-- Ersetze <PROJECT_REF> mit deiner Supabase-Project-Ref.
+--
+-- CREATE EXTENSION IF NOT EXISTS pg_net WITH SCHEMA extensions;
+--
+-- CREATE OR REPLACE FUNCTION public.notify_sms_on_ready()
+-- RETURNS trigger
+-- LANGUAGE plpgsql
+-- SECURITY DEFINER
+-- AS $$
+-- DECLARE
+--   project_url text := 'https://<PROJECT_REF>.supabase.co';
+-- BEGIN
+--   -- Nur auslösen wenn Status auf "ready" wechselt UND Consent vorliegt
+--   IF NEW.status = 'ready'
+--      AND NEW.sms_consent = true
+--      AND NEW.customer_phone IS NOT NULL
+--      AND NEW.sms_sent_at IS NULL
+--      AND (TG_OP = 'INSERT' OR OLD.status IS DISTINCT FROM NEW.status)
+--   THEN
+--     PERFORM extensions.http_post(
+--       url     := project_url || '/functions/v1/send-sms',
+--       body    := jsonb_build_object(
+--         'type',       TG_OP,
+--         'table',      TG_TABLE_NAME,
+--         'schema',     TG_TABLE_SCHEMA,
+--         'record',     row_to_json(NEW),
+--         'old_record', CASE WHEN TG_OP = 'UPDATE' THEN row_to_json(OLD) ELSE NULL END
+--       )::text,
+--       headers := jsonb_build_object('Content-Type', 'application/json')
+--     );
+--   END IF;
+--   RETURN NEW;
+-- END;
+-- $$;
+--
+-- DROP TRIGGER IF EXISTS trg_vehicle_status_sms ON public.vehicle_status;
+-- CREATE TRIGGER trg_vehicle_status_sms
+--   AFTER INSERT OR UPDATE ON public.vehicle_status
+--   FOR EACH ROW EXECUTE FUNCTION public.notify_sms_on_ready();
+
+
 -- =========================================================
 -- Setup abgeschlossen.
 -- Nächste Schritte:
@@ -282,4 +334,10 @@ END $$;
 -- 2. Settings → API → Project URL + anon key kopieren.
 -- 3. Werte in config.js eintragen.
 -- 4. Webseite neu laden – die Verbindung wird automatisch erkannt.
+--
+-- Optional SMS-Versand bei "Abholbereit":
+-- 5. Bei seven.io oder vergleichbarem DE-Provider einen Account anlegen.
+-- 6. supabase functions deploy send-sms (siehe Datei für Details).
+-- 7. SMS_API_KEY als Supabase Secret setzen.
+-- 8. Abschnitt 7 oben einkommentieren und im SQL-Editor ausführen.
 -- =========================================================

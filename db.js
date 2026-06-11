@@ -423,12 +423,16 @@
 
   function upsertVehicleStatus(record){
     if (!record || !record.plate) return Promise.reject(new Error('Kennzeichen fehlt'));
+    // Telefon normalisieren: nur "+" und Ziffern, keine Leerzeichen/Bindestriche
+    var phoneRaw = record.customer_phone ? String(record.customer_phone).replace(/[^0-9+]/g, '') : '';
     var entry = {
       plate: normalizePlate(record.plate),
       plate_display: record.plate_display || record.plate,
       pin: record.pin ? String(record.pin).trim() : null,
       status: record.status || 'received',
       public_note: record.public_note || '',
+      customer_phone: phoneRaw || null,
+      sms_consent: !!record.sms_consent,
       updated_at: new Date().toISOString()
     };
     if (!isProd) {

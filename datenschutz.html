@@ -180,14 +180,17 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
         <p>Die Erfassung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an technisch fehlerfreier Darstellung).</p>
 
         <h2>5. Auftragsstatus-Tracker („Mein Fahrzeug")</h2>
-        <p>Auf der Seite <code>mein-fahrzeug.html</code> können Sie per Eingabe Ihres KFZ-Kennzeichens den Bearbeitungsstand Ihres Werkstattauftrags abfragen. Verarbeitet werden dabei ausschließlich:</p>
-        <ul>
-          <li>das eingegebene Kennzeichen (zur Abfrage),</li>
-          <li>der von uns hinterlegte Bearbeitungsstatus („Angenommen", „In Bearbeitung", „Warten auf Teile", „Abholbereit", „Abgeschlossen") sowie ein optionaler Hinweistext.</li>
-        </ul>
-        <p>Es werden weder Name, Telefon noch E-Mail-Adressen über den Tracker erhoben. Personenbezogene Daten zum Auftrag pflegen wir intern (Werkstattauftrag, Rechnung) — diese werden nicht über die Webseite abgefragt.</p>
+        <p>Auf der Seite <code>mein-fahrzeug.html</code> können Sie per Eingabe Ihres KFZ-Kennzeichens den Bearbeitungsstand Ihres Werkstattauftrags abfragen. Über den öffentlichen Tracker werden ausschließlich Kennzeichen, Bearbeitungsstatus („Angenommen", „In Bearbeitung", „Warten auf Teile", „Abholbereit", „Abgeschlossen") und optionaler Hinweistext zurückgegeben.</p>
+        <p>Es werden weder Name noch E-Mail-Adressen über den Tracker erhoben. Personenbezogene Daten zum Auftrag pflegen wir intern (Werkstattauftrag, Rechnung) — diese werden nicht über die öffentliche Webseite abgefragt.</p>
         <p>Die Abfrage erfolgt über eine sicherheitsgehärtete Datenbankfunktion (Row-Level-Security + SECURITY DEFINER), die ausschließlich Status und Hinweistext zurückliefert. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Durchführung des Werkstattvertrags) und Art. 6 Abs. 1 lit. f DSGVO (Entlastung der telefonischen Erreichbarkeit).</p>
         <p>Statusdaten werden gelöscht, sobald der Auftrag abgeschlossen ist und keine kaufmännischen oder steuerlichen Aufbewahrungsfristen mehr greifen.</p>
+
+        <h2>5a. SMS-Benachrichtigung bei Fertigstellung (optional)</h2>
+        <p>Wenn Sie das wünschen, schicken wir Ihnen eine kurze SMS, sobald Ihr Fahrzeug abholbereit ist. Diese Funktion ist <strong>freiwillig</strong> und nur aktiv, wenn Sie bei Auftragsannahme ausdrücklich zugestimmt haben.</p>
+        <p>Verarbeitet werden in diesem Fall: Ihre Mobilfunknummer, das Kennzeichen, der Bearbeitungsstatus und der Zeitpunkt des Versands. Eine einzige SMS pro Auftrag wird automatisch versendet, sobald der Status auf „Abholbereit" wechselt. Inhalt der SMS: Werkstatt-Name, Kennzeichen, Abholhinweis, Öffnungszeiten — keine sensiblen Daten.</p>
+        <p>Versand-Dienstleister ist die <strong>seven communications GmbH &amp; Co. KG</strong>, Münster (oder ein gleichwertiger DE/EU-Anbieter, mit dem ein Auftragsverarbeitungsvertrag nach Art. 28 DSGVO besteht). Die Datenverarbeitung erfolgt ausschließlich in der EU.</p>
+        <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung, dokumentiert beim Auftragsannahme-Gespräch) sowie Art. 6 Abs. 1 lit. b DSGVO (Durchführung des Werkstattvertrags).</p>
+        <p>Ihre Mobilfunknummer wird mit Abschluss / Löschung des Auftrags entfernt. Sie können die Einwilligung jederzeit telefonisch widerrufen — wir löschen die Nummer dann unmittelbar.</p>
 
         <h2>6. Cookies &amp; LocalStorage</h2>
         <p>Unsere Webseite verwendet nur technisch notwendige Cookies und nutzt zudem den <code>localStorage</code> Ihres Browsers für:</p>
