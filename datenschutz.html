@@ -44,7 +44,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Inter+Tight:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#061327;--white:#fff;--anthracite:#111827;--silver:#F3F6FA}
+:root{--navy:#1A1A1C;--white:#fff;--anthracite:#111827;--silver:#F4F4F6;--ink:#0A0A0B}
 *,*::before,*::after{box-sizing:border-box}
 html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
 .splash{position:fixed;inset:0;background:var(--white);z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity .4s cubic-bezier(.22,1,.36,1)}
@@ -157,14 +157,14 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
         </p>
 
         <h2>2. Hosting</h2>
-        <p>Diese Webseite wird bei einem externen Dienstleister gehostet. Die personenbezogenen Daten, die auf dieser Webseite erfasst werden, werden auf den Servern des Hosters gespeichert.</p>
-        <p>Hoster: <span class="todo">TODO: Name &amp; Anschrift des Hosting-Anbieters eintragen (z.&nbsp;B. Netlify, GitHub, eigenes Hosting)</span></p>
-        <p>Der Einsatz des Hosters erfolgt zum Zwecke der Vertragserfüllung gegenüber unseren potenziellen und bestehenden Kunden (Art. 6 Abs. 1 lit. b DSGVO) und im Interesse einer sicheren, schnellen und effizienten Bereitstellung unseres Online-Angebots (Art. 6 Abs. 1 lit. f DSGVO).</p>
+        <p>Diese Webseite wird über <strong>GitHub Pages</strong> (GitHub Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA) ausgeliefert. Beim Aufruf werden technisch notwendige Verbindungsdaten (siehe „Server-Logfiles") zwangsläufig verarbeitet.</p>
+        <p>Datenschutz von GitHub: <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">github.com/site-policy</a>. Der Einsatz erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer sicheren, schnellen und ressourcenschonenden Bereitstellung).</p>
+        <p class="todo">TODO Owner: Falls Sie auf eine andere Plattform (Netlify, Eigenhosting o. ä.) wechseln, diesen Absatz anpassen.</p>
 
         <h2>3. Backend &amp; Datenbank (Supabase)</h2>
-        <p>Für die Speicherung von Anfragen, die Anmeldung des Mitgliederbereichs und die Pflege von Inhalten nutzen wir die Plattform <strong>Supabase</strong> der Supabase Inc. (970 Toa Payoh North, #07-04, Singapore 318992). Supabase bietet eine PostgreSQL-Datenbank, Authentifizierungs- und Speicher-Dienste an. Die Datenverarbeitung erfolgt in der EU (Frankfurt am Main).</p>
-        <p>Wenn Sie unser Anfrage-Formular nutzen, werden die übermittelten Daten in der Supabase-Datenbank gespeichert. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Anbahnung eines Vertragsverhältnisses) bzw. Art. 6 Abs. 1 lit. f DSGVO (Bearbeitung der Anfrage als berechtigtes Interesse).</p>
-        <p>Datenschutz von Supabase: <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer">https://supabase.com/privacy</a>.</p>
+        <p>Für den Mitgliederbereich (Login), die Pflege von Inhalten (Öffnungszeiten, Kontaktdaten, Texte, Hinweisbanner) und den Auftragsstatus-Tracker („Mein Fahrzeug") nutzen wir die Plattform <strong>Supabase</strong> der Supabase Inc. (970 Toa Payoh North, #07-04, Singapore 318992). Supabase stellt eine PostgreSQL-Datenbank, Authentifizierungs- und Speicherdienste bereit. Die Datenverarbeitung erfolgt in der EU (Region Frankfurt am Main).</p>
+        <p>Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer effizienten Werkstatt-Organisation) bzw. Art. 6 Abs. 1 lit. b DSGVO (Vertragsdurchführung) bei laufenden Werkstattaufträgen.</p>
+        <p>Datenschutz von Supabase: <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer">supabase.com/privacy</a>. Ein Auftragsverarbeitungsvertrag (AVV) gemäß Art. 28 DSGVO ist abgeschlossen.</p>
 
         <h2>4. Server-Logfiles</h2>
         <p>Der Provider erhebt und speichert automatisch Informationen in sogenannten Server-Logfiles, die Ihr Browser übermittelt:</p>
@@ -178,9 +178,15 @@ html,body{margin:0;background:var(--white);color:var(--anthracite);font-family:I
         </ul>
         <p>Die Erfassung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an technisch fehlerfreier Darstellung).</p>
 
-        <h2>5. Anfrage-Formular</h2>
-        <p>Wenn Sie das Formular zur Terminanfrage nutzen, werden Ihre Angaben (Name, Telefon, E-Mail, Fahrzeugdaten, Anliegen, Wunschtermin) zur Bearbeitung Ihrer Anfrage und für eventuelle Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p>
-        <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung) oder Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an effektiver Bearbeitung).</p>
+        <h2>5. Auftragsstatus-Tracker („Mein Fahrzeug")</h2>
+        <p>Auf der Seite <code>mein-fahrzeug.html</code> können Sie per Eingabe Ihres KFZ-Kennzeichens den Bearbeitungsstand Ihres Werkstattauftrags abfragen. Verarbeitet werden dabei ausschließlich:</p>
+        <ul>
+          <li>das eingegebene Kennzeichen (zur Abfrage),</li>
+          <li>der von uns hinterlegte Bearbeitungsstatus („Angenommen", „In Bearbeitung", „Warten auf Teile", „Abholbereit", „Abgeschlossen") sowie ein optionaler Hinweistext.</li>
+        </ul>
+        <p>Es werden weder Name, Telefon noch E-Mail-Adressen über den Tracker erhoben. Personenbezogene Daten zum Auftrag pflegen wir intern (Werkstattauftrag, Rechnung) — diese werden nicht über die Webseite abgefragt.</p>
+        <p>Die Abfrage erfolgt über eine sicherheitsgehärtete Datenbankfunktion (Row-Level-Security + SECURITY DEFINER), die ausschließlich Status und Hinweistext zurückliefert. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Durchführung des Werkstattvertrags) und Art. 6 Abs. 1 lit. f DSGVO (Entlastung der telefonischen Erreichbarkeit).</p>
+        <p>Statusdaten werden gelöscht, sobald der Auftrag abgeschlossen ist und keine kaufmännischen oder steuerlichen Aufbewahrungsfristen mehr greifen.</p>
 
         <h2>6. Cookies &amp; LocalStorage</h2>
         <p>Unsere Webseite verwendet nur technisch notwendige Cookies und nutzt zudem den <code>localStorage</code> Ihres Browsers für:</p>
