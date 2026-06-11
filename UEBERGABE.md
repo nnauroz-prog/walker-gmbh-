@@ -164,10 +164,10 @@ Alternativ: GitHub-Repo verbinden, Auto-Deploy bei jedem Push.
 
 ## Cache-Busting
 
-Alle Asset-Links in HTML tragen `?v=2026-06-10-r4`. Wenn eine neue Version
+Alle Asset-Links in HTML tragen `?v=2026-06-10-r5`. Wenn eine neue Version
 ausgerollt wird:
 
-1. In allen HTML-Dateien `2026-06-10-r4` durch neue Version ersetzen
+1. In allen HTML-Dateien `2026-06-10-r5` durch neue Version ersetzen
    (z. B. `2026-01-15-r2`).
 2. In `config.js` → `APP_VERSION` ebenfalls anpassen.
 3. Im Inline-Cache-Buster-Microscript im `<head>` jeder Seite die Variable
@@ -290,7 +290,7 @@ Live-Binding (`script.js#applyCustomContactIfAny`):
   progress deployment` aus. Wer den eigenen Workflow als alleinige
   Quelle nutzen will: Settings auf `GitHub Actions` umstellen und in
   `pages.yml` den `push`-Trigger einkommentieren.
-- **Cache-Buster** `2026-06-10-r4` synchron in allen Files; bei
+- **Cache-Buster** `2026-06-10-r5` synchron in allen Files; bei
   nächstem Release: `APP_VERSION` in `config.js` + `V=` in den
   Microscripts der HTML-Seiten hochzählen.
 

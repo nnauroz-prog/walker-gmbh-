@@ -1,48 +1,56 @@
 /* =========================================================
    Walker GmbH – Designsystem
-   Navy / Blue / Chrome · Fraunces + Inter
+   Premium Werkstatt: Carbon / Bone / Champagne · Fraunces + Inter
    ========================================================= */
 
 :root {
-  /* Legacy-Tokens auf MB-Schnitt mappen — Navy/Blue zeigen jetzt auf Anthrazit/Schwarz */
-  --navy:        #1A1A1C;
-  --navy-2:      #2A2A2D;
-  --blue:        #0A0A0B;
-  --blue-soft:   #F4F4F6;
-  --chrome:      #D7DEE8;
-  --silver:      #F3F6FA;
-  --anthracite:  #111827;
-  --muted:       #667085;
-  --line:        #D8E0EA;
-  --line-soft:   #EEF2F7;
+  /* Legacy-Tokens auf neue Premium-Palette gemappt */
+  --navy:        #161618;   /* deep carbon, kein flat schwarz */
+  --navy-2:      #232326;
+  --blue:        #161618;
+  --blue-soft:   #F1ECE2;
+  --chrome:      #C9CCD1;
+  --silver:      #EFEAE0;
+  --anthracite:  #1C1C1F;
+  --muted:       #6B6660;
+  --line:        #D8D2C5;
+  --line-soft:   #ECE7DB;
   --white:       #FFFFFF;
 
-  /* Anti-AI: harte Kanten, max 4px Radius (KI-Default ist 8-16px) */
   --radius-sm: 2px;
   --radius-md: 4px;
   --radius-lg: 4px;
 
-  --shadow-sm: 0 6px 18px -10px rgba(6, 19, 39, 0.20);
-  --shadow-md: 0 18px 40px -24px rgba(6, 19, 39, 0.35);
+  /* Tiefere, wärmere Schatten — Premium-Werkstätten haben weiche, satte Schatten */
+  --shadow-sm: 0 1px 2px rgba(22, 22, 24, 0.04), 0 8px 24px -12px rgba(22, 22, 24, 0.14);
+  --shadow-md: 0 4px 8px rgba(22, 22, 24, 0.06), 0 24px 48px -20px rgba(22, 22, 24, 0.22);
+  --shadow-lg: 0 8px 16px rgba(22, 22, 24, 0.08), 0 40px 80px -28px rgba(22, 22, 24, 0.32);
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-quint: cubic-bezier(0.16, 1, 0.3, 1);
   --dur-base: 320ms;
 
   --container: 1180px;
   --header-h: 72px;
 
-  --font-display: 'Inter Tight', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-display: 'Fraunces', 'Times New Roman', Georgia, serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-mono: 'Inter', system-ui, monospace;
 
-  /* MB-Premium Tokens (Schwarz / Anthrazit / Chrome) */
-  --accent: #0A0A0B;                                  /* reines Schwarz als Hauptton */
-  --accent-soft: #E8E8EA;
-  --ink: #0A0A0B;
-  --paper: #FFFFFF;                                   /* reines Weiß */
-  --bg-soft: #F4F4F6;                                 /* MB-Chrome-Hellgrau für Sektionen */
-  --bg-dark: #1A1A1C;                                 /* MB-Anthrazit für Footer */
-  --rule: #E5E5E7;
+  /* Premium-Palette: tiefe Carbon-Töne, warmes Bone-Off-White, gedämpftes Champagne-Akzent */
+  --ink:           #0E0E10;   /* tiefes Carbon, fast schwarz aber mit Wärme */
+  --ink-soft:      #2A2A2D;   /* sekundärer Carbon-Ton */
+  --paper:         #FFFFFF;   /* reines Weiß für Hauptseite */
+  --bone:          #F8F5F0;   /* warmes Off-White (Werkstatt-Papier) für sektion--soft */
+  --bg-soft:       #F1ECE2;   /* gebrochenes Bone für Statement-Sektionen */
+  --bg-dark:       #161618;   /* tiefes Carbon für Dark-Sections und Footer */
+  --bg-darker:     #0E0E10;   /* tiefster Carbon (Footer-Basis) */
+  --rule:          #D8D2C5;   /* warme Trennlinie statt kühles Grau */
+  --rule-dark:     rgba(255,255,255,0.08);
+  --silver-chrome: #B9BCC2;   /* MB-Chrome-Akzent */
+  --champagne:     #A88B5A;   /* warmer Champagne-Akzent für Highlights, Hover */
+  --accent:        #0E0E10;
+  --accent-soft:   #F1ECE2;
   --silver-chrome: #C9C9CE;
 
   --safe-top: env(safe-area-inset-top, 0px);
@@ -122,34 +130,79 @@ table { border-collapse: collapse; }
   border-radius: 4px;
 }
 
-/* ---------- Typography (MB-Premium Sans) ---------- */
+/* ---------- Typography (Premium-Werkstatt: Fraunces + Inter) ---------- */
 h1, h2, h3, h4 {
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 500;
+  font-optical-sizing: auto;
   color: var(--ink);
   margin: 0 0 0.4em;
-  line-height: 1.06;
-  letter-spacing: -0.02em;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
 }
-h1 { font-size: clamp(2.6rem, 5vw + 0.6rem, 4.4rem); letter-spacing: -0.03em; font-weight: 800; }
-h2 { font-size: clamp(2rem, 3vw + 0.8rem, 3.2rem); letter-spacing: -0.025em; font-weight: 700; }
-h3 { font-size: clamp(1.2rem, 0.6vw + 0.95rem, 1.5rem); letter-spacing: -0.015em; font-weight: 600; }
-h4 { font-size: 1.02rem; font-family: var(--font-body); font-weight: 600; }
+/* Fraunces benutzt opsz axis — automatisch passend zur Größe */
+h1 {
+  font-size: clamp(2.8rem, 5.5vw + 0.6rem, 5rem);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  font-variation-settings: "opsz" 144;
+}
+h2 {
+  font-size: clamp(2.1rem, 3vw + 0.8rem, 3.4rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 96;
+}
+h3 {
+  font-size: clamp(1.25rem, 0.6vw + 1rem, 1.55rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  font-variation-settings: "opsz" 36;
+}
+h4 {
+  font-size: 1.02rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0;
+}
 p { margin: 0 0 1em; }
-.lead { font-size: clamp(1.1rem, 0.5vw + 1rem, 1.28rem); color: var(--muted); max-width: 62ch; line-height: 1.55; }
+.lead {
+  font-size: clamp(1.12rem, 0.5vw + 1rem, 1.3rem);
+  color: var(--muted);
+  max-width: 62ch;
+  line-height: 1.6;
+  font-weight: 400;
+}
 
 .eyebrow {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
   font-family: var(--font-body);
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--ink);
-  margin-bottom: 0.9rem;
+  letter-spacing: 0.18em;
+  color: var(--champagne);
+  margin-bottom: 1.1rem;
+}
+/* Hairline davor — gibt visuelle Hierarchie und Editorial-Feel */
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 32px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.8;
+  flex-shrink: 0;
 }
 .eyebrow em { font-style: normal; color: var(--muted); margin-right: 8px; }
-.eyebrow--light { color: rgba(255,255,255,0.7); }
+.eyebrow--light { color: var(--champagne); }
+/* Dark-Sections: eyebrow hat Champagne-Glow */
+.section--dark .eyebrow,
+.statement .eyebrow,
+.hero .eyebrow { color: var(--champagne); }
 
 /* Apple-Style Headline-Polish */
 h1, h2, h3 { text-wrap: balance; }
@@ -229,12 +282,13 @@ h1, h2, h3, .hero__title {
 }
 .spec-strip__num {
   font-family: var(--font-display);
-  font-size: clamp(1.6rem, 1.5vw + 0.9rem, 2.2rem);
-  font-weight: 700;
+  font-variation-settings: "opsz" 96;
+  font-size: clamp(1.7rem, 1.6vw + 0.9rem, 2.4rem);
+  font-weight: 500;
   color: var(--ink);
   letter-spacing: -0.02em;
-  line-height: 1;
-  font-feature-settings: 'tnum' 1;
+  line-height: 1.05;
+  font-feature-settings: 'tnum' 1, 'ss01' 1;
 }
 .spec-strip__label {
   font-size: 0.82rem;
@@ -281,49 +335,71 @@ h1, h2, h3, .hero__title {
 /* (Marquee zurückgefahren – MB-Stil kennt keinen Endlos-Strip) */
 .marquee { display: none; }
 
-/* ---- Statement-Sektion (MB-Schnitt: Sans, ruhig) ---- */
+/* ---- Statement-Sektion: tiefes Carbon mit Champagne-Akzent ---- */
 .statement {
-  padding: clamp(80px, 12vw, 168px) 0;
-  background: var(--bg-soft);
+  padding: clamp(96px, 14vw, 200px) 0;
+  background: linear-gradient(180deg, #161618 0%, #0E0E10 100%);
+  color: var(--bone);
   position: relative;
+  overflow: hidden;
+}
+.statement::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 80% 20%, rgba(168,139,90,0.08) 0%, transparent 50%),
+    repeating-linear-gradient(135deg, transparent 0px, transparent 28px, rgba(255,255,255,0.012) 28px, rgba(255,255,255,0.012) 29px);
+  pointer-events: none;
+  z-index: 0;
 }
 .statement__inner {
   max-width: var(--container);
   margin: 0 auto;
   padding: 0 clamp(20px, 4vw, 40px);
+  position: relative;
+  z-index: 1;
 }
 .statement__text {
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(2.2rem, 4vw + 0.8rem, 4rem);
-  line-height: 1.08;
-  letter-spacing: -0.03em;
-  color: var(--ink);
+  font-weight: 500;
+  font-variation-settings: "opsz" 144;
+  font-size: clamp(2.4rem, 4.5vw + 0.8rem, 4.5rem);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  color: var(--bone);
   margin: 0;
-  max-width: 26ch;
+  max-width: 28ch;
   text-wrap: balance;
 }
 .statement__text em {
-  font-style: normal;
+  font-style: italic;
   font-weight: 400;
-  color: var(--muted);
+  color: var(--champagne);
 }
 .statement__meta {
-  margin-top: clamp(28px, 3vw, 44px);
+  margin-top: clamp(32px, 3.5vw, 48px);
   display: flex;
   flex-wrap: wrap;
-  gap: 14px 32px;
+  gap: 14px 36px;
   font-size: 0.86rem;
   font-weight: 500;
-  color: var(--muted);
+  color: rgba(248,245,240,0.6);
+  font-family: var(--font-body);
+  letter-spacing: 0.02em;
 }
-.statement__meta-num { color: var(--ink); font-weight: 700; margin-right: 6px; }
+.statement__meta-num {
+  color: var(--champagne);
+  font-weight: 600;
+  margin-right: 8px;
+  font-variant-numeric: tabular-nums;
+}
 
-/* ---- Sticky-Pin Mercedes-Sektion ---- */
+/* ---- Sticky-Pin Mercedes-Sektion (warmes Bone-Off-White, Champagne-Akzent) ---- */
 .pinned {
   position: relative;
-  padding: clamp(80px, 12vw, 168px) 0;
-  background: var(--white);
+  padding: clamp(96px, 13vw, 184px) 0;
+  background: var(--bone);
 }
 .pinned__grid {
   display: grid;
@@ -341,33 +417,49 @@ h1, h2, h3, .hero__title {
 }
 .pinned__head h2 {
   margin: 16px 0 24px;
-  font-size: clamp(2.2rem, 4vw + 0.6rem, 3.6rem);
-  letter-spacing: -0.03em;
+  font-size: clamp(2.4rem, 4vw + 0.6rem, 3.8rem);
+  letter-spacing: -0.025em;
+  font-variation-settings: "opsz" 144;
 }
 .pinned__body { display: flex; flex-direction: column; gap: clamp(28px, 4vw, 56px); }
 .pinned__block {
-  padding-block: clamp(16px, 2vw, 28px);
+  padding-block: clamp(20px, 2.4vw, 32px);
   border-top: 1px solid var(--rule);
+  position: relative;
 }
+/* Subtile linke Akzent-Linie beim Hover über Block */
+.pinned__block::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 24px;
+  width: 0;
+  height: 2px;
+  background: var(--champagne);
+  transition: width 0.35s var(--ease-quint);
+}
+.pinned__block:hover::before { width: 28px; }
 .pinned__block:first-child { border-top: 0; padding-top: 0; }
 .pinned__block-label {
   font-size: 0.74rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--muted);
-  margin-bottom: 10px;
+  letter-spacing: 0.16em;
+  color: var(--champagne);
+  margin-bottom: 12px;
   display: inline-block;
 }
 .pinned__block h3 {
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(1.4rem, 1.6vw + 0.9rem, 1.9rem);
-  letter-spacing: -0.02em;
+  font-weight: 500;
+  font-variation-settings: "opsz" 72;
+  font-size: clamp(1.55rem, 1.6vw + 0.9rem, 2rem);
+  letter-spacing: -0.018em;
   margin: 0 0 12px;
   color: var(--ink);
+  line-height: 1.1;
 }
-.pinned__block p { color: var(--muted); margin: 0; }
+.pinned__block p { color: var(--muted); margin: 0; line-height: 1.65; }
 @media (max-width: 880px) {
   .pinned__grid { grid-template-columns: 1fr; }
   .pinned__head { position: relative; top: 0; }
@@ -391,12 +483,14 @@ h1, h2, h3, .hero__title {
   color: inherit;
   overflow: hidden;
   isolation: isolate;
+  transition: transform 0.45s var(--ease-quint);
 }
+.hs-card:hover { transform: translateY(-6px); }
 .hs-card__media {
   position: relative;
   aspect-ratio: 4/3;
   overflow: hidden;
-  background: var(--bg-soft);
+  background: var(--bone);
 }
 .hs-card__media img {
   width: 100%;
@@ -404,48 +498,63 @@ h1, h2, h3, .hero__title {
   object-fit: cover;
   display: block;
   transform: scale(1.02);
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), filter 0.45s var(--ease-out);
+  filter: saturate(0.92) brightness(0.96);
 }
-.hs-card:hover .hs-card__media img { transform: scale(1.08); }
+.hs-card:hover .hs-card__media img {
+  transform: scale(1.08);
+  filter: saturate(1.05) brightness(1);
+}
+/* Subtiles Vignette über Card-Bild für Premium-Feel */
+.hs-card__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(14,14,16,0) 60%, rgba(14,14,16,0.18) 100%);
+  pointer-events: none;
+}
 .hs-card__body {
-  padding: clamp(20px, 2vw, 28px) 0 8px;
+  padding: clamp(22px, 2.4vw, 32px) clamp(20px, 2vw, 28px) clamp(22px, 2vw, 28px);
   display: flex;
   flex-direction: column;
   gap: 10px;
+  background: var(--white);
+  border-top: 1px solid var(--rule);
 }
 .hs-card__num {
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--champagne);
 }
 .hs-card__title {
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(1.4rem, 1.2vw + 1rem, 1.9rem);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  font-weight: 500;
+  font-variation-settings: "opsz" 72;
+  font-size: clamp(1.5rem, 1.4vw + 1rem, 2.05rem);
+  line-height: 1.05;
+  letter-spacing: -0.018em;
   margin: 0;
   color: var(--ink);
 }
 .hs-card__text {
   font-size: 0.98rem;
   color: var(--muted);
-  margin: 4px 0 14px;
-  line-height: 1.55;
+  margin: 4px 0 16px;
+  line-height: 1.6;
 }
 .hs-card__more {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 600;
   color: var(--ink);
-  letter-spacing: -0.01em;
-  transition: gap 0.3s var(--ease-out);
+  letter-spacing: 0;
+  transition: gap 0.3s var(--ease-out), color 0.3s var(--ease-out);
 }
-.hs-card:hover .hs-card__more { gap: 16px; }
+.hs-card:hover .hs-card__more { gap: 16px; color: var(--champagne); }
 .hs-card__more svg { transition: transform 0.3s var(--ease-out); }
 @media (max-width: 880px) {
   .hero-services { grid-template-columns: 1fr; }
@@ -538,12 +647,35 @@ h1, h2, h3, .hero__title {
   flex-wrap: wrap;
 }
 
-/* ---- Footer MB-Anthrazit (klar, ruhig, premium) ---- */
+/* ---- Footer: tiefes Carbon mit Champagne-Hairline ---- */
 .footer--brand {
   position: relative;
-  background: var(--bg-dark);
-  padding: clamp(72px, 9vw, 128px) 0 clamp(36px, 4vw, 56px);
-  color: rgba(255,255,255,0.86);
+  background:
+    linear-gradient(180deg, #161618 0%, #0A0A0C 100%);
+  padding: clamp(80px, 10vw, 140px) 0 clamp(36px, 4vw, 56px);
+  color: rgba(248,245,240,0.78);
+  overflow: hidden;
+}
+/* Carbon-Streifenmuster sehr dezent + Champagne-Hairline oben */
+.footer--brand::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    135deg,
+    transparent 0px,
+    transparent 32px,
+    rgba(255,255,255,0.012) 32px,
+    rgba(255,255,255,0.012) 33px
+  );
+  pointer-events: none;
+}
+.footer--brand::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(168,139,90,0.5) 35%, rgba(168,139,90,0.5) 65%, transparent 100%);
 }
 .footer--brand .container { position: relative; z-index: 2; }
 .footer--brand .footer__mark { display: none; }
@@ -552,61 +684,59 @@ h1, h2, h3, .hero__title {
   grid-template-columns: 1.4fr 1fr 1fr;
   gap: 48px;
   margin-bottom: clamp(48px, 6vw, 80px);
-  padding-bottom: clamp(36px, 4vw, 56px);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: clamp(40px, 5vw, 64px);
+  border-bottom: 1px solid rgba(168,139,90,0.18);
 }
 .footer--brand .footer__lead {
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(1.5rem, 1.6vw + 0.8rem, 2rem);
+  font-weight: 500;
+  font-variation-settings: "opsz" 96;
+  font-size: clamp(1.6rem, 1.8vw + 0.8rem, 2.2rem);
   line-height: 1.15;
-  letter-spacing: -0.02em;
-  color: var(--white);
-  margin: 16px 0 0;
+  letter-spacing: -0.018em;
+  color: var(--bone);
+  margin: 18px 0 0;
   max-width: 26ch;
 }
 .footer--brand .footer__col h4 {
   font-family: var(--font-body);
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.55);
-  margin: 0 0 18px;
+  color: var(--champagne);
+  margin: 0 0 20px;
 }
 .footer--brand .footer__col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 11px; }
 .footer--brand .footer__col a {
-  color: rgba(255,255,255,0.86);
+  color: rgba(248,245,240,0.84);
   font-size: 0.96rem;
   transition: color 0.2s var(--ease-out);
 }
-.footer--brand .footer__col a:hover { color: var(--white); }
+.footer--brand .footer__col a:hover { color: var(--champagne); }
 .footer--brand .footer__bottom {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 14px 28px;
   font-size: 0.82rem;
-  color: rgba(255,255,255,0.55);
+  color: rgba(248,245,240,0.5);
 }
-.footer--brand .footer__bottom a { color: rgba(255,255,255,0.75); }
-.footer--brand .footer__bottom a:hover { color: var(--white); }
+.footer--brand .footer__bottom a { color: rgba(248,245,240,0.72); transition: color 0.2s var(--ease-out); }
+.footer--brand .footer__bottom a:hover { color: var(--champagne); }
 .footer--brand .footer__legal-note {
   font-family: var(--font-body);
   font-size: 0.78rem;
-  color: rgba(255,255,255,0.4);
+  color: rgba(248,245,240,0.36);
   max-width: 76ch;
-  margin: 18px 0 0;
+  margin: 22px 0 0;
+  line-height: 1.55;
 }
 @media (max-width: 760px) {
   .footer--brand .footer__top { grid-template-columns: 1fr; gap: 32px; }
 }
 
-/* ---- Header scrolled state ---- */
-.header.is-scrolled {
-  background: rgba(255,255,255,0.96);
-  box-shadow: 0 1px 0 var(--rule), 0 12px 32px -22px rgba(0,0,0,0.18);
-}
+/* (Header scrolled state — Premium-Variante in section weiter unten) */
 
 /* (Custom Cursor entfernt – MB nutzt das nicht) */
 .cursor-dot { display: none !important; }
@@ -618,11 +748,40 @@ h1, h2, h3, .hero__title {
   margin: 0 auto;
   padding: 0 clamp(20px, 4vw, 40px);
 }
-.section { padding: clamp(80px, 12vw, 168px) 0; }
+.section { padding: clamp(80px, 12vw, 168px) 0; background: var(--paper); }
 .section--tight { padding: clamp(56px, 7vw, 112px) 0; }
+.section--soft { background: var(--bone); }
+.section--dark {
+  background:
+    linear-gradient(180deg, #161618 0%, #0E0E10 100%);
+  color: var(--bone);
+  position: relative;
+  overflow: hidden;
+}
+/* Subtiles Carbon-Streifenmuster in Dark-Sections — diagonale Linien, sehr dezent */
+.section--dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      135deg,
+      transparent 0px,
+      transparent 24px,
+      rgba(255,255,255,0.012) 24px,
+      rgba(255,255,255,0.012) 25px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+.section--dark > * { position: relative; z-index: 1; }
+.section--dark h1,
+.section--dark h2,
+.section--dark h3,
+.section--dark h4 { color: var(--paper); }
+.section--dark .lead { color: rgba(248,245,240,0.78); }
 
-/* Performance: Browser darf untere Sektionen erst rendern, wenn sie sichtbar werden.
-   contain-intrinsic-size hält den Scroll-Indikator stabil, kein Jumpiness beim Reveal. */
+/* Performance: Browser darf untere Sektionen erst rendern, wenn sie sichtbar werden. */
 .section,
 .section--soft,
 .statement,
@@ -630,7 +789,6 @@ h1, h2, h3, .hero__title {
   content-visibility: auto;
   contain-intrinsic-size: 0 600px;
 }
-/* Hero und page-hero bleiben sofort gerendert (above-the-fold) */
 .hero,
 .page-hero {
   content-visibility: visible;
@@ -650,13 +808,24 @@ h1, h2, h3, .hero__title {
 }
 .section__head--left { text-align: left; margin-left: 0; }
 
-/* ---------- Topbar (MB-Anthrazit) ---------- */
+/* ---------- Topbar (Premium-Carbon mit Champagne-Akzenten) ---------- */
 .topbar {
-  background: var(--bg-dark);
-  color: rgba(255,255,255,0.78);
+  background:
+    linear-gradient(180deg, #161618 0%, #0E0E10 100%);
+  color: rgba(248,245,240,0.72);
   font-size: 0.82rem;
-  padding: 8px 0;
-  padding-top: calc(8px + var(--safe-top));
+  padding: 9px 0;
+  padding-top: calc(9px + var(--safe-top));
+  border-bottom: 1px solid rgba(168,139,90,0.16);
+  position: relative;
+}
+/* Feine Hairline-Linie unten in Champagne */
+.topbar::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(168,139,90,0.32) 50%, transparent 100%);
 }
 .topbar__row {
   display: flex;
@@ -665,14 +834,15 @@ h1, h2, h3, .hero__title {
   justify-content: space-between;
   align-items: center;
 }
-.topbar a { color: var(--white); font-weight: 500; }
-.topbar a:hover { color: var(--blue-soft); }
+.topbar a { color: var(--bone); font-weight: 500; transition: color 0.2s var(--ease-out); }
+.topbar a:hover { color: var(--champagne); }
 .topbar__item { display: inline-flex; align-items: center; gap: 8px; }
 .topbar__item svg { width: 14px; height: 14px; opacity: 0.85; }
 .topbar__hint .dot {
   display: inline-block; width: 6px; height: 6px;
-  background: var(--blue-soft); border-radius: 50%;
+  background: var(--champagne); border-radius: 50%;
   margin-right: 8px; vertical-align: middle;
+  box-shadow: 0 0 8px rgba(168,139,90,0.6);
 }
 @media (max-width: 760px) {
   .topbar__hint { display: none; }
@@ -684,10 +854,15 @@ h1, h2, h3, .hero__title {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: saturate(180%) blur(14px);
-  -webkit-backdrop-filter: saturate(180%) blur(14px);
-  border-bottom: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: saturate(180%) blur(16px);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  border-bottom: 1px solid var(--rule);
+  transition: background 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+}
+.header.is-scrolled {
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 1px 0 var(--rule), 0 12px 32px -22px rgba(14,14,16,0.25);
 }
 .header__row {
   display: flex;
@@ -858,14 +1033,32 @@ h1, h2, h3, .hero__title {
 }
 .btn:active { transform: translateY(1px); }
 .btn svg { width: 18px; height: 18px; }
-.btn--primary { background: var(--ink); color: var(--white); border-radius: 999px; }
-.btn--primary:hover { background: #2A2A2D; }
-.btn--blue { background: var(--ink); color: var(--white); border-radius: 999px; }
-.btn--blue:hover { background: #2A2A2D; }
-.btn--light { background: var(--white); color: var(--ink); border-color: var(--rule); border-radius: 999px; }
-.btn--light:hover { background: var(--bg-soft); border-color: var(--silver-chrome); }
-.btn--ghost { background: transparent; color: var(--ink); border-color: var(--rule); border-radius: 999px; }
-.btn--ghost:hover { background: var(--bg-soft); border-color: var(--silver-chrome); }
+.btn--primary {
+  background: var(--ink);
+  color: var(--bone);
+  border-radius: 999px;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.06) inset, 0 8px 20px -10px rgba(14,14,16,0.5);
+}
+.btn--primary:hover {
+  background: var(--ink-soft);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.08) inset, 0 12px 28px -10px rgba(14,14,16,0.6);
+}
+.btn--blue { background: var(--ink); color: var(--bone); border-radius: 999px; }
+.btn--blue:hover { background: var(--ink-soft); }
+.btn--light {
+  background: var(--bone);
+  color: var(--ink);
+  border-color: var(--rule);
+  border-radius: 999px;
+}
+.btn--light:hover { background: var(--white); border-color: var(--ink); }
+.btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--rule);
+  border-radius: 999px;
+}
+.btn--ghost:hover { background: var(--bone); border-color: var(--ink); }
 .btn--link {
   display: inline;
   padding: 0;
@@ -1599,16 +1792,16 @@ h1, h2, h3, .hero__title {
    Content-spezifische Komponenten (Etappe 2)
    ========================================================= */
 
-/* ---------- Hero (MB-Stage: Vollbild-Bühne mit Overlay-Headline) ---------- */
+/* ---------- Hero (Premium-Stage: Vollbild-Foto, Vignette, Fraunces-Display) ---------- */
 .hero {
   position: relative;
-  color: var(--white);
+  color: var(--bone);
   overflow: hidden;
   isolation: isolate;
-  min-height: min(92vh, 920px);
+  min-height: min(92vh, 940px);
   display: flex;
   align-items: flex-end;
-  background: #0A0A0B;
+  background: #0E0E10;
 }
 .hero__visual {
   position: absolute;
@@ -1622,17 +1815,19 @@ h1, h2, h3, .hero__title {
   object-fit: cover;
   object-position: center 35%;
   display: block;
-  transform: scale(1.04);
-  transition: transform 4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(1.06);
+  transition: transform 5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .hero.is-loaded .hero__visual img { transform: scale(1); }
+/* Drei-Schichten-Overlay: top-fade, vignette, bottom-fade — gibt Hero Tiefe */
 .hero__visual::after {
   content: "";
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(10,10,11,0.45) 0%, rgba(10,10,11,0) 30%),
-    linear-gradient(180deg, rgba(10,10,11,0) 40%, rgba(10,10,11,0.78) 100%);
+    radial-gradient(ellipse at 50% 40%, transparent 0%, transparent 35%, rgba(14,14,16,0.4) 100%),
+    linear-gradient(180deg, rgba(14,14,16,0.55) 0%, rgba(14,14,16,0) 25%),
+    linear-gradient(180deg, rgba(14,14,16,0) 40%, rgba(14,14,16,0.88) 100%);
   pointer-events: none;
 }
 .hero__inner {
@@ -1641,32 +1836,37 @@ h1, h2, h3, .hero__title {
   width: 100%;
   max-width: var(--container);
   margin: 0 auto;
-  padding: clamp(56px, 8vw, 120px) clamp(20px, 4vw, 40px) clamp(48px, 6vw, 96px);
+  padding: clamp(56px, 8vw, 120px) clamp(20px, 4vw, 40px) clamp(56px, 7vw, 104px);
 }
 .hero__copy { max-width: 920px; }
 .hero__title {
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(2.8rem, 7vw + 0.4rem, 6.8rem);
+  font-weight: 500;
+  font-variation-settings: "opsz" 144;
+  font-size: clamp(3rem, 7.5vw + 0.4rem, 7rem);
   line-height: 0.98;
-  letter-spacing: -0.035em;
-  color: var(--white);
-  margin: 18px 0 24px;
+  letter-spacing: -0.028em;
+  color: var(--bone);
+  margin: 22px 0 28px;
   text-wrap: balance;
+  /* Tiny text-shadow für Lesbarkeit über Foto */
+  text-shadow: 0 2px 24px rgba(14,14,16,0.35);
 }
 .hero__title-accent {
   display: block;
-  color: var(--white);
+  color: var(--bone);
   font-weight: 400;
-  opacity: 0.7;
+  font-style: italic;
+  opacity: 0.78;
 }
 .hero__lead {
-  font-size: clamp(1.06rem, 0.5vw + 0.95rem, 1.22rem);
-  color: rgba(255,255,255,0.84);
-  margin: 0 0 32px;
+  font-size: clamp(1.1rem, 0.55vw + 0.95rem, 1.28rem);
+  color: rgba(248,245,240,0.88);
+  margin: 0 0 36px;
   max-width: 52ch;
-  line-height: 1.55;
+  line-height: 1.6;
   font-weight: 400;
+  text-shadow: 0 1px 12px rgba(14,14,16,0.4);
 }
 .hero__cta {
   display: flex;
