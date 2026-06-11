@@ -793,13 +793,7 @@ h1, h2, h3, .hero__title {
 .page-hero {
   content-visibility: visible;
 }
-.section--soft { background: var(--silver); }
-.section--dark {
-  background: linear-gradient(160deg, var(--navy) 0%, #020812 100%);
-  color: var(--white);
-}
-.section--dark h1, .section--dark h2, .section--dark h3, .section--dark h4 { color: var(--white); }
-.section--dark .lead { color: var(--chrome); }
+/* (.section--soft, .section--dark — Definitionen oben im Premium-Block) */
 
 .section__head {
   max-width: 760px;
@@ -1167,24 +1161,51 @@ h1, h2, h3, .hero__title {
 @media (max-width: 720px) { .footer__grid { grid-template-columns: 1fr 1fr; gap: 28px 20px; } }
 @media (max-width: 460px) { .footer__grid { grid-template-columns: 1fr; } }
 
-/* ---------- Page hero (subpages) ---------- */
+/* ---------- Page hero (subpages) — Premium-Bone mit Champagne-Akzent ---------- */
 .page-hero {
-  padding: clamp(48px, 6vw, 88px) 0 clamp(28px, 4vw, 48px);
-  background: var(--silver);
-  border-bottom: 1px solid var(--line);
+  padding: clamp(72px, 9vw, 128px) 0 clamp(40px, 5vw, 64px);
+  background:
+    linear-gradient(180deg, var(--bone) 0%, var(--white) 100%);
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+  overflow: hidden;
+}
+/* Subtile Champagne-Hairline am Bottom */
+.page-hero::after {
+  content: "";
+  position: absolute;
+  left: 50%; bottom: -1px;
+  width: 120px;
+  height: 2px;
+  background: var(--champagne);
+  transform: translateX(-50%);
+  opacity: 0.7;
 }
 .page-hero__grid { max-width: 820px; }
+.page-hero h1 {
+  font-size: clamp(2.6rem, 4.5vw + 0.6rem, 4.2rem);
+  font-variation-settings: "opsz" 144;
+  font-weight: 500;
+  letter-spacing: -0.022em;
+  margin: 0 0 18px;
+  line-height: 1.02;
+}
+.page-hero .lead { font-size: clamp(1.12rem, 0.5vw + 1rem, 1.32rem); }
 .breadcrumbs {
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   color: var(--muted);
-  margin-bottom: 16px;
+  margin-bottom: 22px;
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 8px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 500;
 }
-.breadcrumbs a { color: var(--muted); }
-.breadcrumbs a:hover { color: var(--blue); }
-.breadcrumbs span[aria-current="page"] { color: var(--navy); font-weight: 500; }
+.breadcrumbs a { color: var(--muted); transition: color 0.2s var(--ease-out); }
+.breadcrumbs a:hover { color: var(--champagne); }
+.breadcrumbs span:not([aria-current]) { color: var(--muted); opacity: 0.5; }
+.breadcrumbs span[aria-current="page"] { color: var(--ink); font-weight: 600; }
 
 /* ---------- Hinweisbanner (Owner-konfiguriert) ---------- */
 .notice {
@@ -1240,31 +1261,50 @@ h1, h2, h3, .hero__title {
 .alert--error   { background: #FEF2F2; border: 1px solid #FECACA; color: #991B1B; }
 .alert--info    { background: var(--blue-soft); border: 1px solid #C6DFF8; color: var(--navy); }
 
-/* ---------- Cookie Banner ---------- */
+/* ---------- Cookie Banner (Premium) ---------- */
 .cookie-banner {
   position: fixed;
   left: 16px; right: 16px;
   bottom: calc(16px + var(--safe-bottom));
   max-width: 880px;
   margin: 0 auto;
-  background: var(--navy);
-  color: var(--white);
+  background: linear-gradient(180deg, #1A1A1C 0%, #0E0E10 100%);
+  color: var(--bone);
   border-radius: var(--radius-lg);
-  padding: 18px 22px;
-  box-shadow: var(--shadow-md);
+  padding: 20px 24px;
+  box-shadow: var(--shadow-lg);
   z-index: 90;
   display: none;
+  border: 1px solid rgba(168,139,90,0.2);
 }
 .cookie-banner[aria-hidden="false"] { display: block; }
 .cookie-banner__row {
   display: flex; gap: 16px; align-items: center; flex-wrap: wrap; justify-content: space-between;
 }
-.cookie-banner__text { flex: 1 1 280px; font-size: 0.92rem; color: var(--chrome); }
-.cookie-banner__text strong { color: var(--white); display: block; margin-bottom: 4px; }
-.cookie-banner__actions { display: flex; gap: 8px; flex-wrap: wrap; }
-.cookie-banner .btn { min-height: 40px; padding: 8px 14px; font-size: 0.86rem; }
-.cookie-banner .btn--ghost { background: transparent; color: var(--white); border-color: rgba(255,255,255,0.18); }
-.cookie-banner .btn--ghost:hover { background: rgba(255,255,255,0.06); }
+.cookie-banner__text { flex: 1 1 280px; font-size: 0.92rem; color: rgba(248,245,240,0.82); line-height: 1.5; }
+.cookie-banner__text strong {
+  color: var(--bone);
+  display: block;
+  margin-bottom: 6px;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-variation-settings: "opsz" 24;
+  font-size: 1.05rem;
+}
+.cookie-banner__actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.cookie-banner .btn { min-height: 40px; padding: 8px 16px; font-size: 0.86rem; }
+.cookie-banner .btn--ghost {
+  background: transparent;
+  color: var(--bone);
+  border-color: rgba(168,139,90,0.4);
+}
+.cookie-banner .btn--ghost:hover { background: rgba(168,139,90,0.08); border-color: var(--champagne); }
+.cookie-banner .btn--blue {
+  background: var(--champagne);
+  color: var(--ink);
+  border-color: var(--champagne);
+}
+.cookie-banner .btn--blue:hover { background: #B8985F; border-color: #B8985F; }
 
 /* ---------- Reveal-on-scroll ---------- */
 .reveal {
@@ -1983,95 +2023,159 @@ h1, h2, h3, .hero__title {
 @media (max-width: 880px) { .services { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 520px) { .services { grid-template-columns: 1fr; } }
 
-/* ---------- Mercedes-Section (dark editorial) ---------- */
+/* ---------- Mercedes-Section / CTA-Band (Premium Carbon Editorial) ---------- */
 .mb-section {
-  background: linear-gradient(160deg, var(--navy) 0%, #020812 100%);
-  color: var(--white);
-  border-radius: var(--radius-lg);
-  padding: clamp(32px, 5vw, 64px);
+  background: linear-gradient(180deg, #161618 0%, #0E0E10 100%);
+  color: var(--bone);
+  padding: clamp(48px, 6vw, 88px) clamp(28px, 4vw, 64px);
   display: grid;
   grid-template-columns: 1.2fr 1fr;
-  gap: clamp(28px, 4vw, 56px);
+  gap: clamp(32px, 5vw, 72px);
   align-items: center;
   overflow: hidden;
   position: relative;
 }
+/* Carbon-Streifenmuster + Champagne-Radial-Glow */
 .mb-section::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(closest-side at 100% 0%, rgba(30,115,190,0.25), transparent 60%);
+  background:
+    radial-gradient(ellipse at 85% 15%, rgba(168,139,90,0.14) 0%, transparent 55%),
+    repeating-linear-gradient(135deg, transparent 0px, transparent 28px, rgba(255,255,255,0.012) 28px, rgba(255,255,255,0.012) 29px);
   pointer-events: none;
 }
 .mb-section > * { position: relative; z-index: 1; }
-.mb-section h2 { color: var(--white); }
-.mb-section .lead { color: var(--chrome); }
-.mb-list { list-style: none; padding: 0; margin: 0 0 24px; display: grid; gap: 12px; }
-.mb-list li { display: flex; gap: 12px; align-items: flex-start; color: var(--chrome); }
+.mb-section h2 {
+  color: var(--bone);
+  font-variation-settings: "opsz" 144;
+  font-size: clamp(2.2rem, 3.5vw + 0.6rem, 3.6rem);
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+.mb-section .lead { color: rgba(248,245,240,0.84); }
+.mb-list { list-style: none; padding: 0; margin: 0 0 28px; display: grid; gap: 14px; }
+.mb-list li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  color: rgba(248,245,240,0.88);
+  line-height: 1.55;
+}
 .mb-list li::before {
-  content: ""; width: 22px; height: 22px; border-radius: 50%;
-  background: var(--blue);
-  flex: 0 0 auto; margin-top: 2px;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>");
+  content: ""; width: 18px; height: 18px; border-radius: 50%;
+  background: var(--champagne);
+  flex: 0 0 auto; margin-top: 4px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23161618' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 12px 12px;
+  background-size: 11px 11px;
+  box-shadow: 0 0 0 1px rgba(168,139,90,0.3), 0 4px 12px rgba(168,139,90,0.18);
 }
 .mb-section__visual {
   aspect-ratio: 4/5;
-  border-radius: var(--radius-md);
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(168,139,90,0.18);
+  position: relative;
+  box-shadow: 0 20px 60px -20px rgba(0,0,0,0.6);
 }
-.mb-section__visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.mb-section__visual img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(0.9);
+}
+/* Champagne-Vignette am Bild-Edge */
+.mb-section__visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(160deg, transparent 60%, rgba(14,14,16,0.45) 100%),
+    radial-gradient(closest-side at 0% 100%, rgba(168,139,90,0.18) 0%, transparent 60%);
+  pointer-events: none;
+}
 .mb-section__legal {
-  margin-top: 14px;
+  margin-top: 18px;
   font-size: 0.78rem;
-  color: rgba(255,255,255,0.5);
-  line-height: 1.55;
+  color: rgba(248,245,240,0.45);
+  line-height: 1.6;
 }
 @media (max-width: 880px) {
   .mb-section { grid-template-columns: 1fr; }
-  .mb-section__visual { max-width: 380px; }
+  .mb-section__visual { max-width: 420px; }
 }
 
-/* ---------- Process / Stepper ---------- */
+/* ---------- Process / Stepper (Premium Editorial) ---------- */
 .steps {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  overflow: hidden;
+  background: transparent;
   list-style: none;
   padding: 0;
   margin: 0;
+  border-top: 1px solid var(--rule);
 }
 .step {
-  padding: 24px 22px;
-  border-right: 1px solid var(--line);
+  padding: clamp(28px, 3vw, 40px) clamp(16px, 1.5vw, 24px);
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+  background: transparent;
+  transition: background 0.3s var(--ease-out);
 }
 .step:last-child { border-right: 0; }
+.step:hover { background: var(--bone); }
+/* Champagne-Hairline beim Hover über Step */
+.step::before {
+  content: "";
+  position: absolute;
+  top: -1px; left: 0;
+  height: 2px;
+  width: 0;
+  background: var(--champagne);
+  transition: width 0.4s var(--ease-quint);
+}
+.step:hover::before { width: 100%; }
 .step__num {
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 1.9rem;
-  letter-spacing: -0.02em;
-  color: var(--blue);
-  line-height: 1;
-  margin-bottom: 12px;
+  font-variation-settings: "opsz" 96;
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(2.4rem, 2.5vw + 1rem, 3.2rem);
+  letter-spacing: -0.025em;
+  color: var(--champagne);
+  line-height: 0.9;
+  margin-bottom: 16px;
   display: block;
 }
-.step h4 { font-family: var(--font-body); font-size: 1rem; margin: 0 0 6px; color: var(--navy); }
-.step p { font-size: 0.92rem; color: var(--muted); margin: 0; line-height: 1.55; }
+.step h4 {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 36;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 8px;
+  color: var(--ink);
+}
+.step p {
+  font-size: 0.92rem;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.6;
+}
 .step-note {
-  background: var(--blue-soft);
-  border-left: 3px solid var(--blue);
-  padding: 16px 18px;
-  margin-top: 22px;
+  background: var(--bone);
+  border-left: 3px solid var(--champagne);
+  padding: 18px 22px;
+  margin-top: clamp(22px, 2.5vw, 36px);
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  color: var(--navy);
-  font-size: 0.96rem;
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-style: italic;
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 14;
+  line-height: 1.55;
 }
 @media (max-width: 980px) {
   .steps { grid-template-columns: repeat(2, 1fr); }
@@ -2084,37 +2188,57 @@ h1, h2, h3, .hero__title {
   .step:last-child { border-bottom: 0; }
 }
 
-/* ---------- Quote ---------- */
+/* ---------- Quote (Editorial-Premium) ---------- */
 .quote {
-  max-width: 880px;
+  max-width: 920px;
   margin: 0 auto;
   text-align: center;
-  padding: clamp(24px, 3vw, 40px) 12px;
+  padding: clamp(40px, 5vw, 80px) 12px;
+  position: relative;
 }
 .quote__mark {
   font-family: var(--font-display);
-  font-size: clamp(4rem, 8vw, 6rem);
-  line-height: 1;
-  color: var(--blue);
-  opacity: 0.18;
-  margin-bottom: -0.4em;
+  font-variation-settings: "opsz" 144;
+  font-size: clamp(7rem, 12vw, 11rem);
+  line-height: 0.8;
+  color: var(--champagne);
+  opacity: 0.55;
+  margin: 0 auto -0.5em;
+  display: block;
+  font-style: italic;
+  font-weight: 400;
 }
 .quote__text {
   font-family: var(--font-display);
+  font-variation-settings: "opsz" 144;
   font-style: italic;
-  font-size: clamp(1.4rem, 2vw + 0.6rem, 2rem);
-  font-weight: 500;
-  line-height: 1.3;
-  color: var(--navy);
-  margin: 0 auto 1.4rem;
-  max-width: 30ch;
+  font-size: clamp(1.55rem, 2.2vw + 0.7rem, 2.4rem);
+  font-weight: 400;
+  line-height: 1.32;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 0 auto 1.8rem;
+  max-width: 32ch;
+  text-wrap: balance;
 }
 .quote__author {
-  font-size: 0.86rem;
-  color: var(--muted);
-  letter-spacing: 0.08em;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--champagne);
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+.quote__author::before,
+.quote__author::after {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
 }
 
 /* ---------- FAQ ---------- */
@@ -2148,29 +2272,59 @@ h1, h2, h3, .hero__title {
 .faq__item[open] .faq__q .chev { transform: rotate(180deg); }
 .faq__a { padding: 0 20px 20px; color: var(--muted); font-size: 0.96rem; line-height: 1.6; }
 
-/* ---------- Hours table ---------- */
+/* ---------- Hours table (Premium Editorial) ---------- */
 .hours-card {
-  background: var(--white);
-  border: 1px solid var(--line);
+  background: var(--bone);
+  border: 1px solid var(--rule);
   border-radius: var(--radius-md);
-  padding: 26px;
+  padding: clamp(28px, 3vw, 40px);
+  box-shadow: var(--shadow-sm);
+  position: relative;
 }
-.hours-card h3 { font-family: var(--font-body); font-weight: 600; font-size: 1.05rem; margin: 0 0 12px; color: var(--navy); }
+/* Champagne-Hairline links als Akzent */
+.hours-card::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 28px; bottom: 28px;
+  width: 2px;
+  background: var(--champagne);
+  opacity: 0.4;
+}
+.hours-card h3 {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 36;
+  font-weight: 500;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+  margin: 0 0 18px;
+  color: var(--ink);
+}
 .hours {
   width: 100%;
   border-collapse: collapse;
 }
 .hours th, .hours td {
   text-align: left;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--line-soft);
-  font-size: 0.96rem;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.98rem;
   font-weight: 500;
 }
 .hours tr:last-child th, .hours tr:last-child td { border-bottom: 0; }
-.hours th { color: var(--anthracite); font-weight: 500; }
-.hours td { color: var(--navy); font-weight: 600; text-align: right; font-variant-numeric: tabular-nums; }
-.hours tr.closed td { color: var(--muted); font-weight: 500; }
+.hours th { color: var(--ink); font-weight: 500; }
+.hours td {
+  color: var(--ink);
+  font-weight: 500;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1, 'ss01' 1;
+  letter-spacing: 0.01em;
+}
+.hours tr.closed td { color: var(--muted); font-weight: 400; font-style: italic; }
+/* Aktuell-geöffnet-Markierung */
+.hours tr.is-today th { font-weight: 700; color: var(--champagne); }
+.hours tr.is-today td { font-weight: 600; color: var(--champagne); }
+.hours tr.is-today::after { content: " · jetzt"; }
 
 /* ---------- Contact cards ---------- */
 .contact-cards {
